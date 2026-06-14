@@ -146,7 +146,7 @@ def fig_participantes(sus):
         text=counts.values.astype(int), textposition="outside",
     ))
     fig.update_layout(title="Participantes por celda experimental",
-                      xaxis_title="Celda (combinacion de intervenciones)",
+                      xaxis_title="Celda (combinación de intervenciones)",
                       yaxis_title="N.° de estudiantes")
     return style_fig(fig)
 
@@ -177,7 +177,7 @@ def fig_intentos_celda(sessions):
 
 def fig_efectos_principales(sessions):
     d = sessions[sessions["attempts"] > 0]
-    factors = [("O", "Ocultamiento"), ("C", "Contador cromatico"), ("E", "Espera incremental")]
+    factors = [("O", "Ocultamiento"), ("C", "Contador cromático"), ("E", "Espera incremental")]
     fig = go.Figure()
     xcats = []
     for key, name in factors:
@@ -191,7 +191,7 @@ def fig_efectos_principales(sessions):
                 marker_color=FACTOR_ON if state else FACTOR_OFF,
                 text=[f"{m:.1f}"], textposition="outside", showlegend=False,
             ))
-    fig.update_layout(title="Efecto principal de cada intervencion sobre los intentos",
+    fig.update_layout(title="Efecto principal de cada intervención sobre los intentos",
                       xaxis_title="Factor (desactivado vs. activado)",
                       yaxis_title="Intentos promedio por ejercicio",
                       bargap=0.35)
@@ -209,7 +209,7 @@ def fig_distribucion_intentos(sessions):
             boxpoints="outliers", line=dict(width=1.4),
             hoverinfo="y",  # nunca muestra identificadores, solo el valor
         ))
-    fig.update_layout(title="Distribucion de intentos por celda experimental",
+    fig.update_layout(title="Distribución de intentos por celda experimental",
                       xaxis_title="Celda experimental",
                       yaxis_title="Intentos por ejercicio", showlegend=False)
     return style_fig(fig)
@@ -290,14 +290,14 @@ def fig_sus_celda(sus):
     ))
     fig.add_hline(y=68, line_dash="dash", line_color="#e0726e",
                   annotation_text="Promedio de referencia (68)", annotation_position="top left")
-    fig.update_layout(title="Puntuacion SUS promedio por celda (IC 95%)",
+    fig.update_layout(title="Puntuación SUS promedio por celda (IC 95%)",
                       xaxis_title="Celda experimental",
-                      yaxis_title="Puntuacion SUS (0-100)", yaxis_range=[0, 100])
+                      yaxis_title="Puntuación SUS (0-100)", yaxis_range=[0, 100])
     return style_fig(fig)
 
 
 def fig_sus_efectos(sus):
-    factors = [("O", "Ocultamiento"), ("C", "Contador cromatico"), ("E", "Espera incremental")]
+    factors = [("O", "Ocultamiento"), ("C", "Contador cromático"), ("E", "Espera incremental")]
     fig = go.Figure()
     for key, name in factors:
         for state in [False, True]:
@@ -311,9 +311,9 @@ def fig_sus_efectos(sus):
             ))
     fig.add_hline(y=68, line_dash="dash", line_color="#e0726e",
                   annotation_text="Referencia 68", annotation_position="top left")
-    fig.update_layout(title="Efecto principal de cada intervencion sobre el SUS",
+    fig.update_layout(title="Efecto principal de cada intervención sobre el SUS",
                       xaxis_title="Factor (desactivado vs. activado)",
-                      yaxis_title="Puntuacion SUS", yaxis_range=[0, 100], bargap=0.35)
+                      yaxis_title="Puntuación SUS", yaxis_range=[0, 100], bargap=0.35)
     return style_fig(fig)
 
 
@@ -328,9 +328,9 @@ def fig_sus_distribucion(sus):
             marker=dict(size=5), hoveron="violins",
             hoverinfo="y",  # los puntos no exponen identificadores
         ))
-    fig.update_layout(title="Distribucion del SUS por celda experimental",
+    fig.update_layout(title="Distribución del SUS por celda experimental",
                       xaxis_title="Celda experimental",
-                      yaxis_title="Puntuacion SUS", showlegend=False)
+                      yaxis_title="Puntuación SUS", showlegend=False)
     return style_fig(fig)
 
 
@@ -352,8 +352,8 @@ def fig_sus_clasificacion(sus):
         ))
     fig.add_vline(x=mean, line_color=INK, line_width=3,
                   annotation_text=f"SUS global = {mean:.1f}", annotation_position="top")
-    fig.update_layout(title="Clasificacion del SUS global en la escala adjetival",
-                      barmode="stack", xaxis_title="Puntuacion SUS (0-100)",
+    fig.update_layout(title="Clasificación del SUS global en la escala adjetival",
+                      barmode="stack", xaxis_title="Puntuación SUS (0-100)",
                       yaxis_title="", xaxis_range=[0, 100],
                       legend=dict(orientation="h", y=-0.3))
     fig.update_yaxes(showticklabels=False)
@@ -371,8 +371,8 @@ def fig_sus_items(sus):
         texttemplate="%{text}", textfont=dict(size=12),
         colorbar=dict(title="Media<br>(1-5)"),
     ))
-    fig.update_layout(title="Respuesta promedio por item del SUS y celda",
-                      xaxis_title="Item del cuestionario SUS",
+    fig.update_layout(title="Respuesta promedio por ítem del SUS y celda",
+                      xaxis_title="Ítem del cuestionario SUS",
                       yaxis_title="Celda experimental")
     return style_fig(fig, height=480)
 
@@ -402,9 +402,9 @@ def fig_intentos_vs_sus(sessions, sus):
         fig.add_annotation(x=0.98, y=0.04, xref="paper", yref="paper",
                            text=f"r = {r:.2f}", showarrow=False,
                            font=dict(size=13, color=MUTED))
-    fig.update_layout(title="Relacion entre intentos promedio y experiencia (SUS) por estudiante",
+    fig.update_layout(title="Relación entre intentos promedio y experiencia (SUS) por estudiante",
                       xaxis_title="Intentos promedio por ejercicio (por estudiante)",
-                      yaxis_title="Puntuacion SUS")
+                      yaxis_title="Puntuación SUS")
     return style_fig(fig)
 
 
@@ -451,100 +451,100 @@ def build(sessions_path, sus_path, out_path):
     charts = [
         ("muestra", "Muestra",
          "Participantes por celda experimental",
-         "Verifica el balance del diseno factorial: el esquema round-robin debe repartir "
+         "Verifica el balance del diseño factorial: el esquema round-robin debe repartir "
          "los estudiantes de forma aproximadamente uniforme entre las 8 celdas. Celdas muy "
-         "desiguales advierten sobre la potencia estadistica disponible para cada comparacion.",
+         "desiguales advierten sobre la potencia estadística disponible para cada comparación.",
          fig_participantes(sus)),
 
         ("rq1_celdas", "RQ1 · Prueba y error",
          "Intentos promedio por celda experimental",
-         "Responde directamente a la RQ1: que combinacion de intervenciones reduce los "
-         "intentos. Las barras estan ordenadas de menor a mayor y la linea punteada marca el "
-         "nivel del grupo control, de modo que se identifica de un vistazo que celdas quedan "
+         "Responde directamente a la RQ1: qué combinación de intervenciones reduce los "
+         "intentos. Las barras están ordenadas de menor a mayor y la línea punteada marca el "
+         "nivel del grupo control, de modo que se identifica de un vistazo qué celdas quedan "
          "por debajo del control. Las barras de error (IC 95%) indican si las diferencias son "
          "fiables o atribuibles al azar.",
          fig_intentos_celda(sessions)),
 
         ("rq1_efectos", "RQ1 · Prueba y error",
-         "Efecto principal de cada intervencion",
-         "Aisla el aporte individual de cada factor (O, C, E) promediando sobre las demas "
+         "Efecto principal de cada intervención",
+         "Aisla el aporte individual de cada factor (O, C, E) promediando sobre las demás "
          "condiciones, tal como lo hace el modelo factorial. Comparar 'ON' contra 'OFF' "
-         "muestra si activar una intervencion, por si sola, sube o baja la cantidad de intentos.",
+         "muestra si activar una intervención, por sí sola, sube o baja la cantidad de intentos.",
          fig_efectos_principales(sessions)),
 
         ("rq1_dist", "RQ1 · Prueba y error",
-         "Distribucion de intentos por celda",
-         "Mas alla del promedio, los diagramas de caja revelan la dispersion y los valores "
-         "atipicos. Como los intentos son datos de conteo con fuerte sesgo a la derecha, ver "
-         "la forma completa de la distribucion justifica el uso de modelos Poisson/binomial "
-         "negativa y evita conclusiones enganosas basadas solo en medias.",
+         "Distribución de intentos por celda",
+         "Más allá del promedio, los diagramas de caja revelan la dispersión y los valores "
+         "atípicos. Como los intentos son datos de conteo con fuerte sesgo a la derecha, ver "
+         "la forma completa de la distribución justifica el uso de modelos Poisson/binomial "
+         "negativa y evita conclusiones engañosas basadas solo en medias.",
          fig_distribucion_intentos(sessions)),
 
         ("rq1_tema", "RQ1 · Prueba y error",
          "Intentos por ejercicio",
          "El tema del ejercicio es una covariable de control del estudio. Esta vista muestra "
-         "cuanta variacion en los intentos proviene de la dificultad intrinseca de cada "
-         "problema, lo que respalda incluir el ejercicio como control en el analisis para no "
+         "cuánta variación en los intentos proviene de la dificultad intrínseca de cada "
+         "problema, lo que respalda incluir el ejercicio como control en el análisis para no "
          "confundir su efecto con el de las intervenciones.",
          fig_intentos_tema(sessions)),
 
         ("rq1_interacciones", "RQ1 · Prueba y error",
          "Interacciones de segundo orden",
-         "El diseno 2^3 contempla interacciones: el efecto de una intervencion puede depender "
-         "de si otra esta activa. Lineas no paralelas sugieren interaccion (las intervenciones "
-         "se potencian o se anulan), informacion clave para interpretar las celdas combinadas.",
+         "El diseño 2^3 contempla interacciones: el efecto de una intervención puede depender "
+         "de si otra está activa. Líneas no paralelas sugieren interacción (las intervenciones "
+         "se potencian o se anulan), información clave para interpretar las celdas combinadas.",
          fig_interacciones(sessions)),
 
         ("rq1_solved", "RQ1 · Prueba y error",
          "Tasa de ejercicios resueltos por celda",
-         "Sirve de control de validez: una intervencion solo es deseable si reduce los intentos "
-         "sin perjudicar el aprendizaje. Si una celda baja los intentos pero tambien desploma "
-         "el porcentaje de exito, podria estar frustrando a los estudiantes en lugar de "
+         "Sirve de control de validez: una intervención solo es deseable si reduce los intentos "
+         "sin perjudicar el aprendizaje. Si una celda baja los intentos pero también desploma "
+         "el porcentaje de éxito, podría estar frustrando a los estudiantes en lugar de "
          "fomentar mejores estrategias.",
          fig_tasa_resolucion(sessions)),
 
         ("rq2_celdas", "RQ2 · Experiencia (SUS)",
-         "Puntuacion SUS promedio por celda",
-         "Responde a la RQ2: si las estrategias afectan la experiencia percibida. La linea de "
-         "referencia en 68 es el promedio historico del SUS; celdas por debajo sugieren que la "
-         "intervencion deteriora la usabilidad percibida, un costo a sopesar frente a su "
+         "Puntuación SUS promedio por celda",
+         "Responde a la RQ2: si las estrategias afectan la experiencia percibida. La línea de "
+         "referencia en 68 es el promedio histórico del SUS; celdas por debajo sugieren que la "
+         "intervención deteriora la usabilidad percibida, un costo a sopesar frente a su "
          "beneficio sobre los intentos.",
          fig_sus_celda(sus)),
 
         ("rq2_efectos", "RQ2 · Experiencia (SUS)",
          "Efecto principal sobre el SUS",
-         "Equivalente al ANOVA factorial de la RQ2: muestra como cada intervencion, por "
+         "Equivalente al ANOVA factorial de la RQ2: muestra cómo cada intervención, por "
          "separado, mueve la usabilidad percibida. Permite detectar intervenciones que reducen "
          "los intentos pero penalizan la experiencia, o viceversa.",
          fig_sus_efectos(sus)),
 
         ("rq2_dist", "RQ2 · Experiencia (SUS)",
-         "Distribucion del SUS por celda",
-         "Los violines combinan distribucion, mediana y puntos individuales. Con muestras "
-         "pequenas por celda, ver cada observacion evita que un promedio oculte opiniones muy "
+         "Distribución del SUS por celda",
+         "Los violines combinan distribución, mediana y puntos individuales. Con muestras "
+         "pequeñas por celda, ver cada observación evita que un promedio oculte opiniones muy "
          "divididas sobre una misma interfaz.",
          fig_sus_distribucion(sus)),
 
         ("rq2_escala", "RQ2 · Experiencia (SUS)",
-         "Clasificacion del SUS en la escala adjetival",
-         "Traduce la puntuacion global a una etiqueta interpretable (de 'pobre' a 'excelente') "
-         "segun la escala de Bangor et al. Es util para comunicar el resultado a audiencias no "
-         "tecnicas sin perder el anclaje cuantitativo.",
+         "Clasificación del SUS en la escala adjetival",
+         "Traduce la puntuación global a una etiqueta interpretable (de 'pobre' a 'excelente') "
+         "según la escala de Bangor et al. Es útil para comunicar el resultado a audiencias no "
+         "técnicas sin perder el anclaje cuantitativo.",
          fig_sus_clasificacion(sus)),
 
         ("rq2_items", "RQ2 · Experiencia (SUS)",
-         "Respuesta promedio por item del SUS",
-         "Descompone el SUS en sus 10 items por celda. Permite localizar que aspecto concreto "
-         "de la experiencia (complejidad, confianza, necesidad de apoyo, etc.) se ve mas "
-         "afectado por cada combinacion de intervenciones.",
+         "Respuesta promedio por ítem del SUS",
+         "Descompone el SUS en sus 10 ítems por celda. Permite localizar qué aspecto concreto "
+         "de la experiencia (complejidad, confianza, necesidad de apoyo, etc.) se ve más "
+         "afectado por cada combinación de intervenciones.",
          fig_sus_items(sus)),
 
-        ("relacion", "Relacion entre medidas",
+        ("relacion", "Relación entre medidas",
          "Intentos promedio vs. SUS por estudiante",
          "Cruza las dos variables centrales del estudio a nivel de estudiante. Una pendiente "
-         "negativa indicaria que quienes mas reintentan reportan peor experiencia, ayudando a "
-         "entender si reducir la prueba y error y mejorar la satisfaccion van de la mano o en "
-         "tension.",
+         "negativa indicaría que quienes más reintentan reportan peor experiencia, ayudando a "
+         "entender si reducir la prueba y error y mejorar la satisfacción van de la mano o en "
+         "tensión.",
          fig_intentos_vs_sus(sessions, sus)),
     ]
 
@@ -635,11 +635,11 @@ def build(sessions_path, sus_path, out_path):
   </nav>
   <main>
     <header class="hero">
-      <h1>Desincentivo de la prueba y error en jueces en linea</h1>
+      <h1>Desincentivo de la prueba y error en jueces en línea</h1>
       <p>Visualizaciones del experimento factorial 2&sup3; (ocultamiento de casos,
-      contador cromatico y espera incremental). <strong>Datos preliminares.</strong>
-      Cada grafico es interactivo y puede descargarse en PNG de alta resolucion con el
-      boton correspondiente.</p>
+      contador cromático y espera incremental). <strong>Datos preliminares.</strong>
+      Cada gráfico es interactivo y puede descargarse en PNG de alta resolución con el
+      botón correspondiente.</p>
       <div class="stats">
         <div class="stat"><div class="n">{n_students}</div><div class="l">Estudiantes</div></div>
         <div class="stat"><div class="n">{n_rows}</div><div class="l">Ejercicios con intentos</div></div>
@@ -653,19 +653,19 @@ def build(sessions_path, sus_path, out_path):
             <span class="badge" style="background:#2c7fb8">O</span>
             <p class="name">Ocultamiento de casos</p>
             <p class="det">Se restringe la visibilidad a un solo caso de prueba, ocultando los
-            demas tanto en el enunciado como en la retroalimentacion.</p>
+            demás tanto en el enunciado como en la retroalimentación.</p>
           </div>
           <div class="factor" style="border-left-color:#41ab5d">
             <span class="badge" style="background:#41ab5d">C</span>
-            <p class="name">Contador cromatico</p>
-            <p class="det">Un indicador del numero de envios que transita del verde al rojo
-            conforme aumentan los intentos, para hacer consciente el reenvio.</p>
+            <p class="name">Contador cromático</p>
+            <p class="det">Un indicador del número de envíos que transita del verde al rojo
+            conforme aumentan los intentos, para hacer consciente el reenvío.</p>
           </div>
           <div class="factor" style="border-left-color:#fe9929">
             <span class="badge" style="background:#fe9929">E</span>
             <p class="name">Espera incremental</p>
-            <p class="det">Tras cada envio el boton se bloquea unos segundos (5 s, +5 s por
-            intento, hasta 60 s), imponiendo un costo temporal al reenvio impulsivo.</p>
+            <p class="det">Tras cada envío el botón se bloquea unos segundos (5 s, +5 s por
+            intento, hasta 60 s), imponiendo un costo temporal al reenvío impulsivo.</p>
           </div>
         </div>
       </div>
