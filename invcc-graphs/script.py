@@ -18,11 +18,15 @@ Los datos se interpretan segun el diseno factorial 2^3 del estudio:
   E = try_timer   (espera incremental entre envios)
 La variable de prueba y error es 'attempts' (intentos por ejercicio) y la
 experiencia de uso se mide con la puntuacion SUS (0-100).
+Mediante un analisis de Tukey se determinara la combinacion de estrategias que
+alcance la mayor relacion entre problemas resueltos y reintentos.
 """
 
+import json
 import os
 import sys
 import html
+from pathlib import Path
 import numpy as np
 import pandas as pd
 import plotly.graph_objects as go
@@ -51,6 +55,7 @@ CELL_COLORS = {
 FACTOR_ON = "#2c7fb8"
 FACTOR_OFF = "#c6ccd4"
 PLOTLY_CDN = "https://cdn.plot.ly/plotly-2.35.2.min.js"
+EXERCISES_ROOT = Path(__file__).resolve().parent.parent / "exercises"
 
 
 def style_fig(fig, height=460):
@@ -85,7 +90,36 @@ def cell_label(o, c, e):
     return "+".join(parts) if parts else "Control"
 
 
-def load_sessions(path):
+def humanize_problem_id(problem_id):
+    return str(problem_id).replace("-", " ").replace("_", " ").strip().title()
+
+
+def load_exercise_catalog(exercises_root=EXERCISES_ROOT):
+    rows = []
+    if not exercises_root.exists():
+        return pd.DataFrame(columns=["problem_id", "problem_name"])
+
+    for config_path in sorted(exercises_root.glob("**/config.json")):
+        try:
+            with open(config_path, "r", encoding="utf-8") as fh:
+                config = json.load(fh)
+        except (OSError, json.JSONDecodeError):
+            continue
+
+        problem_id = str(config.get("id", "")).strip()
+        if not problem_id:
+            continue
+        problem_name = str(config.get("title", "")).strip() or humanize_problem_id(problem_id)
+        rows.append({
+            "problem_id": problem_id,
+            "problem_name": problem_name,
+            "exercise_path": str(config_path.parent.relative_to(exercises_root)),
+        })
+
+    return pd.DataFrame(rows).drop_duplicates(subset=["problem_id"], keep="first")
+
+
+def load_sessions(path, exercise_catalog=None):
     df = pd.read_csv(path)
     for col in ["hide_tests", "show_tries", "try_timer", "solved"]:
         df[col] = to_bool(df[col])
@@ -94,6 +128,15 @@ def load_sessions(path):
     df["C"] = df["show_tries"]
     df["E"] = df["try_timer"]
     df["cell"] = [cell_label(o, c, e) for o, c, e in zip(df["O"], df["C"], df["E"])]
+    if exercise_catalog is not None and not exercise_catalog.empty:
+        df = df.merge(exercise_catalog[["problem_id", "problem_name"]], on="problem_id", how="left")
+    else:
+        df["problem_name"] = df["problem_id"]
+    df["problem_name"] = (
+        df["problem_name"]
+        .fillna(df["problem_id"].map(humanize_problem_id))
+        .fillna(df["problem_id"])
+    )
     return df
 
 
@@ -215,13 +258,17 @@ def fig_distribucion_intentos(sessions):
     return style_fig(fig)
 
 
-def fig_intentos_tema(sessions):
+def fig_intentos_tema(sessions, exercise_catalog=None):
     d = sessions[sessions["attempts"] > 0]
-    med = d.groupby("problem_id")["attempts"].median().sort_values()
+    name_col = "problem_name" if "problem_name" in d.columns else "problem_id"
+    med = d.groupby(name_col)["attempts"].median().sort_values()
+    if exercise_catalog is not None and not exercise_catalog.empty:
+        catalog_order = exercise_catalog["problem_name"].tolist()
+        med = med.reindex(catalog_order)
     order = med.index.tolist()
     fig = go.Figure()
     fig.add_trace(go.Box(
-        x=d["problem_id"], y=d["attempts"],
+        x=d[name_col], y=d["attempts"],
         marker_color="#2c7fb8", line=dict(width=1.2), boxpoints=False,
         hoverinfo="y",
     ))
@@ -408,6 +455,78 @@ def fig_intentos_vs_sus(sessions, sus):
     return style_fig(fig)
 
 
+def fig_resueltos_vs_intentos_tratamiento(sessions):
+    d_all = sessions.copy()
+    d_attempted = d_all[d_all["attempts"] > 0]
+
+    attempts = d_attempted.groupby("cell")["attempts"].mean().rename("mean_attempts")
+    solved_rate = d_all.groupby("cell")["solved"].mean().rename("solved_rate") * 100
+    counts = d_all.groupby("cell").size().rename("n")
+
+    merged = pd.concat([attempts, solved_rate, counts], axis=1).dropna(subset=["mean_attempts"])
+    merged = merged.reindex(cells_present(d_all)).dropna(subset=["mean_attempts"])
+
+    fig = go.Figure()
+    for cell, row in merged.iterrows():
+        fig.add_trace(go.Scatter(
+            x=[row["mean_attempts"]],
+            y=[row["solved_rate"]],
+            mode="markers+text",
+            text=[cell],
+            textposition="top center",
+            name=cell,
+            marker=dict(
+                color=CELL_COLORS[cell],
+                size=max(12, min(30, 8 + row["n"] / 8)),
+                opacity=0.9,
+                line=dict(width=1, color="white"),
+            ),
+            hovertemplate=(
+                f"{cell}<br>Intentos promedio: %{{x:.1f}}"
+                f"<br>Problemas resueltos: %{{y:.1f}}%"
+                f"<br>Observaciones: {int(row['n'])}<extra></extra>"
+            ),
+            showlegend=False,
+        ))
+
+    fig.update_layout(
+        title="Relación entre problemas resueltos y reintentos por tratamiento",
+        xaxis_title="Intentos promedio por ejercicio en ejercicios con al menos 1 intento",
+        yaxis_title="% de ejercicios resueltos",
+    )
+    fig.add_annotation(
+        x=0.5,
+        y=-0.22,
+        xref="paper",
+        yref="paper",
+        showarrow=False,
+        align="left",
+        font=dict(size=12, color=MUTED),
+        text=(
+            "Se excluyen los ejercicios con 0 intentos del eje de intentos porque no aportan a la "
+            "relación entre reintentos y logro. La tasa de resuelto sí conserva todos los ejercicios "
+            "del tratamiento para no sobreestimar el éxito."
+        ),
+    )
+    return style_fig(fig, height=520)
+
+def fig_eficiencia_resueltos_por_intento(sessions):
+    d = sessions[sessions["attempts"] > 0]
+    order = cells_present(d)
+    grp = d.groupby("cell").agg(solved_n=("solved", "sum"), attempts_n=("attempts", "sum"))
+    grp["eficiencia"] = grp["solved_n"] / grp["attempts_n"]
+    grp = grp.reindex(order)
+    fig = go.Figure(go.Bar(
+        x=order, y=grp["eficiencia"],
+        marker_color=[CELL_COLORS[c] for c in order],
+        text=[f"{v:.3f}" for v in grp["eficiencia"]], textposition="outside",
+        hovertemplate="%{x}<br>Resueltos: %{customdata[0]}<br>Intentos: %{customdata[1]}<extra></extra>",
+        customdata=grp[["solved_n", "attempts_n"]].values,
+    ))
+    fig.update_layout(title="Problemas resueltos por cada intento, según tratamiento",
+                      xaxis_title="Celda experimental",
+                      yaxis_title="Resueltos / intentos")
+    return style_fig(fig)
 # ---------------------------------------------------------------------------
 # Ensamblaje del HTML
 # ---------------------------------------------------------------------------
@@ -439,7 +558,8 @@ def fig_to_card(section_id, title, description, fig):
 
 
 def build(sessions_path, sus_path, out_path):
-    sessions = load_sessions(sessions_path)
+    exercise_catalog = load_exercise_catalog()
+    sessions = load_sessions(sessions_path, exercise_catalog=exercise_catalog)
     sus = load_sus(sus_path, sessions)
 
     n_students = sessions["carnet"].nunique()
@@ -486,7 +606,7 @@ def build(sessions_path, sus_path, out_path):
          "cuánta variación en los intentos proviene de la dificultad intrínseca de cada "
          "problema, lo que respalda incluir el ejercicio como control en el análisis para no "
          "confundir su efecto con el de las intervenciones.",
-         fig_intentos_tema(sessions)),
+         fig_intentos_tema(sessions, exercise_catalog=exercise_catalog)),
 
         ("rq1_interacciones", "RQ1 · Prueba y error",
          "Interacciones de segundo orden",
@@ -503,6 +623,23 @@ def build(sessions_path, sus_path, out_path):
          "fomentar mejores estrategias.",
          fig_tasa_resolucion(sessions)),
 
+        ("rq1_logro_vs_intentos", "RQ1 · Prueba y error",
+         "Problemas resueltos vs. intentos por tratamiento",
+         "Resume la relación central del estudio a nivel de tratamiento: cuánto se reintenta y "
+         "qué proporción de ejercicios se logra resolver. Para esta vista se excluyen los "
+         "ejercicios con 0 intentos del eje de intentos, porque no describen reintentos; la "
+         "tasa de resuelto sigue considerando todo el tratamiento. Esa lectura es la que luego "
+         "puede contrastarse con el análisis de Tukey para identificar la mejor combinación de "
+         "estrategias.",
+         fig_resueltos_vs_intentos_tratamiento(sessions)),
+        ("rq1_eficiencia", "RQ1 · Prueba y error",
+         "Problemas resueltos por cada intento",
+         "Calcula, para cada celda, la razón entre problemas resueltos y el total de intentos "
+         "invertidos (resueltos / intentos), una medida directa de eficiencia: por ejemplo, "
+         "resolver 1 problema en 5 intentos da 0.2, y resolver 4 en 15 da 0.267. Es la métrica "
+         "más cercana al objetivo del análisis de Tukey: identificar la combinación de "
+         "estrategias con mejor relación entre logro y reintentos.",
+         fig_eficiencia_resueltos_por_intento(sessions)),
         ("rq2_celdas", "RQ2 · Experiencia (SUS)",
          "Puntuación SUS promedio por celda",
          "Responde a la RQ2: si las estrategias afectan la experiencia percibida. La línea de "
@@ -638,6 +775,8 @@ def build(sessions_path, sus_path, out_path):
       <h1>Desincentivo de la prueba y error en jueces en línea</h1>
       <p>Visualizaciones del experimento factorial 2&sup3; (ocultamiento de casos,
       contador cromático y espera incremental). <strong>Datos preliminares.</strong>
+    Mediante un análisis de Tukey se determinará la combinación de estrategias que
+    alcance la mayor relación entre problemas resueltos y reintentos.
       Cada gráfico es interactivo y puede descargarse en PNG de alta resolución con el
       botón correspondiente.</p>
       <div class="stats">
@@ -693,8 +832,8 @@ def build(sessions_path, sus_path, out_path):
 
 def main():
     # Rutas por defecto: datos preliminares en la carpeta data/.
-    default_sessions = os.path.join("data", "preliminary_sessions.csv")
-    default_sus = os.path.join("data", "preliminary_sus.csv")
+    default_sessions = os.path.join("data", "levcode_sessions_2026-06-15.csv")
+    default_sus = os.path.join("data", "levcode_sus_2026-06-15.csv")
     args = sys.argv[1:]
     if len(args) >= 2:
         sessions_path, sus_path = args[0], args[1]
