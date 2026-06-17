@@ -88,6 +88,22 @@ def style_fig(fig, height=460):
     return fig
 
 
+def with_note(fig, text, top=78):
+    """Añade una segunda línea bajo el título (en gris y más pequeña), pensada
+    para indicar el tamaño de muestra con el que se generó el gráfico. `top`
+    ajusta el margen superior para gráficos con más elementos arriba."""
+    base = fig.layout.title.text or ""
+    fig.update_layout(
+        title=dict(text=f"{base}<br><span style=\"font-size:13px;color:{MUTED}\">{text}</span>"),
+        margin=dict(l=70, r=30, t=top, b=60),
+    )
+    return fig
+
+
+def with_n(fig, n, label="estudiantes", top=78):
+    return with_note(fig, f"n = {n} {label}", top=top)
+
+
 # ---------------------------------------------------------------------------
 # Carga y preparacion de datos
 # ---------------------------------------------------------------------------
@@ -206,9 +222,9 @@ def cells_present(df):
     return [c for c in CELL_ORDER if c in set(df["cell"])]
 
 
-def fig_participantes(sus):
-    order = cells_present(sus)
-    counts = sus["cell"].value_counts().reindex(order).fillna(0)
+def fig_participantes(sessions):
+    order = cells_present(sessions)
+    counts = sessions.groupby("cell")["carnet"].nunique().reindex(order).fillna(0)
     fig = go.Figure(go.Bar(
         x=order, y=counts.values,
         marker_color=[CELL_COLORS[c] for c in order],
@@ -217,7 +233,7 @@ def fig_participantes(sus):
     fig.update_layout(title="Participantes por celda experimental",
                       xaxis_title="Celda (combinación de intervenciones)",
                       yaxis_title="N.° de estudiantes")
-    return style_fig(fig)
+    return with_n(style_fig(fig), sessions["carnet"].nunique())
 
 
 def fig_intentos_celda(sessions):
@@ -242,7 +258,7 @@ def fig_intentos_celda(sessions):
     fig.update_layout(title="Intentos promedio por celda",
                       xaxis_title="Celda experimental",
                       yaxis_title="Intentos promedio por ejercicio")
-    return style_fig(fig)
+    return with_n(style_fig(fig), d["carnet"].nunique())
 
 
 def fig_intentos_sus_combinado(sessions, sus):
@@ -303,7 +319,9 @@ def fig_intentos_sus_combinado(sessions, sus):
                     tickfont=dict(color="#b34a46")),
         legend=dict(orientation="h", y=1.12, x=1, xanchor="right"),
     )
-    return style_fig(fig)
+    return with_note(style_fig(fig),
+                     f"n = {d['carnet'].nunique()} estudiantes (intentos) · "
+                     f"{sus['carnet'].nunique()} con SUS")
 
 
 def fig_efectos_principales(sessions):
@@ -328,7 +346,7 @@ def fig_efectos_principales(sessions):
                       xaxis_title="Factor (desactivado vs. activado)",
                       yaxis_title="Intentos promedio por ejercicio",
                       bargap=0.35)
-    return style_fig(fig)
+    return with_n(style_fig(fig), d["carnet"].nunique())
 
 
 def fig_distribucion_intentos(sessions):
@@ -345,7 +363,7 @@ def fig_distribucion_intentos(sessions):
     fig.update_layout(title="Distribución de intentos por celda experimental",
                       xaxis_title="Celda experimental",
                       yaxis_title="Intentos por ejercicio", showlegend=False)
-    return style_fig(fig)
+    return with_n(style_fig(fig), d["carnet"].nunique())
 
 
 def fig_intentos_tema(sessions, exercise_catalog=None):
@@ -367,7 +385,7 @@ def fig_intentos_tema(sessions, exercise_catalog=None):
                       xaxis_title="Ejercicio", yaxis_title="Intentos",
                       showlegend=False)
     fig.update_xaxes(tickangle=-40)
-    return style_fig(fig, height=520)
+    return with_n(style_fig(fig, height=520), d["carnet"].nunique())
 
 
 def fig_interacciones(sessions):
@@ -394,7 +412,7 @@ def fig_interacciones(sessions):
         fig.update_xaxes(title_text=n1, row=1, col=idx)
     fig.update_yaxes(title_text="Intentos promedio", row=1, col=1)
     fig.update_layout(title="Interacciones de segundo orden entre intervenciones")
-    return style_fig(fig)
+    return with_n(style_fig(fig), d["carnet"].nunique(), top=110)
 
 
 def fig_tasa_resolucion(sessions):
@@ -411,7 +429,7 @@ def fig_tasa_resolucion(sessions):
                       xaxis_title="Celda experimental",
                       yaxis_title="% de ejercicios resueltos",
                       yaxis_range=[0, 105])
-    return style_fig(fig)
+    return with_n(style_fig(fig), d["carnet"].nunique())
 
 
 def fig_sus_celda(sus):
@@ -432,7 +450,7 @@ def fig_sus_celda(sus):
     fig.update_layout(title="Puntuación SUS promedio por celda (IC 95%)",
                       xaxis_title="Celda experimental",
                       yaxis_title="Puntuación SUS (0-100)", yaxis_range=[0, 100])
-    return style_fig(fig)
+    return with_n(style_fig(fig), sus["carnet"].nunique())
 
 
 def fig_sus_efectos(sus):
@@ -455,7 +473,7 @@ def fig_sus_efectos(sus):
     fig.update_layout(title="Efecto principal de cada intervención sobre el SUS",
                       xaxis_title="Factor (desactivado vs. activado)",
                       yaxis_title="Puntuación SUS", yaxis_range=[0, 100], bargap=0.35)
-    return style_fig(fig)
+    return with_n(style_fig(fig), sus["carnet"].nunique())
 
 
 def fig_sus_distribucion(sus):
@@ -472,7 +490,7 @@ def fig_sus_distribucion(sus):
     fig.update_layout(title="Distribución del SUS por celda experimental",
                       xaxis_title="Celda experimental",
                       yaxis_title="Puntuación SUS", showlegend=False)
-    return style_fig(fig)
+    return with_n(style_fig(fig), sus["carnet"].nunique())
 
 
 def fig_sus_clasificacion(sus):
@@ -498,7 +516,7 @@ def fig_sus_clasificacion(sus):
                       yaxis_title="", xaxis_range=[0, 100],
                       legend=dict(orientation="h", y=-0.3))
     fig.update_yaxes(showticklabels=False)
-    return style_fig(fig, height=320)
+    return with_n(style_fig(fig, height=320), sus["carnet"].nunique())
 
 
 def fig_sus_items(sus):
@@ -515,7 +533,7 @@ def fig_sus_items(sus):
     fig.update_layout(title="Respuesta promedio por ítem del SUS y celda",
                       xaxis_title="Ítem del cuestionario SUS",
                       yaxis_title="Celda experimental")
-    return style_fig(fig, height=480)
+    return with_n(style_fig(fig, height=480), sus["carnet"].nunique())
 
 
 def fig_intentos_vs_sus(sessions, sus):
@@ -546,7 +564,7 @@ def fig_intentos_vs_sus(sessions, sus):
     fig.update_layout(title="Relación entre intentos promedio y experiencia (SUS) por estudiante",
                       xaxis_title="Intentos promedio por ejercicio (por estudiante)",
                       yaxis_title="Puntuación SUS")
-    return style_fig(fig)
+    return with_n(style_fig(fig), len(merged), "estudiantes con intentos y SUS")
 
 
 def fig_resueltos_vs_intentos_tratamiento(sessions):
@@ -607,7 +625,7 @@ def fig_resueltos_vs_intentos_tratamiento(sessions):
             "del tratamiento para no sobreestimar el éxito."
         ),
     )
-    return style_fig(fig, height=520)
+    return with_n(style_fig(fig, height=520), d_all["carnet"].nunique())
 
 def fig_eficiencia_resueltos_por_intento(sessions):
     d = sessions[sessions["attempts"] > 0]
@@ -625,7 +643,7 @@ def fig_eficiencia_resueltos_por_intento(sessions):
     fig.update_layout(title="Problemas resueltos por cada intento, según tratamiento",
                       xaxis_title="Celda experimental",
                       yaxis_title="Resueltos / intentos")
-    return style_fig(fig)
+    return with_n(style_fig(fig), d["carnet"].nunique())
 # ---------------------------------------------------------------------------
 # Ensamblaje del HTML
 # ---------------------------------------------------------------------------
@@ -673,7 +691,7 @@ def build(sessions_path, sus_path, out_path):
          "Verifica el balance del diseño factorial: el esquema round-robin debe repartir "
          "los estudiantes de forma aproximadamente uniforme entre las 8 celdas. Celdas muy "
          "desiguales advierten sobre la potencia estadística disponible para cada comparación.",
-         fig_participantes(sus)),
+         fig_participantes(sessions)),
 
         ("rq1_celdas", "RQ1 · Prueba y error",
          "Intentos promedio por celda experimental",
