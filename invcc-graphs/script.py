@@ -55,6 +55,16 @@ CELL_COLORS = {
 FACTOR_ON = "#2c7fb8"
 FACTOR_OFF = "#c6ccd4"
 PLOTLY_CDN = "https://cdn.plot.ly/plotly-2.35.2.min.js"
+
+
+def lighten(bg, t=0.55):
+    """Mezcla el color con blanco una fracción t (0=igual, 1=blanco). Se usa para
+    aclarar las barras de modo que la etiqueta del valor, siempre en negro, se lea
+    bien sin perder el tono que identifica cada celda/factor."""
+    h = bg.lstrip("#")
+    r, g, b = (int(h[i:i + 2], 16) for i in (0, 2, 4))
+    r, g, b = (round(v + (255 - v) * t) for v in (r, g, b))
+    return f"#{r:02x}{g:02x}{b:02x}"
 EXERCISES_ROOT = Path(__file__).resolve().parent.parent / "exercises"
 
 
@@ -222,13 +232,14 @@ def fig_intentos_celda(sessions):
     fig = go.Figure(go.Bar(
         x=labels, y=means,
         error_y=dict(type="data", array=err, color=MUTED, thickness=1.4, width=6),
-        marker_color=[CELL_COLORS[c] for c in labels],
-        text=[f"{m:.1f}" for m in means], textposition="outside",
+        marker_color=[lighten(CELL_COLORS[c]) for c in labels],
+        text=[f"{m:.1f}" for m in means], textposition="inside",
+        insidetextanchor="start", textfont=dict(color=INK, size=13),
     ))
     if ctrl is not None:
         fig.add_hline(y=ctrl, line_dash="dash", line_color="#9aa5b1",
                       annotation_text="Nivel control", annotation_position="top left")
-    fig.update_layout(title="Intentos promedio por celda (IC 95%) — ordenado de menor a mayor",
+    fig.update_layout(title="Intentos promedio por celda",
                       xaxis_title="Celda experimental",
                       yaxis_title="Intentos promedio por ejercicio")
     return style_fig(fig)
@@ -256,22 +267,28 @@ def fig_intentos_sus_combinado(sessions, sus):
     fig.add_trace(go.Bar(
         x=labels, y=att_means,
         error_y=dict(type="data", array=att_err, color=MUTED, thickness=1.4, width=6),
-        marker_color=[CELL_COLORS[c] for c in labels],
-        text=[f"{m:.1f}" for m in att_means], textposition="outside",
+        marker_color=[lighten(CELL_COLORS[c]) for c in labels],
+        text=[f"{m:.1f}" for m in att_means], textposition="inside",
+        insidetextanchor="start", textfont=dict(color=INK, size=13),
         name="Intentos promedio", yaxis="y",
         hovertemplate="%{x}<br>Intentos: %{y:.1f}<extra></extra>",
     ))
     fig.add_trace(go.Scatter(
-        x=labels, y=sus_means, mode="lines+markers+text",
+        x=labels, y=sus_means, mode="lines+markers",
         error_y=dict(type="data", array=sus_err, color="#e0726e",
                      thickness=1.2, width=5),
         line=dict(color="#e0726e", width=2.6),
-        marker=dict(size=9, color="#e0726e", line=dict(width=1, color="white")),
-        text=[f"{m:.0f}" if not np.isnan(m) else "" for m in sus_means],
-        textposition="top center", textfont=dict(color="#b34a46"),
+        marker=dict(size=26, color="white", line=dict(width=2, color="#e0726e")),
         name="SUS promedio", yaxis="y2",
         hovertemplate="%{x}<br>SUS: %{y:.0f}<extra></extra>",
     ))
+    # Número del SUS centrado exactamente dentro de cada círculo (anotación con
+    # anclaje al centro; yshift fino corrige el ligero desfase de la fuente).
+    for c, m in zip(labels, sus_means):
+        if not np.isnan(m):
+            fig.add_annotation(x=c, y=m, yref="y2", text=f"{m:.0f}",
+                               showarrow=False, xanchor="center", yanchor="middle",
+                               yshift=1, font=dict(color=INK, size=11))
     if ctrl is not None:
         fig.add_hline(y=ctrl, line_dash="dash", line_color="#9aa5b1",
                       annotation_text="Nivel control (intentos)",
@@ -302,8 +319,10 @@ def fig_efectos_principales(sessions):
             fig.add_trace(go.Bar(
                 x=[cat], y=[m],
                 error_y=dict(type="data", array=[e], color=MUTED, thickness=1.4, width=6),
-                marker_color=FACTOR_ON if state else FACTOR_OFF,
-                text=[f"{m:.1f}"], textposition="outside", showlegend=False,
+                marker_color=lighten(FACTOR_ON if state else FACTOR_OFF),
+                text=[f"{m:.1f}"], textposition="inside", insidetextanchor="start",
+                textfont=dict(color=INK, size=13),
+                showlegend=False,
             ))
     fig.update_layout(title="Efecto principal de cada intervención sobre los intentos",
                       xaxis_title="Factor (desactivado vs. activado)",
@@ -404,8 +423,9 @@ def fig_sus_celda(sus):
     fig = go.Figure(go.Bar(
         x=labels, y=means,
         error_y=dict(type="data", array=err, color=MUTED, thickness=1.4, width=6),
-        marker_color=[CELL_COLORS[c] for c in labels],
-        text=[f"{m:.0f}" for m in means], textposition="outside",
+        marker_color=[lighten(CELL_COLORS[c]) for c in labels],
+        text=[f"{m:.0f}" for m in means], textposition="inside",
+        insidetextanchor="start", textfont=dict(color=INK, size=13),
     ))
     fig.add_hline(y=68, line_dash="dash", line_color="#e0726e",
                   annotation_text="Promedio de referencia (68)", annotation_position="top left")
@@ -425,8 +445,10 @@ def fig_sus_efectos(sus):
             fig.add_trace(go.Bar(
                 x=[cat], y=[m],
                 error_y=dict(type="data", array=[e], color=MUTED, thickness=1.4, width=6),
-                marker_color=FACTOR_ON if state else FACTOR_OFF,
-                text=[f"{m:.0f}"], textposition="outside", showlegend=False,
+                marker_color=lighten(FACTOR_ON if state else FACTOR_OFF),
+                text=[f"{m:.0f}"], textposition="inside", insidetextanchor="start",
+                textfont=dict(color=INK, size=13),
+                showlegend=False,
             ))
     fig.add_hline(y=68, line_dash="dash", line_color="#e0726e",
                   annotation_text="Referencia 68", annotation_position="top left")
