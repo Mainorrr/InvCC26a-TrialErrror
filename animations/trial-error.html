@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brute Force Jigsaw - Smiley Face</title>
+<style>
+    body {
+        font-family: 'Segoe UI', Roboto, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: #ffffff;
+        color: #2d3436;
+        margin: 0;
+        padding: 20px;
+    }
+
+    h1 { color: #636e72; font-weight: 300; }
+
+    #board-container {
+        display: grid;
+        grid-template-columns: repeat(4, 80px);
+        grid-template-rows: repeat(4, 80px);
+        background-color: transparent; /* Sin fondo: el puzzle se arma "en el piso" */
+        margin-bottom: 40px;
+        z-index: 10;
+        position: relative;
+    }
+
+    .board-cell {
+        width: 80px;
+        height: 80px;
+        position: relative;
+        box-sizing: border-box;
+    }
+
+    #pool-wrapper {
+        background-color: transparent; 
+        padding: 50px 100px;
+        border-radius: 20px;
+        border: none;
+        position: relative; 
+        min-height: 780px;
+        width: 100%;
+        max-width: 900px;
+        box-sizing: border-box;
+    }
+
+    #pool-container {
+        display: grid;
+        grid-template-columns: repeat(4, 80px); 
+        grid-template-rows: repeat(4, 80px);
+        gap: 50px; 
+        margin: 0 auto;
+        width: fit-content;
+    }
+
+    .pool-slot {
+        width: 80px;
+        height: 80px;
+        background-color: transparent;
+        border-radius: 12px;
+        position: relative;
+    }
+
+    .puzzle-piece {
+        position: absolute;
+        width: 120px;
+        height: 120px;
+        top: -20px;
+        left: -20px;
+        z-index: 10;
+        transition: transform 0.28s ease-in-out; 
+        pointer-events: none;
+        will-change: transform;
+    }
+
+    .puzzle-piece svg {
+        width: 100%;
+        height: 100%;
+        filter: drop-shadow(0 4px 6px rgba(0,0,0,0.15));
+        overflow: visible;
+    }
+
+    /* FIX: piezas encajadas no llevan sombra (la sombra pinta halo rosado en los bordes interiores) */
+    .puzzle-piece.locked svg {
+        filter: none;
+    }
+
+    .testing { z-index: 100; }
+    .locked { z-index: 5; }
+
+    #controls { margin-bottom: 30px; display: flex; gap: 15px; justify-content: center; }
+    button {
+        background-color: #00b894;
+        color: white;
+        border: none;
+        padding: 12px 35px;
+        font-size: 16px;
+        font-weight: 600;
+        border-radius: 50px;
+        cursor: pointer;
+        box-shadow: 0 4px 15px rgba(0, 184, 148, 0.3);
+    }
+    #smart-btn {
+        background-color: #6c5ce7;
+        box-shadow: 0 4px 15px rgba(108, 92, 231, 0.3);
+    }
+    button:disabled { background-color: #b2bec3; box-shadow: none; }
+</style>
+</head>
+<body>
+
+<h1>Jigsaw Solver</h1>
+<div id="controls">
+    <button id="start-btn" onclick="startSolving()">Start Solver</button>
+    <button id="smart-btn" onclick="startSmartSolving()">Smart Solver</button>
+</div>
+
+<div id="board-container"></div>
+
+<div id="pool-wrapper">
+    <div id="pool-container"></div>
+</div>
+
+<script>
+    const rows = 4, cols = 4, totalPieces = rows * cols;
+    const PIECE = 100;
+    const BOARD_W = cols * PIECE;
+    const BOARD_H = rows * PIECE;
+
+    const boardContainer = document.getElementById('board-container');
+    const poolContainer = document.getElementById('pool-container');
+    const poolWrapper = document.getElementById('pool-wrapper');
+    const startBtn = document.getElementById('start-btn');
+    const smartBtn = document.getElementById('smart-btn');
+
+    const rightBorders = [], bottomBorders = [];
+    let piecesData = [];
+    let piecesByTargetIndex = {};
+
+    function randomEdge() { return Math.random() > 0.5 ? 1 : -1; }
+
+    function generateBorders() {
+        rightBorders.length = 0;
+        bottomBorders.length = 0;
+        for (let r = 0; r < rows; r++) {
+            let rowRight = [];
+            for (let c = 0; c < cols - 1; c++) rowRight.push(randomEdge());
+            rightBorders.push(rowRight);
+        }
+        for (let r = 0; r < rows - 1; r++) {
+            let rowBottom = [];
+            for (let c = 0; c < cols; c++) rowBottom.push(randomEdge());
+            bottomBorders.push(rowBottom);
+        }
+    }
+
+    function getPieceEdges(r, c) {
+        const top    = (r === 0)        ? 0 : -bottomBorders[r - 1][c];
+        const right  = (c === cols - 1) ? 0 :  rightBorders[r][c];
+        const bottom = (r === rows - 1) ? 0 :  bottomBorders[r][c];
+        const left   = (c === 0)        ? 0 : -rightBorders[r][c - 1];
+        return { top, right, bottom, left };
+    }
+
+    function buildAbsolutePath(edges, r, c) {
+        const x0 = c * PIECE; const y0 = r * PIECE;
+        const x1 = x0 + PIECE; const y1 = y0 + PIECE;
+        const TAB = 25;
+        const tx1 = x0 + 35, tx2 = x0 + 65;
+        const ty1 = y0 + 35, ty2 = y0 + 65;
+
+        let p = `M ${x0} ${y0} `;
+
+        if (edges.top === 0) p += `L ${x1} ${y0} `;
+        else if (edges.top === 1) p += `L ${tx1} ${y0} C ${tx1} ${y0 - TAB}, ${tx2} ${y0 - TAB}, ${tx2} ${y0} L ${x1} ${y0} `;
+        else p += `L ${tx1} ${y0} C ${tx1} ${y0 + TAB}, ${tx2} ${y0 + TAB}, ${tx2} ${y0} L ${x1} ${y0} `;
+
+        if (edges.right === 0) p += `L ${x1} ${y1} `;
+        else if (edges.right === 1) p += `L ${x1} ${ty1} C ${x1 + TAB} ${ty1}, ${x1 + TAB} ${ty2}, ${x1} ${ty2} L ${x1} ${y1} `;
+        else p += `L ${x1} ${ty1} C ${x1 - TAB} ${ty1}, ${x1 - TAB} ${ty2}, ${x1} ${ty2} L ${x1} ${y1} `;
+
+        if (edges.bottom === 0) p += `L ${x0} ${y1} `;
+        else if (edges.bottom === 1) p += `L ${tx2} ${y1} C ${tx2} ${y1 + TAB}, ${tx1} ${y1 + TAB}, ${tx1} ${y1} L ${x0} ${y1} `;
+        else p += `L ${tx2} ${y1} C ${tx2} ${y1 - TAB}, ${tx1} ${y1 - TAB}, ${tx1} ${y1} L ${x0} ${y1} `;
+
+        if (edges.left === 0) p += `L ${x0} ${y0} `;
+        else if (edges.left === 1) p += `L ${x0} ${ty2} C ${x0 - TAB} ${ty2}, ${x0 - TAB} ${ty1}, ${x0} ${ty1} L ${x0} ${y0} `;
+        else p += `L ${x0} ${ty2} C ${x0 + TAB} ${ty2}, ${x0 + TAB} ${ty1}, ${x0} ${ty1} L ${x0} ${y0} `;
+
+        p += `Z`;
+        return p;
+    }
+
+    function smileyFaceMarkup(bgColor) {
+        const cx = BOARD_W / 2; const cy = BOARD_H / 2;
+        const faceR = 170; const eyeOffX = 60; const eyeOffY = 50;
+        const eyeR = 18; const mouthR = 95;
+        return `
+            <rect x="0" y="0" width="${BOARD_W}" height="${BOARD_H}" fill="${bgColor}"/>
+            <circle cx="${cx}" cy="${cy}" r="${faceR}" fill="#FFD93D"/>
+            <circle cx="${cx - eyeOffX}" cy="${cy - eyeOffY}" r="${eyeR}" fill="#2d3436"/>
+            <circle cx="${cx + eyeOffX}" cy="${cy - eyeOffY}" r="${eyeR}" fill="#2d3436"/>
+            <circle cx="${cx - eyeOffX + 6}" cy="${cy - eyeOffY - 6}" r="5" fill="#ffffff"/>
+            <circle cx="${cx + eyeOffX + 6}" cy="${cy - eyeOffY - 6}" r="5" fill="#ffffff"/>
+            <path d="M ${cx - mouthR} ${cy + 15} Q ${cx} ${cy + 110}, ${cx + mouthR} ${cy + 15}" stroke="#2d3436" stroke-width="7" fill="none" stroke-linecap="round"/>
+        `;
+    }
+
+    // Mapeo de color de fondo por pieza, según su grupo SMART_GROUPS:
+    // - Las 4 esquinas del puzzle se distinguen con colores propios para
+    //   reforzar visualmente la idea de clasificación durante el smart solve.
+    // - Los grupos centrales (sobre la cara) quedan con azul como antes.
+    const CORNER_COLORS = {
+        // grupo [0, 1, 4] — esquina superior izquierda → coral
+        0: '#FF7F50', 1: '#FF7F50', 4: '#FF7F50',
+        // grupo [2, 3, 7] — esquina superior derecha → verde menta
+        2: '#5DD5A8', 3: '#5DD5A8', 7: '#5DD5A8',
+        // grupo [8, 12, 13] — esquina inferior izquierda → lavanda
+        8: '#9B7EDE', 12: '#9B7EDE', 13: '#9B7EDE',
+        // grupo [11, 14, 15] — esquina inferior derecha → rosa coral
+        11: '#F47B9A', 14: '#F47B9A', 15: '#F47B9A'
+    };
+    const DEFAULT_BG = '#5B8DEF';
+    function bgColorForPiece(r, c) {
+        const index = r * cols + c;
+        return CORNER_COLORS[index] || DEFAULT_BG;
+    }
+
+    function buildOuterBorderPath(edges, r, c) {
+        const x0 = c * PIECE; const y0 = r * PIECE;
+        const x1 = x0 + PIECE; const y1 = y0 + PIECE;
+
+        if (r !== 0 && c !== cols - 1 && r !== rows - 1 && c !== 0) return '';
+        let p = '';
+        if (r === 0) p += `M ${x0} ${y0} L ${x1} ${y0} `;
+        if (c === cols - 1) p += `M ${x1} ${y0} L ${x1} ${y1} `;
+        if (r === rows - 1) p += `M ${x1} ${y1} L ${x0} ${y1} `;
+        if (c === 0) p += `M ${x0} ${y1} L ${x0} ${y0} `;
+        return p;
+    }
+
+    function buildSidePaths(edges, r, c) {
+        const x0 = c * PIECE, y0 = r * PIECE; const x1 = x0 + PIECE, y1 = y0 + PIECE;
+        const TAB = 25; const tx1 = x0 + 35, tx2 = x0 + 65; const ty1 = y0 + 35, ty2 = y0 + 65;
+
+        let top = `M ${x0} ${y0} `;
+        if (edges.top === 0) top += `L ${x1} ${y0}`;
+        else if (edges.top === 1) top += `L ${tx1} ${y0} C ${tx1} ${y0 - TAB}, ${tx2} ${y0 - TAB}, ${tx2} ${y0} L ${x1} ${y0}`;
+        else top += `L ${tx1} ${y0} C ${tx1} ${y0 + TAB}, ${tx2} ${y0 + TAB}, ${tx2} ${y0} L ${x1} ${y0}`;
+
+        let right = `M ${x1} ${y0} `;
+        if (edges.right === 0) right += `L ${x1} ${y1}`;
+        else if (edges.right === 1) right += `L ${x1} ${ty1} C ${x1 + TAB} ${ty1}, ${x1 + TAB} ${ty2}, ${x1} ${ty2} L ${x1} ${y1}`;
+        else right += `L ${x1} ${ty1} C ${x1 - TAB} ${ty1}, ${x1 - TAB} ${ty2}, ${x1} ${ty2} L ${x1} ${y1}`;
+
+        let bottom = `M ${x1} ${y1} `;
+        if (edges.bottom === 0) bottom += `L ${x0} ${y1}`;
+        else if (edges.bottom === 1) bottom += `L ${tx2} ${y1} C ${tx2} ${y1 + TAB}, ${tx1} ${y1 + TAB}, ${tx1} ${y1} L ${x0} ${y1}`;
+        else bottom += `L ${tx2} ${y1} C ${tx2} ${y1 - TAB}, ${tx1} ${y1 - TAB}, ${tx1} ${y1} L ${x0} ${y1}`;
+
+        let left = `M ${x0} ${y1} `;
+        if (edges.left === 0) left += `L ${x0} ${y0}`;
+        else if (edges.left === 1) left += `L ${x0} ${ty2} C ${x0 - TAB} ${ty2}, ${x0 - TAB} ${ty1}, ${x0} ${ty1} L ${x0} ${y0}`;
+        else left += `L ${x0} ${ty2} C ${x0 + TAB} ${ty2}, ${x0 + TAB} ${ty1}, ${x0} ${ty1} L ${x0} ${y0}`;
+
+        return { top, right, bottom, left };
+    }
+
+    function createPieceSVG(edges, r, c, pieceId, attemptsBySide = { top:0, right:0, bottom:0, left:0 }) {
+        const absPath = buildAbsolutePath(edges, r, c);
+        const sidePaths = buildSidePaths(edges, r, c);
+        const clipId = `clip-${pieceId}`;
+
+        const vbX = c * PIECE - 25; const vbY = r * PIECE - 25;
+        const vbW = PIECE + 50; const vbH = PIECE + 50;
+
+        const lerpColor = (hexA, hexB, t) => {
+            const a = [parseInt(hexA.slice(1,3),16), parseInt(hexA.slice(3,5),16), parseInt(hexA.slice(5,7),16)];
+            const b = [parseInt(hexB.slice(1,3),16), parseInt(hexB.slice(3,5),16), parseInt(hexB.slice(5,7),16)];
+            const r = Math.round(a[0] + (b[0]-a[0])*t); const g = Math.round(a[1] + (b[1]-a[1])*t); const bb = Math.round(a[2] + (b[2]-a[2])*t);
+            return `rgb(${r},${g},${bb})`;
+        };
+        const colorForDamage = (dmg) => lerpColor('#a87547', '#5a3416', dmg);
+
+        const sideOrder = ['top', 'right', 'bottom', 'left'];
+        const damaged = sideOrder.map(s => attemptsBySide[s] > 0);
+        const allDamaged = damaged.every(Boolean);
+        const stripMoveTo = (path) => path.replace(/^M\s*[\-\d.]+\s+[\-\d.]+\s*/, '');
+        const damageStrokes = [];
+
+        if (allDamaged) {
+            const maxHits = Math.max(attemptsBySide.top, attemptsBySide.right, attemptsBySide.bottom, attemptsBySide.left);
+            const fullPath = sidePaths.top + ' ' + stripMoveTo(sidePaths.right) + ' ' + stripMoveTo(sidePaths.bottom) + ' ' + stripMoveTo(sidePaths.left) + ' Z';
+            damageStrokes.push({ path: fullPath, hits: maxHits });
+        } else {
+            let start = 0;
+            for (let i = 0; i < 4; i++) { if (!damaged[i]) { start = i; break; } }
+            let i = 0;
+            while (i < 4) {
+                const sideIdx = (start + i) % 4;
+                if (!damaged[sideIdx]) { i++; continue; }
+                const runSides = []; let runMaxHits = 0;
+                while (i < 4 && damaged[(start + i) % 4]) {
+                    const k = (start + i) % 4;
+                    runSides.push(sideOrder[k]);
+                    if (attemptsBySide[sideOrder[k]] > runMaxHits) runMaxHits = attemptsBySide[sideOrder[k]];
+                    i++;
+                }
+                let runPath = sidePaths[runSides[0]];
+                for (let j = 1; j < runSides.length; j++) runPath += ' ' + stripMoveTo(sidePaths[runSides[j]]);
+                damageStrokes.push({ path: runPath, hits: runMaxHits });
+            }
+        }
+
+        const pieceCx = c * PIECE + PIECE / 2; const pieceCy = r * PIECE + PIECE / 2;
+        function seedRand(seed) { let s = seed | 0; return () => { s = (s * 9301 + 49297) % 233280; return s / 233280; }; }
+
+        let measureSvg = document.getElementById('__measureSvg');
+        if (!measureSvg) {
+            measureSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+            measureSvg.setAttribute('id', '__measureSvg'); measureSvg.style.position = 'absolute'; measureSvg.style.width = '0'; measureSvg.style.height = '0'; measureSvg.style.visibility = 'hidden';
+            document.body.appendChild(measureSvg);
+        }
+
+        function generateDamageLayer(pathD, hitNumber, seed, runSeed) {
+            const tmpPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            tmpPath.setAttribute('d', pathD); measureSvg.appendChild(tmpPath);
+            const totalLen = tmpPath.getTotalLength();
+            const hitProgress = Math.min(1, hitNumber / 24);
+            const maxDepth = 1.5 + hitProgress * 6; const minDepth = 0.5 + hitProgress * 2;
+            // Spacing FIJO (no depende del hit) para que todas las capas
+            // muestreen en las mismas posiciones del borde y los picos
+            // queden alineados entre capas.
+            const spacing = 6;
+            const numSamples = Math.max(6, Math.floor(totalLen / spacing));
+            // Noise seed se basa en runSeed (compartido entre capas del mismo
+            // borde) para que la geometría dentada sea consistente entre capas;
+            // solo varía la profundidad por hit.
+            const rand = seedRand(runSeed);
+            const noiseAtPoint = []; const peakAtPoint = [];
+            for (let i = 0; i <= numSamples; i++) {
+                noiseAtPoint.push(rand());
+                peakAtPoint.push(i % 2 === 0);
+            }
+
+            // Puntos de pico (en el borde) — uno por sample. La "cara dentada"
+            // del polígono usa SOLO estos puntos, igual que antes, para no
+            // cambiar la silueta de los dientes.
+            const peakAnchors = []; const innerPoints = [];
+            for (let i = 0; i <= numSamples; i++) {
+                const t = (i / numSamples) * totalLen;
+                const p = tmpPath.getPointAtLength(t);
+                const tNext = Math.min(totalLen, t + 0.5);
+                const pNext = tmpPath.getPointAtLength(tNext);
+                let tx = pNext.x - p.x; let ty = pNext.y - p.y;
+                const tlen = Math.hypot(tx, ty) || 1; tx /= tlen; ty /= tlen;
+                let nx = -ty; let ny = tx;
+                const towardsCenterX = pieceCx - p.x; const towardsCenterY = pieceCy - p.y;
+                if (nx * towardsCenterX + ny * towardsCenterY < 0) { nx = -nx; ny = -ny; }
+                peakAnchors.push({ x: p.x, y: p.y });
+                const noise = noiseAtPoint[i]; const isPeak = peakAtPoint[i];
+                const depthBase = isPeak ? maxDepth : minDepth;
+                const depth = depthBase * (0.6 + noise * 0.8);
+                const lateral = (noise - 0.5) * 1.5;
+                innerPoints.push({ x: p.x + nx * depth + tx * lateral, y: p.y + ny * depth + ty * lateral });
+            }
+
+            // "Espalda" del polígono (contra el borde de la pieza): muestreamos
+            // la curva REAL del path con muchos puntos intermedios entre los
+            // peakAnchors, así el polígono sigue las curvas Bézier en lugar de
+            // hacer cuerdas rectas que dejarían lunas entre el contorno y la
+            // base de cada pico. La cara dentada (innerPoints) NO cambia.
+            const backbonePoints = [];
+            const subdivisions = 4; // 4 puntos por segmento entre peakAnchors
+            for (let i = 0; i < numSamples; i++) {
+                const t0 = (i / numSamples) * totalLen;
+                const t1 = ((i + 1) / numSamples) * totalLen;
+                for (let k = 0; k < subdivisions; k++) {
+                    const t = t0 + (t1 - t0) * (k / subdivisions);
+                    const p = tmpPath.getPointAtLength(t);
+                    backbonePoints.push({ x: p.x, y: p.y });
+                }
+            }
+            // Cerramos con el último anchor.
+            backbonePoints.push(peakAnchors[numSamples]);
+
+            measureSvg.removeChild(tmpPath);
+
+            // Construye el polígono: backbone (siguiendo la curva real del
+            // borde) → innerPoints en reversa (la silueta dentada original).
+            let d = `M ${backbonePoints[0].x.toFixed(2)} ${backbonePoints[0].y.toFixed(2)} `;
+            for (let i = 1; i < backbonePoints.length; i++) d += `L ${backbonePoints[i].x.toFixed(2)} ${backbonePoints[i].y.toFixed(2)} `;
+            for (let i = innerPoints.length - 1; i >= 0; i--) d += `L ${innerPoints[i].x.toFixed(2)} ${innerPoints[i].y.toFixed(2)} `;
+            d += 'Z'; return d;
+        }
+
+        const damageBorder = damageStrokes.map((s, runIdx) => {
+            let layers = '';
+            // runSeed compartido entre todas las capas de este borde, para que
+            // los picos se aliñen y la capa más profunda cubra a las menos
+            // profundas sin dejar huecos del color de fondo entre ellas.
+            const runSeed = pieceId * 17 + runIdx * 31;
+
+            for (let h = 1; h <= s.hits; h++) {
+                const hitProgress = Math.min(1, h / 24);
+                const color = colorForDamage(hitProgress); const shadowColor = lerpColor('#5a3416', '#2d1a08', hitProgress);
+                const layerPath = generateDamageLayer(s.path, h, h * 7919, runSeed);
+                layers += `<path d="${layerPath}" fill="${color}"/><path d="${layerPath}" fill="none" stroke="${shadowColor}" stroke-width="0.7" opacity="0.5"/>`;
+            }
+            return layers;
+        }).join('');
+
+        /* FIX anti-aliasing del clip-path:
+           El borde del clip-path tiene píxeles semi-transparentes (anti-aliasing).
+           Cuando dos piezas vecinas se juntan, sus dos zonas de AA se suman y
+           dejan ver el board rosa entre ellas (los arcos amarillo-claro).
+           Solución: bajo el contenido recortado pintamos el path de la pieza
+           SIN clip, con el color que domina en esa pieza (amarillo si su centro
+           cae dentro del círculo de la cara, rosa si cae afuera). Eso extiende
+           el color correcto justo donde el AA hacía hueco; el contenido
+           recortado encima conserva el detalle real (ojos, boca, etc.).
+           El stroke del mismo color añade ~0.75px de overdraw hacia afuera.
+        */
+        const faceCx = BOARD_W / 2;
+        const faceCy = BOARD_H / 2;
+        const faceRadius = 170;
+        const pieceCenterX = c * PIECE + PIECE / 2;
+        const pieceCenterY = r * PIECE + PIECE / 2;
+        const distToFaceCenter = Math.hypot(pieceCenterX - faceCx, pieceCenterY - faceCy);
+        const pieceBg = bgColorForPiece(r, c);
+        // Base amarillo si la pieza cae claramente dentro del círculo de la cara;
+        // base = color de su grupo (esquina) si cae claramente afuera; en zona
+        // borde, amarillo (el damageBorder café tapa cualquier sangrado leve).
+        const baseColor = distToFaceCenter < faceRadius - 10 ? '#FFD93D'
+                        : distToFaceCenter > faceRadius + 20 ? pieceBg
+                        : '#FFD93D';
+
+        return `
+        <svg viewBox="${vbX} ${vbY} ${vbW} ${vbH}" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" shape-rendering="geometricPrecision">
+            <defs><clipPath id="${clipId}"><path d="${absPath}" /></clipPath></defs>
+            <path d="${absPath}" fill="${baseColor}" stroke="#2d3436" stroke-width="1.5"/>
+            <g clip-path="url(#${clipId})">
+                ${smileyFaceMarkup(pieceBg)}
+                ${damageBorder}
+            </g>
+        </svg>
+        `;
+    }
+
+    function updatePieceDamage(piece) {
+        piece.element.innerHTML = createPieceSVG(piece.edges, piece.r, piece.c, piece.id, piece.attemptsBySide);
+    }
+
+    function getSidesTouchingLocked(cellIdx) {
+        const cellR = Math.floor(cellIdx / cols); const cellC = cellIdx % cols;
+        const touched = { top: false, right: false, bottom: false, left: false };
+        const checkCell = (nr, nc) => {
+            if (nr < 0 || nr >= rows || nc < 0 || nc >= cols) return false;
+            const neighborCell = document.getElementById(`cell-${nr * cols + nc}`);
+            return neighborCell && neighborCell.querySelector('.puzzle-piece.locked') !== null;
+        };
+        if (checkCell(cellR - 1, cellC)) touched.top = true;
+        if (checkCell(cellR, cellC + 1)) touched.right = true;
+        if (checkCell(cellR + 1, cellC)) touched.bottom = true;
+        if (checkCell(cellR, cellC - 1)) touched.left = true;
+        return touched;
+    }
+
+    // Helpers globales para simular el gesto humano de tomar y soltar piezas.
+    // Se usan antes y después de cada movimiento para que toda la animación
+    // de piezas se vea como si una persona las estuviera moviendo.
+    async function liftPiece(pieceElem, holdMs = 180) {
+        // Capturar transform actual (translate + rotate) para preservarlo
+        const currentTransform = pieceElem.style.transform || '';
+        const translateMatch = currentTransform.match(/translate\([^)]+\)/);
+        const rotateMatch = currentTransform.match(/rotate\([^)]+\)/);
+        const translatePart = translateMatch ? translateMatch[0] : 'translate(0px, 0px)';
+        const rotatePart = rotateMatch ? rotateMatch[0] : 'rotate(0deg)';
+
+        const svg = pieceElem.querySelector('svg');
+        pieceElem.style.zIndex = 1000;
+        if (svg) {
+            svg.style.transition = 'filter 0.18s ease-out';
+            svg.style.filter = 'drop-shadow(0 10px 14px rgba(0,0,0,0.35))';
+        }
+        pieceElem.style.transition = 'transform 0.18s ease-out';
+        pieceElem.style.transform = `${translatePart} ${rotatePart} scale(1.12)`;
+        await new Promise(r => setTimeout(r, holdMs));
+    }
+
+    // Quita la sombra elevada (NO toca z-index — el caller lo administra
+    // explícitamente antes de soltar, para evitar z-fighting durante la
+    // transición entre piezas).
+    function dropPiece(pieceElem) {
+        const svg = pieceElem.querySelector('svg');
+        if (svg) {
+            svg.style.filter = 'drop-shadow(0 4px 6px rgba(0,0,0,0.15))';
+        }
+    }
+
+    async function movePieceAnimated(pieceElem, targetContainer) {
+        // 1. LEVANTAR la pieza antes de moverla
+        await liftPiece(pieceElem, 40);
+
+        // 2. MOVER al contenedor destino
+        const rectStart = pieceElem.getBoundingClientRect();
+        targetContainer.appendChild(pieceElem);
+        const rectEnd = pieceElem.getBoundingClientRect();
+        const dX = rectStart.left - rectEnd.left;
+        const dY = rectStart.top - rectEnd.top;
+
+        pieceElem.style.transition = 'none';
+        // Mantener el scale 1.12 durante el viaje
+        pieceElem.style.transform = `translate(${dX}px, ${dY}px) scale(1.12)`;
+        pieceElem.offsetHeight;
+        pieceElem.style.transition = 'transform 0.42s ease-in-out';
+        pieceElem.style.transform = `translate(0, 0) scale(1)`;
+
+        await new Promise(resolve => setTimeout(resolve, 440));
+
+        // 3. SOLTAR: bajar z-index ANTES de quitar la sombra para que no haya
+        // un frame con z-index 1000 ya posada (z-fighting con otras piezas).
+        // Las piezas locked tienen z-index 5; testing/sueltas usan default 10.
+        pieceElem.style.zIndex = '';
+        dropPiece(pieceElem);
+    }
+
+    function shuffle(arr) {
+        for (let i = arr.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+    }
+
+    function initializePuzzle() {
+        boardContainer.innerHTML = ''; poolContainer.innerHTML = ''; piecesData = [];
+        piecesByTargetIndex = {}; generateBorders();
+
+        let allPieces = [];
+        for (let r = 0; r < rows; r++) {
+            for (let c = 0; c < cols; c++) {
+                const index = r * cols + c;
+                const edges = getPieceEdges(r, c);
+                const cell = document.createElement('div');
+                cell.className = 'board-cell'; cell.id = `cell-${index}`;
+                boardContainer.appendChild(cell);
+
+                const piece = document.createElement('div');
+                piece.className = 'puzzle-piece'; piece.id = `piece-${index}`;
+                piece.innerHTML = createPieceSVG(edges, r, c, index, { top: 0, right: 0, bottom: 0, left: 0 });
+                allPieces.push({
+                    id: index, element: piece, targetIndex: index, edges, r, c,
+                    attemptsBySide: { top: 0, right: 0, bottom: 0, left: 0 }
+                });
+                piecesByTargetIndex[index] = allPieces[allPieces.length - 1];
+            }
+        }
+
+        const shuffled = shuffle(allPieces.slice());
+        for (let i = 0; i < totalPieces; i++) {
+            const slot = document.createElement('div');
+            slot.className = 'pool-slot'; slot.id = `slot-${i}`;
+            poolContainer.appendChild(slot);
+            const piece = shuffled[i];
+            piece.currentPoolSlotId = slot.id;
+            slot.appendChild(piece.element);
+            piecesData.push(piece);
+        }
+    }
+
+    // Celda donde arranca la fuerza bruta. Marcada con "Y" en el diagrama:
+    // fila 2, columna 1 → índice 2*cols + 1 = 9.
+    const START_CELL = 2 * cols + 1;
+
+    // Devuelve TODAS las celdas vacías del tablero que tienen al menos una
+    // pieza ya colocada en algún lado vecino — es decir, todos los espacios
+    // donde una pieza nueva podría conectarse al rompecabezas. El recorrido
+    // es por índice ascendente para un orden de prueba estable.
+    function getConnectableCells() {
+        const result = [];
+        for (let idx = 0; idx < totalPieces; idx++) {
+            const cell = document.getElementById(`cell-${idx}`);
+            if (!cell || cell.querySelector('.puzzle-piece.locked') !== null) continue;
+            const r = Math.floor(idx / cols), c = idx % cols;
+            const neighbors = [
+                { nr: r - 1, nc: c }, { nr: r, nc: c + 1 },
+                { nr: r + 1, nc: c }, { nr: r, nc: c - 1 }
+            ];
+            const touchesLocked = neighbors.some(({ nr, nc }) => {
+                if (nr < 0 || nr >= rows || nc < 0 || nc >= cols) return false;
+                const ncell = document.getElementById(`cell-${nr * cols + nc}`);
+                return ncell && ncell.querySelector('.puzzle-piece.locked') !== null;
+            });
+            if (touchesLocked) result.push(idx);
+        }
+        return result;
+    }
+
+    async function startSolving() {
+        startBtn.disabled = true; smartBtn.disabled = true;
+
+        // 1. Colocar primero la pieza de la celda Y, ya resuelta, en su lugar.
+        const startCell = document.getElementById(`cell-${START_CELL}`);
+        const startPieceArrIdx = piecesData.findIndex(p => p.targetIndex === START_CELL);
+        const startPiece = piecesData[startPieceArrIdx];
+        startPiece.element.classList.add('testing');
+        await movePieceAnimated(startPiece.element, startCell);
+        await new Promise(r => setTimeout(r, 90));
+        startPiece.element.classList.remove('testing');
+        startPiece.element.classList.add('locked');
+        piecesData.splice(startPieceArrIdx, 1);
+
+        // 2. Para cada pieza del pool: se prueba en TODOS los espacios
+        //    conectables del rompecabezas (cualquier celda vacía que toque una
+        //    pieza ya colocada), no solo en los lados de una pieza concreta. Si
+        //    encaja en alguno se queda; si falla en todos, vuelve al pool con su
+        //    daño acumulado. Los huecos conectables se recalculan en cada
+        //    intento, porque cada pieza colocada abre nuevos espacios.
+        while (piecesData.length > 0) {
+            let anyPlaced = false;
+
+            for (let i = 0; i < piecesData.length; i++) {
+                const piece = piecesData[i];
+                const connectable = getConnectableCells();
+                let placed = false;
+
+                for (const cellIdx of connectable) {
+                    const targetCell = document.getElementById(`cell-${cellIdx}`);
+                    piece.element.classList.add('testing');
+                    await movePieceAnimated(piece.element, targetCell);
+
+                    if (piece.targetIndex === cellIdx) {
+                        piece.element.classList.remove('testing');
+                        piece.element.classList.add('locked');
+                        piecesData.splice(i, 1);
+                        placed = true;
+                        anyPlaced = true;
+                        break;
+                    }
+
+                    // No encajó en este hueco: daño y se prepara para el
+                    // siguiente hueco (o para volver al pool).
+                    const touched = getSidesTouchingLocked(cellIdx);
+                    const cellR = Math.floor(cellIdx / cols); const cellC = cellIdx % cols;
+                    const damageLockedNeighbor = (nr, nc, oppositeSide) => {
+                        if (nr < 0 || nr >= rows || nc < 0 || nc >= cols) return;
+                        const neighborIdx = nr * cols + nc;
+                        const neighbor = piecesByTargetIndex[neighborIdx];
+                        if (!neighbor || !neighbor.element.classList.contains('locked')) return;
+                        neighbor.attemptsBySide[oppositeSide] += 1;
+                        updatePieceDamage(neighbor);
+                    };
+
+                    if (touched.top) { piece.attemptsBySide.top += 1; damageLockedNeighbor(cellR - 1, cellC, 'bottom'); }
+                    if (touched.right) { piece.attemptsBySide.right += 1; damageLockedNeighbor(cellR, cellC + 1, 'left'); }
+                    if (touched.bottom) { piece.attemptsBySide.bottom += 1; damageLockedNeighbor(cellR + 1, cellC, 'top'); }
+                    if (touched.left) { piece.attemptsBySide.left += 1; damageLockedNeighbor(cellR, cellC - 1, 'right'); }
+
+                    updatePieceDamage(piece);
+                }
+
+                if (placed) {
+                    i--; // el splice corrió el array: reevaluar el mismo índice
+                    continue;
+                }
+
+                // Falló en todos los huecos conectables: vuelve a su slot.
+                const slot = document.getElementById(piece.currentPoolSlotId);
+                piece.element.classList.remove('testing');
+                await movePieceAnimated(piece.element, slot);
+            }
+
+            // Salvaguarda: si una pasada completa no colocó ninguna pieza, no
+            // hay progreso posible — se corta para no quedar en bucle infinito.
+            if (!anyPlaced) break;
+        }
+        startBtn.innerText = "Solved!";
+    }
+
+    async function animatePieceToAbsolute(piece, container, centerPosX, centerPosY, destRot, finalZIndex) {
+        const pieceElem = piece.element;
+
+        // 1. LEVANTAR antes de mover (sobre la posición actual)
+        await liftPiece(pieceElem, 150);
+
+        const rectStart = pieceElem.getBoundingClientRect();
+
+        container.appendChild(pieceElem);
+        pieceElem.style.position = 'absolute';
+        pieceElem.style.top = '0px';
+        pieceElem.style.left = '0px';
+
+        const destX = centerPosX - 60;
+        const destY = centerPosY - 60;
+        const finalTransform = `translate(${destX}px, ${destY}px) rotate(${destRot}deg) scale(1)`;
+
+        pieceElem.style.transition = 'none';
+        pieceElem.style.transform = finalTransform;
+
+        const rectEnd = pieceElem.getBoundingClientRect();
+        const dX = rectStart.left - rectEnd.left;
+        const dY = rectStart.top - rectEnd.top;
+
+        // Posición inicial (origen del movimiento) manteniendo el scale 1.12
+        pieceElem.style.transform = `translate(${destX + dX}px, ${destY + dY}px) rotate(${piece.currentRot || 0}deg) scale(1.12)`;
+        pieceElem.offsetHeight;
+
+        pieceElem.style.transition = 'transform 0.4s ease-in-out';
+        pieceElem.style.transform = finalTransform;
+
+        piece.currentRot = destRot;
+        await new Promise(r => setTimeout(r, 420));
+
+        // 2. SOLTAR: setear z-index final ANTES de quitar la sombra elevada
+        // para que la pieza no quede un frame en z-index 1000 sobre piezas
+        // que ya están en una posición fija con z-index alto.
+        if (finalZIndex !== undefined) {
+            pieceElem.style.zIndex = finalZIndex;
+        }
+        dropPiece(pieceElem);
+        await new Promise(r => setTimeout(r, 60));
+    }
+
+    async function animatePieceToBoard(piece, targetCell) {
+        const pieceElem = piece.element;
+
+        // 1. LEVANTAR antes de mover
+        await liftPiece(pieceElem, 150);
+
+        const rectStart = pieceElem.getBoundingClientRect();
+
+        targetCell.appendChild(pieceElem);
+        pieceElem.style.position = '';
+        pieceElem.style.top = '';
+        pieceElem.style.left = '';
+
+        const finalTransform = 'translate(0px, 0px) rotate(0deg) scale(1)';
+
+        pieceElem.style.transition = 'none';
+        pieceElem.style.transform = finalTransform;
+
+        const rectEnd = pieceElem.getBoundingClientRect();
+        const dX = rectStart.left - rectEnd.left;
+        const dY = rectStart.top - rectEnd.top;
+
+        // Origen del movimiento manteniendo el scale 1.12
+        pieceElem.style.transform = `translate(${dX}px, ${dY}px) rotate(${piece.currentRot || 0}deg) scale(1.12)`;
+        pieceElem.offsetHeight;
+
+        pieceElem.style.transition = 'transform 0.65s ease-in-out';
+        pieceElem.style.transform = finalTransform;
+
+        piece.currentRot = 0;
+        await new Promise(r => setTimeout(r, 680));
+
+        // 2. SOLTAR: la pieza aterriza en su celda final; vuelve a z-index
+        // por defecto del CSS (.locked aplicada después la pondrá en 5).
+        pieceElem.style.zIndex = '';
+        dropPiece(pieceElem);
+        await new Promise(r => setTimeout(r, 60));
+    }
+
+    async function startSmartSolving() {
+        startBtn.disabled = true; smartBtn.disabled = true;
+
+        const SMART_GROUPS = [
+            [0, 1, 4],
+            [5, 6],
+            [2, 3, 7],
+            [8, 12, 13],
+            [9, 10],
+            [11, 14, 15]
+        ];
+
+        const poolW = poolWrapper.clientWidth;
+        const poolH = poolWrapper.clientHeight;
+
+        const slotCenters = [
+            { x: poolW * 0.10, y: poolH * 0.18 }, 
+            { x: poolW * 0.50, y: poolH * 0.18 }, 
+            { x: poolW * 0.90, y: poolH * 0.18 }, 
+            { x: poolW * 0.10, y: poolH * 0.50 }, 
+            { x: poolW * 0.50, y: poolH * 0.50 }, 
+            { x: poolW * 0.90, y: poolH * 0.50 }
+        ];
+        // Staging bien al fondo del pool, debajo de la zona donde se formarán
+        // los 6 grupos. Como el min-height del pool es 780px, esto cae en
+        // ~y=725px, claramente debajo del grid de slots (que termina ~y=520).
+        const stagingCenter = { x: poolW * 0.50, y: poolH * 0.93 };
+
+        // Fase staging: amontona todas las piezas en el centro inferior.
+        // Cada pieza recibe un stackOrder que refleja el orden en que fue
+        // colocada en el montón — las últimas quedan arriba (z-index mayor),
+        // como en una pila real de piezas. Pasamos el zIndex final como
+        // parámetro para que se aplique ANTES de bajar la sombra de
+        // "levantada", evitando que la pieza recién posada quede un frame
+        // con z-index alto sobre la siguiente que se levanta.
+        for (let i = 0; i < piecesData.length; i++) {
+            const piece = piecesData[i];
+            const cx = stagingCenter.x + (Math.random() - 0.5) * 30;
+            const cy = stagingCenter.y + (Math.random() - 0.5) * 30;
+            const rot = (Math.random() - 0.5) * 15;
+            piece.stackOrder = i; // 0 = más abajo, último = más arriba
+            await animatePieceToAbsolute(piece, poolWrapper, cx, cy, rot, 10 + i);
+        }
+
+        await new Promise(r => setTimeout(r, 1000));
+
+        // Calcular offsets de formación por grupo (igual que antes: triángulo
+        // para 3 piezas, lado a lado para 2 piezas).
+        const SEP = 55;
+        const groupOffsetsByIdx = SMART_GROUPS.map(group => {
+            if (group.length === 3) {
+                return [
+                    { dx: -SEP * 0.9, dy: -SEP * 0.5 },
+                    { dx:  SEP * 0.9, dy: -SEP * 0.5 },
+                    { dx:  0,          dy:  SEP * 0.7 }
+                ];
+            } else if (group.length === 2) {
+                return [
+                    { dx: -SEP * 0.7, dy: 0 },
+                    { dx:  SEP * 0.7, dy: 0 }
+                ];
+            } else {
+                return group.map(() => ({ dx: 0, dy: 0 }));
+            }
+        });
+
+        // Construir lista global: para cada pieza, su destino (grupo + offset).
+        // Luego ordenar TODAS las piezas por stackOrder DESC para tomar siempre
+        // la que está encima del montón, independientemente del grupo al que
+        // vaya. Replica el comportamiento real: agarrás lo que ves arriba y lo
+        // colocás en el grupo correspondiente, vas y volvés al montón.
+        const allSelections = [];
+        for (let g = 0; g < SMART_GROUPS.length; g++) {
+            const group = SMART_GROUPS[g];
+            const offsets = groupOffsetsByIdx[g];
+            for (let idx = 0; idx < group.length; idx++) {
+                const targetIndex = group[idx];
+                allSelections.push({
+                    piece: piecesByTargetIndex[targetIndex],
+                    groupIdx: g,
+                    offset: offsets[idx]
+                });
+            }
+        }
+        allSelections.sort((a, b) => (b.piece.stackOrder || 0) - (a.piece.stackOrder || 0));
+
+        // groupArrivalOrder[g] = lista de piezas en el orden en que llegaron
+        // al grupo g. La última en llegar queda visualmente encima de las
+        // anteriores (z-index incremental dentro del grupo).
+        const groupArrivalOrder = SMART_GROUPS.map(() => []);
+
+        for (const { piece, groupIdx, offset } of allSelections) {
+            const center = slotCenters[groupIdx];
+            const jitterX = (Math.random() - 0.5) * 8;
+            const jitterY = (Math.random() - 0.5) * 8;
+            const cx = center.x + offset.dx + jitterX;
+            const cy = center.y + offset.dy + jitterY;
+            const rot = (Math.random() - 0.5) * 12;
+
+            // z-index dentro del grupo: 200 base por grupo, + posición dentro
+            // del grupo. La pieza N-ésima en llegar al grupo g recibe z-index
+            // 200 + groupIdx*10 + arrivalIdx, así las que llegan después
+            // quedan visualmente por encima de las anteriores del mismo grupo.
+            const arrivalIdx = groupArrivalOrder[groupIdx].length;
+            const zFinal = 200 + groupIdx * 10 + arrivalIdx;
+
+            // animatePieceToAbsolute ya incluye el gesto humano completo:
+            // levanta la pieza, la mueve al destino, y la suelta. Pasamos el
+            // zIndex final como parámetro para evitar z-fighting: la pieza
+            // recién posada baja directamente al z-index destino, antes de
+            // quitar la sombra elevada.
+            await animatePieceToAbsolute(piece, poolWrapper, cx, cy, rot, zFinal);
+            groupArrivalOrder[groupIdx].push(piece);
+        }
+
+        await new Promise(r => setTimeout(r, 1200));
+
+        // Antes de empezar a colocar en el board, subimos el z-index del
+        // #board-container para que quede sobre el #pool-wrapper. Sin esto,
+        // las piezas que se mueven al board quedan visualmente debajo de las
+        // piezas que aún están en el pool, porque el pool-wrapper se pinta
+        // después del board en el HTML (ambos position:relative sin separación
+        // explícita de z-index). Al subir el board a un z-index alto, la
+        // pieza levantada (z-index 1000 dentro del board) sí queda al frente.
+        boardContainer.style.zIndex = '500';
+
+        // Al colocar en el board: tomar de cada grupo las piezas en orden
+        // INVERSO al de llegada — las últimas en aterrizar son las que están
+        // visualmente arriba, y son las que una persona tomaría primero.
+        for (let g = 0; g < SMART_GROUPS.length; g++) {
+            const arrivalOrder = groupArrivalOrder[g];
+            // Reversa: última colocada (z-index más alto = arriba) primero.
+            const pickOrder = arrivalOrder.slice().reverse();
+            for (const piece of pickOrder) {
+                const targetCell = document.getElementById(`cell-${piece.targetIndex}`);
+                await animatePieceToBoard(piece, targetCell);
+                piece.element.classList.add('locked');
+            }
+            await new Promise(r => setTimeout(r, 800));
+        }
+
+        poolContainer.innerHTML = '';
+        piecesData.length = 0; 
+        
+        // Restaurar z-index original del board ahora que el puzzle está armado.
+        boardContainer.style.zIndex = '';
+        
+        startBtn.innerText = "Solved!";
+        smartBtn.innerText = "Solved (Smart)!";
+    }
+
+    initializePuzzle();
+
+</script>
+</body>
+</html>
