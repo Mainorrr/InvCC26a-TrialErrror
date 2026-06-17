@@ -10,7 +10,7 @@ Uso:
 Produce un archivo HTML navegable (por defecto: dashboard.html) con multiples
 graficos interactivos. Cada grafico incluye:
   - una breve descripcion de por que es util para la investigacion, y
-  - un boton para descargarlo como PNG en alta calidad (escala x4).
+  - un boton para descargarlo como SVG (vectorial, sin perdida de calidad).
 
 Los datos se interpretan segun el diseno factorial 2^3 del estudio:
   O = hide_tests  (ocultamiento de casos de prueba)
@@ -119,8 +119,24 @@ def load_exercise_catalog(exercises_root=EXERCISES_ROOT):
     return pd.DataFrame(rows).drop_duplicates(subset=["problem_id"], keep="first")
 
 
+def read_csv_robust(path):
+    """Lee un CSV probando UTF-8 y, si falla, Latin-1 (acentos en nombres)."""
+    for enc in ("utf-8", "utf-8-sig", "latin-1"):
+        try:
+            return pd.read_csv(path, encoding=enc)
+        except UnicodeDecodeError:
+            continue
+    return pd.read_csv(path, encoding="latin-1", encoding_errors="replace")
+
+
+def normalize_columns(df):
+    """Mapea las columnas del esquema definitivo (user, problem) a los nombres
+    internos que usa el resto del script (carnet, problem_id)."""
+    return df.rename(columns={"user": "carnet", "problem": "problem_id"})
+
+
 def load_sessions(path, exercise_catalog=None):
-    df = pd.read_csv(path)
+    df = normalize_columns(read_csv_robust(path))
     for col in ["hide_tests", "show_tries", "try_timer", "solved"]:
         df[col] = to_bool(df[col])
     df["attempts"] = pd.to_numeric(df["attempts"], errors="coerce").fillna(0).astype(int)
@@ -150,7 +166,7 @@ def sus_score(row):
 
 
 def load_sus(path, sessions):
-    df = pd.read_csv(path)
+    df = normalize_columns(read_csv_robust(path))
     for i in range(1, 11):
         df[f"q{i}"] = pd.to_numeric(df[f"q{i}"], errors="coerce")
     df = df.dropna(subset=[f"q{i}" for i in range(1, 11)])
@@ -215,6 +231,61 @@ def fig_intentos_celda(sessions):
     fig.update_layout(title="Intentos promedio por celda (IC 95%) — ordenado de menor a mayor",
                       xaxis_title="Celda experimental",
                       yaxis_title="Intentos promedio por ejercicio")
+    return style_fig(fig)
+
+
+def fig_intentos_sus_combinado(sessions, sus):
+    """Combina las barras de intentos promedio por celda (eje izquierdo) con
+    una línea de la puntuación SUS promedio por celda (eje derecho), para leer
+    de un vistazo la interacción entre prueba y error y experiencia de uso."""
+    d = sessions[sessions["attempts"] > 0]
+    # Mismo orden que 'Intentos promedio por celda': de menor a mayor intentos.
+    rows = [(c, *mean_ci(d[d["cell"] == c]["attempts"])) for c in cells_present(d)]
+    rows.sort(key=lambda r: r[1])
+    labels = [r[0] for r in rows]
+    att_means = [r[1] for r in rows]
+    att_err = [r[2] for r in rows]
+    ctrl = next((r[1] for r in rows if r[0] == "Control"), None)
+
+    # SUS promedio (e IC 95%) por celda, alineado al orden de las barras.
+    sus_stats = {c: mean_ci(sus[sus["cell"] == c]["SUS"]) for c in set(sus["cell"])}
+    sus_means = [sus_stats[c][0] if c in sus_stats else np.nan for c in labels]
+    sus_err = [sus_stats[c][1] if c in sus_stats else 0.0 for c in labels]
+
+    fig = go.Figure()
+    fig.add_trace(go.Bar(
+        x=labels, y=att_means,
+        error_y=dict(type="data", array=att_err, color=MUTED, thickness=1.4, width=6),
+        marker_color=[CELL_COLORS[c] for c in labels],
+        text=[f"{m:.1f}" for m in att_means], textposition="outside",
+        name="Intentos promedio", yaxis="y",
+        hovertemplate="%{x}<br>Intentos: %{y:.1f}<extra></extra>",
+    ))
+    fig.add_trace(go.Scatter(
+        x=labels, y=sus_means, mode="lines+markers+text",
+        error_y=dict(type="data", array=sus_err, color="#e0726e",
+                     thickness=1.2, width=5),
+        line=dict(color="#e0726e", width=2.6),
+        marker=dict(size=9, color="#e0726e", line=dict(width=1, color="white")),
+        text=[f"{m:.0f}" if not np.isnan(m) else "" for m in sus_means],
+        textposition="top center", textfont=dict(color="#b34a46"),
+        name="SUS promedio", yaxis="y2",
+        hovertemplate="%{x}<br>SUS: %{y:.0f}<extra></extra>",
+    ))
+    if ctrl is not None:
+        fig.add_hline(y=ctrl, line_dash="dash", line_color="#9aa5b1",
+                      annotation_text="Nivel control (intentos)",
+                      annotation_position="top left", yref="y")
+    fig.update_layout(
+        title="Intentos promedio y SUS por celda experimental (interacción)",
+        xaxis_title="Celda experimental",
+        yaxis=dict(title="Intentos promedio por ejercicio", side="left"),
+        yaxis2=dict(title="Puntuación SUS (0-100)", overlaying="y", side="right",
+                    range=[0, 100], showgrid=False,
+                    title_font=dict(size=14, color="#b34a46"),
+                    tickfont=dict(color="#b34a46")),
+        legend=dict(orientation="h", y=1.12, x=1, xanchor="right"),
+    )
     return style_fig(fig)
 
 
@@ -309,8 +380,9 @@ def fig_interacciones(sessions):
 
 def fig_tasa_resolucion(sessions):
     d = sessions[sessions["attempts"] > 0]
-    order = cells_present(d)
-    rate = d.groupby("cell")["solved"].mean().reindex(order) * 100
+    rate = (d.groupby("cell")["solved"].mean() * 100).reindex(cells_present(d))
+    rate = rate.sort_values()  # de menor a mayor porcentaje
+    order = rate.index.tolist()
     fig = go.Figure(go.Bar(
         x=order, y=rate.values,
         marker_color=[CELL_COLORS[c] for c in order],
@@ -489,10 +561,15 @@ def fig_resueltos_vs_intentos_tratamiento(sessions):
             showlegend=False,
         ))
 
+    # Ejes anclados a su rango real (Y: 0-100%, X: desde 0) para no exagerar
+    # visualmente diferencias que en realidad son pequeñas.
+    x_max = float(merged["mean_attempts"].max())
     fig.update_layout(
         title="Relación entre problemas resueltos y reintentos por tratamiento",
         xaxis_title="Intentos promedio por ejercicio en ejercicios con al menos 1 intento",
         yaxis_title="% de ejercicios resueltos",
+        yaxis_range=[0, 105],
+        xaxis_range=[0, x_max * 1.1],
     )
     fig.add_annotation(
         x=0.5,
@@ -539,7 +616,7 @@ def fig_to_card(section_id, title, description, fig):
         "displaylogo": False,
         "responsive": True,
         "modeBarButtonsToRemove": ["select2d", "lasso2d"],
-        "toImageButtonOptions": {"format": "png", "filename": section_id, "scale": 4},
+        "toImageButtonOptions": {"format": "svg", "filename": section_id},
     }
     plot_html = fig.to_html(full_html=False, include_plotlyjs=False,
                             div_id=div_id, config=config)
@@ -548,7 +625,7 @@ def fig_to_card(section_id, title, description, fig):
       <div class="card-head">
         <h2>{html.escape(title)}</h2>
         <button class="dl-btn" onclick="descargar('{div_id}', '{section_id}')">
-          &#x2193;&nbsp;Descargar PNG (alta calidad)
+          &#x2193;&nbsp;Descargar SVG (vectorial)
         </button>
       </div>
       <p class="desc">{description}</p>
@@ -676,6 +753,16 @@ def build(sessions_path, sus_path, out_path):
          "afectado por cada combinación de intervenciones.",
          fig_sus_items(sus)),
 
+        ("relacion_combo", "Relación entre medidas",
+         "Intentos promedio y SUS por celda",
+         "Superpone, sobre las mismas celdas, las barras de intentos promedio (eje "
+         "izquierdo) y la línea de puntuación SUS promedio (eje derecho). Al compartir "
+         "el eje horizontal permite leer la interacción directamente: si una celda baja "
+         "los intentos, se ve al instante si lo hace conservando o sacrificando la "
+         "experiencia percibida. Las barras mantienen el orden de menor a mayor intentos "
+         "del gráfico original y conservan sus barras de error (IC 95%).",
+         fig_intentos_sus_combinado(sessions, sus)),
+
         ("relacion", "Relación entre medidas",
          "Intentos promedio vs. SUS por estudiante",
          "Cruza las dos variables centrales del estudio a nivel de estudiante. Una pendiente "
@@ -777,7 +864,7 @@ def build(sessions_path, sus_path, out_path):
       contador cromático y espera incremental). <strong>Datos preliminares.</strong>
     Mediante un análisis de Tukey se determinará la combinación de estrategias que
     alcance la mayor relación entre problemas resueltos y reintentos.
-      Cada gráfico es interactivo y puede descargarse en PNG de alta resolución con el
+      Cada gráfico es interactivo y puede descargarse en SVG vectorial con el
       botón correspondiente.</p>
       <div class="stats">
         <div class="stat"><div class="n">{n_students}</div><div class="l">Estudiantes</div></div>
@@ -816,7 +903,8 @@ def build(sessions_path, sus_path, out_path):
   function descargar(divId, name) {{
     var gd = document.getElementById(divId);
     var w = gd.offsetWidth || 1100, h = gd.offsetHeight || 460;
-    Plotly.downloadImage(gd, {{format:'png', width:w, height:h, scale:4, filename:name}});
+    // SVG: formato vectorial, escala sin pérdida de calidad.
+    Plotly.downloadImage(gd, {{format:'svg', width:w, height:h, filename:name}});
   }}
 </script>
 </body>
@@ -831,9 +919,9 @@ def build(sessions_path, sus_path, out_path):
 
 
 def main():
-    # Rutas por defecto: datos preliminares en la carpeta data/.
-    default_sessions = os.path.join("data", "levcode_sessions_2026-06-15.csv")
-    default_sus = os.path.join("data", "levcode_sus_2026-06-15.csv")
+    # Rutas por defecto: datos finales (definitivos) en la carpeta data/.
+    default_sessions = os.path.join("data", "final_sessions.csv")
+    default_sus = os.path.join("data", "final_sus.csv")
     args = sys.argv[1:]
     if len(args) >= 2:
         sessions_path, sus_path = args[0], args[1]

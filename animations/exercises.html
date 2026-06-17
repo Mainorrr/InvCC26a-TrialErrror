@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Asignación de ejercicios</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;}
+
+  body{
+    background:#ffffff;
+    color:#000000;
+    font-family:Arial, Helvetica, sans-serif;
+    font-size:14px;
+    padding:24px;
+    line-height:1.4;
+  }
+
+  .wrap{max-width:760px;margin:0 auto;}
+
+  h1{
+    font-size:18px;
+    font-weight:bold;
+    margin-bottom:4px;
+  }
+  .sub{
+    font-size:13px;
+    color:#333;
+    margin-bottom:18px;
+  }
+
+  /* ---------- Spreadsheet table ---------- */
+  table{
+    border-collapse:collapse;
+    width:100%;
+    table-layout:fixed;
+  }
+  th, td{
+    border:1px solid #000;
+    text-align:center;
+    vertical-align:middle;
+  }
+  th{
+    background:#ffffff;
+    font-weight:bold;
+    font-size:13px;
+    padding:8px 4px;
+    border-bottom:2px solid #000;
+  }
+  td{
+    padding:0;
+    height:58px;
+  }
+  .cell{
+    width:100%;
+    height:100%;
+    padding:8px 4px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    gap:2px;
+  }
+  .cell .name{font-weight:normal;}
+  .cell .count{font-weight:normal;}
+
+  /* fill colors like the reference image */
+  .green{background:#7be37b;}
+  .orange{background:#f0a830;}
+
+  /* highlight states (subtle, academic) */
+  .cell.candidate{outline:2px solid #000;outline-offset:-2px;}
+  .cell.scanning{outline:2px solid #000;outline-offset:-2px;background:#f5dd2b;}
+  .cell.chosen{outline:3px solid #c00000;outline-offset:-3px;}
+
+  /* ---------- Side info ---------- */
+  .info{
+    margin-top:16px;
+    display:flex;
+    gap:32px;
+    flex-wrap:wrap;
+    font-size:13px;
+  }
+  .info b{font-weight:bold;}
+
+  .assign-box{
+    margin-top:16px;
+    border:1px solid #000;
+    padding:10px 12px;
+    max-width:100%;
+  }
+  .assign-box .hdr{
+    font-weight:bold;
+    margin-bottom:6px;
+    border-bottom:1px solid #999;
+    padding-bottom:4px;
+  }
+  .assign-box table{width:100%;}
+  .assign-box td{
+    border:none;
+    height:auto;
+    padding:3px 6px;
+    text-align:left;
+    font-size:13px;
+  }
+  .assign-box td.t{color:#333;width:48%;}
+  .assign-box td.x{font-weight:bold;}
+
+  /* ---------- Controls ---------- */
+  .controls{
+    margin-top:18px;
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+    align-items:center;
+  }
+  button{
+    font-family:Arial, sans-serif;
+    font-size:13px;
+    padding:7px 14px;
+    border:1px solid #000;
+    background:#f0f0f0;
+    color:#000;
+    cursor:pointer;
+  }
+  button:hover:not(:disabled){background:#e0e0e0;}
+  button:active:not(:disabled){background:#d0d0d0;}
+  button:disabled{opacity:.45;cursor:not-allowed;}
+
+  .speed{
+    margin-left:auto;
+    font-size:12px;
+    color:#333;
+    display:flex;
+    align-items:center;
+    gap:6px;
+  }
+  input[type=range]{width:100px;}
+
+  .status{
+    margin-top:12px;
+    font-size:13px;
+    color:#000;
+    min-height:18px;
+  }
+  .legend{
+    margin-top:10px;
+    font-size:12px;
+    color:#333;
+    display:flex;
+    gap:18px;
+    flex-wrap:wrap;
+  }
+  .legend span{display:flex;align-items:center;gap:5px;}
+  .legend .sw{
+    width:13px;height:13px;display:inline-block;border:1px solid #000;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>Asignación equitativa de ejercicios</h1>
+  <p class="sub">20 ejercicios (5 tipos &times; 4). A cada estudiante se le asigna uno por tipo: se eligen los de menor contador y se desempata al azar.</p>
+
+  <table id="board"></table>
+
+  <div class="info">
+    <div><b>Estudiantes asignados:</b> <span id="studentCount">0</span></div>
+    <div><b>Total de asignaciones:</b> <span id="totalCount">0</span></div>
+  </div>
+
+  <div class="assign-box">
+    <div class="hdr">Asignación del estudiante actual</div>
+    <table><tbody id="assignBody"></tbody></table>
+  </div>
+
+  <div class="controls">
+    <button id="btnStep">Asignar a estudiante</button>
+    <button id="btnFast">Asignar 25 estudiantes</button>
+    <button id="btnReset">Reiniciar contadores</button>
+    <div class="speed">
+      Velocidad
+      <input type="range" id="speed" min="1" max="10" value="6">
+    </div>
+  </div>
+  <div class="controls" style="margin-top:8px;border-top:1px solid #ccc;padding-top:12px;">
+    <label style="font-size:13px;">Simular
+      <input type="number" id="nStudents" value="10" min="1" max="999"
+             style="width:60px;padding:6px;border:1px solid #000;font-family:Arial;font-size:13px;margin:0 4px;">
+      estudiantes animados
+    </label>
+    <button id="btnSim">Iniciar simulación</button>
+    <button id="btnStop" disabled>Detener</button>
+  </div>
+  <div class="status" id="status">Pulse &laquo;Asignar a estudiante&raquo; para ver el algoritmo paso a paso.</div>
+
+  <div class="legend">
+    <span><i class="sw" style="border-color:#000;"></i> Candidato (menor contador)</span>
+    <span><i class="sw" style="background:#f5dd2b;"></i> Evaluando</span>
+    <span><i class="sw" style="border-color:#c00000;"></i> Elegido</span>
+  </div>
+
+</div>
+
+<script>
+const TYPES = ["Entrada y salida","Condicionales","Ciclos","Funciones","Listas"];
+const PER_TYPE = 4;
+
+let counters = TYPES.map(()=>Array(PER_TYPE).fill(0));
+let students = 0;
+let busy = false;
+let cancelSeq = false;
+
+const $ = id => document.getElementById(id);
+const sleep = ms => new Promise(r=>setTimeout(r,ms));
+const speedFactor = () => 11 - parseInt($('speed').value);
+
+// ----- Build table -----
+function buildTable(){
+  const t = $('board');
+  t.innerHTML = '';
+  const thead = document.createElement('thead');
+  const trh = document.createElement('tr');
+  TYPES.forEach((ty,ti)=>{
+    const th = document.createElement('th');
+    th.textContent = ty;
+    trh.appendChild(th);
+  });
+  thead.appendChild(trh);
+  t.appendChild(thead);
+
+  const tb = document.createElement('tbody');
+  for(let e=0;e<PER_TYPE;e++){
+    const tr = document.createElement('tr');
+    for(let ti=0;ti<TYPES.length;ti++){
+      const td = document.createElement('td');
+      const cell = document.createElement('div');
+      cell.className='cell';
+      cell.id=`c-${ti}-${e}`;
+      cell.innerHTML=`
+        <div class="name">Ejercicio ${e+1}</div>
+        <div class="count"><span id="n-${ti}-${e}">0</span> Asignaciones</div>`;
+      td.appendChild(cell);
+      tr.appendChild(td);
+    }
+    tb.appendChild(tr);
+  }
+  t.appendChild(tb);
+  paintAll();
+}
+
+// ----- Color: green for the lower counts in a column, orange for higher -----
+function paintAll(){
+  for(let ti=0;ti<TYPES.length;ti++){
+    const col = counters[ti];
+    const min = Math.min(...col);
+    const max = Math.max(...col);
+    for(let e=0;e<PER_TYPE;e++){
+      const cell = $(`c-${ti}-${e}`);
+      cell.classList.remove('green','orange');
+      if(max===min) cell.classList.add('green');
+      else cell.classList.add(col[e] > min ? 'orange' : 'green');
+      $(`n-${ti}-${e}`).textContent = col[e];
+    }
+  }
+  $('totalCount').textContent = counters.flat().reduce((a,b)=>a+b,0);
+}
+
+function clearStates(){
+  document.querySelectorAll('.cell').forEach(c=>{
+    c.classList.remove('candidate','scanning','chosen');
+  });
+}
+
+// ----- Assignment list -----
+function resetAssignList(){
+  const b = $('assignBody');
+  b.innerHTML='';
+  TYPES.forEach((ty,ti)=>{
+    const tr=document.createElement('tr');
+    tr.innerHTML=`<td class="t">${ty}</td><td class="x" id="arx-${ti}">&mdash;</td>`;
+    b.appendChild(tr);
+  });
+}
+function fillAssignRow(ti,e){
+  $('arx-'+ti).textContent=`Ejercicio ${e+1}`;
+}
+
+// ----- One type, animated -----
+async function assignOneType(ti, animate){
+  const f = speedFactor();
+  const col = counters[ti];
+  const min = Math.min(...col);
+  const candidates = [];
+  for(let e=0;e<PER_TYPE;e++) if(col[e]===min) candidates.push(e);
+
+  if(animate){
+    candidates.forEach(e=>$(`c-${ti}-${e}`).classList.add('candidate'));
+    $('status').textContent =
+      `Tipo «${TYPES[ti]}»: contador mínimo = ${min}, ${candidates.length} candidato(s).`;
+    await sleep(80*f);
+
+    const spins = candidates.length>1 ? candidates.length*2 + Math.floor(Math.random()*2) : 1;
+    for(let s=0;s<spins;s++){
+      const idx = candidates[s % candidates.length];
+      const cell=$(`c-${ti}-${idx}`);
+      cell.classList.remove('candidate');
+      cell.classList.add('scanning');
+      await sleep(40*f);
+      if(s<spins-1){ cell.classList.remove('scanning'); cell.classList.add('candidate'); }
+    }
+  }
+
+  const chosen = candidates[Math.floor(Math.random()*candidates.length)];
+
+  if(animate){
+    document.querySelectorAll('#board .cell.scanning').forEach(c=>c.classList.remove('scanning'));
+    candidates.forEach(e=>$(`c-${ti}-${e}`).classList.remove('candidate'));
+    $(`c-${ti}-${chosen}`).classList.add('chosen');
+  }
+
+  counters[ti][chosen]++;
+  paintAll();
+  if(animate){
+    fillAssignRow(ti,chosen);
+    $('status').textContent =
+      `Tipo «${TYPES[ti]}»: asignado Ejercicio ${chosen+1} (contador ahora ${counters[ti][chosen]}).`;
+    await sleep(70*f);
+  }
+  return chosen;
+}
+
+// ----- One full student, animated (core, reusable) -----
+async function runStudentAnimated(){
+  clearStates(); resetAssignList();
+  for(let ti=0; ti<TYPES.length; ti++){
+    await assignOneType(ti, true);
+    if(cancelSeq) return;
+  }
+  students++;
+  $('studentCount').textContent=students;
+  await sleep(50*speedFactor());
+  $('status').textContent=`Estudiante #${students} asignado. Un ejercicio por tipo.`;
+}
+
+// ----- Single student (button) -----
+async function assignStudent(){
+  if(busy) return;
+  busy=true; setButtons(false);
+  await runStudentAnimated();
+  await sleep(450);
+  clearStates();
+  busy=false; setButtons(true);
+}
+
+// ----- N students, animated consecutively (for recording) -----
+async function simulateStudents(){
+  if(busy) return;
+  let n = parseInt($('nStudents').value);
+  if(isNaN(n) || n<1){ $('status').textContent='Ingrese un número válido de estudiantes.'; return; }
+  busy=true; cancelSeq=false; setButtons(false);
+  $('btnStop').disabled=false;
+
+  for(let k=0;k<n;k++){
+    if(cancelSeq) break;
+    $('status').textContent=`Simulando estudiante ${k+1} de ${n}…`;
+    await runStudentAnimated();
+    if(cancelSeq) break;
+    await sleep(350);          // pausa breve entre estudiantes
+    clearStates();
+    await sleep(120);
+  }
+
+  clearStates();
+  $('status').textContent = cancelSeq
+    ? `Simulación detenida. ${students} estudiantes asignados en total.`
+    : `Simulación completa: ${n} estudiantes asignados de forma consecutiva.`;
+  $('btnStop').disabled=true;
+  busy=false; setButtons(true);
+}
+
+// ----- 25 students, simple (no animation) -----
+function assignFast(n){
+  if(busy) return;
+  clearStates(); resetAssignList();
+  for(let k=0;k<n;k++){
+    for(let ti=0; ti<TYPES.length; ti++){
+      const col=counters[ti];
+      const min=Math.min(...col);
+      const cands=[];
+      for(let e=0;e<PER_TYPE;e++) if(col[e]===min) cands.push(e);
+      const chosen=cands[Math.floor(Math.random()*cands.length)];
+      counters[ti][chosen]++;
+      if(k===n-1) fillAssignRow(ti,chosen);
+    }
+    students++;
+  }
+  $('studentCount').textContent=students;
+  paintAll();
+  $('status').textContent=`${n} estudiantes asignados. Los contadores siguen repartidos de forma pareja.`;
+}
+
+function setButtons(on){
+  $('btnStep').disabled=!on;
+  $('btnFast').disabled=!on;
+  $('btnReset').disabled=!on;
+  $('btnSim').disabled=!on;
+  $('nStudents').disabled=!on;
+}
+
+function reset(){
+  if(busy) return;
+  counters = TYPES.map(()=>Array(PER_TYPE).fill(0));
+  students=0;
+  $('studentCount').textContent=0;
+  clearStates(); resetAssignList(); paintAll();
+  $('status').textContent='Contadores reiniciados.';
+}
+
+$('btnStep').addEventListener('click', assignStudent);
+$('btnFast').addEventListener('click', ()=>assignFast(25));
+$('btnReset').addEventListener('click', reset);
+$('btnSim').addEventListener('click', simulateStudents);
+$('btnStop').addEventListener('click', ()=>{ cancelSeq=true; });
+
+buildTable();
+resetAssignList();
+</script>
+</body>
+</html>

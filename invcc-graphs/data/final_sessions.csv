@@ -1,0 +1,636 @@
+user,grupo,problem,attempts,solved,created_at,updated_at,hide_tests,show_tries,try_timer
+1,08,Datos de persona,7,false,Thu Jun 04 2026 18:09:50 GMT+0000 (Coordinated Universal Time),Thu Jun 04 2026 20:05:09 GMT+0000 (Coordinated Universal Time),false,true,false
+1,08,El Número Negativo,22,true,Thu Jun 04 2026 18:09:50 GMT+0000 (Coordinated Universal Time),Thu Jun 04 2026 20:28:13 GMT+0000 (Coordinated Universal Time),false,true,false
+1,08,Números del 1 al N,0,false,Thu Jun 04 2026 18:09:50 GMT+0000 (Coordinated Universal Time),Thu Jun 04 2026 18:09:50 GMT+0000 (Coordinated Universal Time),false,true,false
+1,08,Energia potencial,0,false,Thu Jun 04 2026 18:09:50 GMT+0000 (Coordinated Universal Time),Thu Jun 04 2026 18:09:50 GMT+0000 (Coordinated Universal Time),false,true,false
+1,08,Contar menores que el último,0,false,Thu Jun 04 2026 18:09:50 GMT+0000 (Coordinated Universal Time),Thu Jun 04 2026 18:09:50 GMT+0000 (Coordinated Universal Time),false,true,false
+2,08,Suma de dos números,2,true,Thu Jun 04 2026 19:14:47 GMT+0000 (Coordinated Universal Time),Thu Jun 04 2026 19:16:57 GMT+0000 (Coordinated Universal Time),true,false,true
+2,08,Aprobado o reprobado,15,true,Thu Jun 04 2026 19:14:47 GMT+0000 (Coordinated Universal Time),Thu Jun 04 2026 19:33:14 GMT+0000 (Coordinated Universal Time),true,false,true
+2,08,Factorial de un número,21,true,Thu Jun 04 2026 19:14:47 GMT+0000 (Coordinated Universal Time),Thu Jun 04 2026 20:12:19 GMT+0000 (Coordinated Universal Time),true,false,true
+2,08,Altura máxima,1,true,Thu Jun 04 2026 19:14:47 GMT+0000 (Coordinated Universal Time),Thu Jun 04 2026 20:17:55 GMT+0000 (Coordinated Universal Time),true,false,true
+2,08,Invertir una lista,8,false,Thu Jun 04 2026 19:14:47 GMT+0000 (Coordinated Universal Time),Thu Jun 04 2026 20:26:55 GMT+0000 (Coordinated Universal Time),true,false,true
+3,08,Área de un rectángulo,2,true,Thu Jun 04 2026 19:16:10 GMT+0000 (Coordinated Universal Time),Thu Jun 04 2026 19:18:10 GMT+0000 (Coordinated Universal Time),true,true,false
+3,08,Signo del número,3,true,Thu Jun 04 2026 19:16:10 GMT+0000 (Coordinated Universal Time),Thu Jun 04 2026 19:20:52 GMT+0000 (Coordinated Universal Time),true,true,false
+3,08,Suma de N Números,24,true,Thu Jun 04 2026 19:16:10 GMT+0000 (Coordinated Universal Time),Thu Jun 04 2026 20:16:26 GMT+0000 (Coordinated Universal Time),true,true,false
+3,08,Altura máxima,8,true,Thu Jun 04 2026 19:16:10 GMT+0000 (Coordinated Universal Time),Thu Jun 04 2026 20:10:38 GMT+0000 (Coordinated Universal Time),true,true,false
+3,08,Intercalar dos listas,39,true,Thu Jun 04 2026 19:16:10 GMT+0000 (Coordinated Universal Time),Thu Jun 04 2026 20:26:29 GMT+0000 (Coordinated Universal Time),true,true,false
+4,08,Saludo personalizado,2,true,Thu Jun 04 2026 19:19:01 GMT+0000 (Coordinated Universal Time),Thu Jun 04 2026 19:23:05 GMT+0000 (Coordinated Universal Time),true,true,true
+4,08,Par o impar,1,true,Thu Jun 04 2026 19:19:01 GMT+0000 (Coordinated Universal Time),Thu Jun 04 2026 19:25:35 GMT+0000 (Coordinated Universal Time),true,true,true
+4,08,Tabla de multiplicar,6,true,Thu Jun 04 2026 19:19:01 GMT+0000 (Coordinated Universal Time),Thu Jun 04 2026 19:32:43 GMT+0000 (Coordinated Universal Time),true,true,true
+4,08,Energia potencial,15,true,Thu Jun 04 2026 19:19:01 GMT+0000 (Coordinated Universal Time),Thu Jun 04 2026 20:27:19 GMT+0000 (Coordinated Universal Time),true,true,true
+4,08,Contar menores que el último,17,true,Thu Jun 04 2026 19:19:01 GMT+0000 (Coordinated Universal Time),Thu Jun 04 2026 20:14:01 GMT+0000 (Coordinated Universal Time),true,true,true
+5,08,Datos de persona,3,true,Thu Jun 04 2026 19:19:50 GMT+0000 (Coordinated Universal Time),Thu Jun 04 2026 19:26:28 GMT+0000 (Coordinated Universal Time),false,false,false
+5,08,Aprobado o reprobado,8,true,Thu Jun 04 2026 19:19:50 GMT+0000 (Coordinated Universal Time),Thu Jun 04 2026 19:35:40 GMT+0000 (Coordinated Universal Time),false,false,false
+5,08,Números del 1 al N,4,true,Thu Jun 04 2026 19:19:50 GMT+0000 (Coordinated Universal Time),Thu Jun 04 2026 19:37:51 GMT+0000 (Coordinated Universal Time),false,false,false
+5,08,Velocidad final,21,true,Thu Jun 04 2026 19:19:50 GMT+0000 (Coordinated Universal Time),Thu Jun 04 2026 20:10:03 GMT+0000 (Coordinated Universal Time),false,false,false
+5,08,Invertir una lista,22,false,Thu Jun 04 2026 19:19:50 GMT+0000 (Coordinated Universal Time),Thu Jun 04 2026 20:26:43 GMT+0000 (Coordinated Universal Time),false,false,false
+6,08,Área de un rectángulo,6,true,Thu Jun 04 2026 19:20:15 GMT+0000 (Coordinated Universal Time),Thu Jun 04 2026 19:35:01 GMT+0000 (Coordinated Universal Time),false,false,true
+6,08,El Número Negativo,7,true,Thu Jun 04 2026 19:20:15 GMT+0000 (Coordinated Universal Time),Thu Jun 04 2026 20:08:48 GMT+0000 (Coordinated Universal Time),false,false,true
+6,08,Factorial de un número,5,true,Thu Jun 04 2026 19:20:15 GMT+0000 (Coordinated Universal Time),Thu Jun 04 2026 20:14:40 GMT+0000 (Coordinated Universal Time),false,false,true
+6,08,Porcentaje de incremento,3,true,Thu Jun 04 2026 19:20:15 GMT+0000 (Coordinated Universal Time),Thu Jun 04 2026 20:21:50 GMT+0000 (Coordinated Universal Time),false,false,true
+6,08,Sumar dos listas,3,true,Thu Jun 04 2026 19:20:15 GMT+0000 (Coordinated Universal Time),Thu Jun 04 2026 20:25:48 GMT+0000 (Coordinated Universal Time),false,false,true
+7,08,Suma de dos números,8,true,Thu Jun 04 2026 19:24:09 GMT+0000 (Coordinated Universal Time),Thu Jun 04 2026 19:34:55 GMT+0000 (Coordinated Universal Time),false,true,false
+7,08,Signo del número,14,true,Thu Jun 04 2026 19:24:09 GMT+0000 (Coordinated Universal Time),Thu Jun 04 2026 19:43:01 GMT+0000 (Coordinated Universal Time),false,true,false
+7,08,Números del 1 al N,24,true,Thu Jun 04 2026 19:24:09 GMT+0000 (Coordinated Universal Time),Thu Jun 04 2026 19:53:44 GMT+0000 (Coordinated Universal Time),false,true,false
+7,08,Velocidad final,23,true,Thu Jun 04 2026 19:24:09 GMT+0000 (Coordinated Universal Time),Thu Jun 04 2026 20:15:36 GMT+0000 (Coordinated Universal Time),false,true,false
+7,08,Intercalar dos listas,25,false,Thu Jun 04 2026 19:24:09 GMT+0000 (Coordinated Universal Time),Thu Jun 04 2026 20:28:05 GMT+0000 (Coordinated Universal Time),false,true,false
+8,08,Saludo personalizado,3,true,Thu Jun 04 2026 19:25:21 GMT+0000 (Coordinated Universal Time),Thu Jun 04 2026 19:28:08 GMT+0000 (Coordinated Universal Time),false,true,true
+8,08,Par o impar,1,true,Thu Jun 04 2026 19:25:21 GMT+0000 (Coordinated Universal Time),Thu Jun 04 2026 19:30:22 GMT+0000 (Coordinated Universal Time),false,true,true
+8,08,Tabla de multiplicar,2,true,Thu Jun 04 2026 19:25:21 GMT+0000 (Coordinated Universal Time),Thu Jun 04 2026 19:32:34 GMT+0000 (Coordinated Universal Time),false,true,true
+8,08,Energia potencial,1,true,Thu Jun 04 2026 19:25:21 GMT+0000 (Coordinated Universal Time),Thu Jun 04 2026 19:34:29 GMT+0000 (Coordinated Universal Time),false,true,true
+8,08,Invertir una lista,12,true,Thu Jun 04 2026 19:25:21 GMT+0000 (Coordinated Universal Time),Thu Jun 04 2026 19:54:19 GMT+0000 (Coordinated Universal Time),false,true,true
+9,08,Datos de persona,29,true,Thu Jun 04 2026 19:26:18 GMT+0000 (Coordinated Universal Time),Thu Jun 04 2026 19:54:25 GMT+0000 (Coordinated Universal Time),true,false,false
+9,08,El Número Negativo,18,true,Thu Jun 04 2026 19:26:18 GMT+0000 (Coordinated Universal Time),Thu Jun 04 2026 20:11:09 GMT+0000 (Coordinated Universal Time),true,false,false
+9,08,Factorial de un número,8,false,Thu Jun 04 2026 19:26:18 GMT+0000 (Coordinated Universal Time),Thu Jun 04 2026 20:29:32 GMT+0000 (Coordinated Universal Time),true,false,false
+9,08,Altura máxima,0,false,Thu Jun 04 2026 19:26:18 GMT+0000 (Coordinated Universal Time),Thu Jun 04 2026 19:26:18 GMT+0000 (Coordinated Universal Time),true,false,false
+9,08,Contar menores que el último,0,false,Thu Jun 04 2026 19:26:18 GMT+0000 (Coordinated Universal Time),Thu Jun 04 2026 19:26:18 GMT+0000 (Coordinated Universal Time),true,false,false
+10,08,Área de un rectángulo,2,true,Thu Jun 04 2026 19:26:20 GMT+0000 (Coordinated Universal Time),Thu Jun 04 2026 19:39:58 GMT+0000 (Coordinated Universal Time),true,false,true
+10,08,Signo del número,6,true,Thu Jun 04 2026 19:26:20 GMT+0000 (Coordinated Universal Time),Thu Jun 04 2026 19:41:10 GMT+0000 (Coordinated Universal Time),true,false,true
+10,08,Suma de N Números,14,true,Thu Jun 04 2026 19:26:20 GMT+0000 (Coordinated Universal Time),Thu Jun 04 2026 20:28:58 GMT+0000 (Coordinated Universal Time),true,false,true
+10,08,Velocidad final,4,true,Thu Jun 04 2026 19:26:20 GMT+0000 (Coordinated Universal Time),Thu Jun 04 2026 20:06:20 GMT+0000 (Coordinated Universal Time),true,false,true
+10,08,Intercalar dos listas,0,false,Thu Jun 04 2026 19:26:20 GMT+0000 (Coordinated Universal Time),Thu Jun 04 2026 19:26:20 GMT+0000 (Coordinated Universal Time),true,false,true
+11,08,Suma de dos números,8,true,Thu Jun 04 2026 19:26:34 GMT+0000 (Coordinated Universal Time),Thu Jun 04 2026 19:34:56 GMT+0000 (Coordinated Universal Time),true,true,false
+11,08,Aprobado o reprobado,14,true,Thu Jun 04 2026 19:26:34 GMT+0000 (Coordinated Universal Time),Thu Jun 04 2026 19:44:01 GMT+0000 (Coordinated Universal Time),true,true,false
+11,08,Números del 1 al N,13,true,Thu Jun 04 2026 19:26:34 GMT+0000 (Coordinated Universal Time),Thu Jun 04 2026 19:55:50 GMT+0000 (Coordinated Universal Time),true,true,false
+11,08,Energia potencial,2,true,Thu Jun 04 2026 19:26:34 GMT+0000 (Coordinated Universal Time),Thu Jun 04 2026 19:59:39 GMT+0000 (Coordinated Universal Time),true,true,false
+11,08,Sumar dos listas,10,true,Thu Jun 04 2026 19:26:34 GMT+0000 (Coordinated Universal Time),Thu Jun 04 2026 20:17:50 GMT+0000 (Coordinated Universal Time),true,true,false
+12,08,Datos de persona,3,true,Thu Jun 04 2026 19:29:51 GMT+0000 (Coordinated Universal Time),Thu Jun 04 2026 19:36:53 GMT+0000 (Coordinated Universal Time),true,true,true
+12,08,El Número Negativo,9,true,Thu Jun 04 2026 19:29:51 GMT+0000 (Coordinated Universal Time),Thu Jun 04 2026 20:13:42 GMT+0000 (Coordinated Universal Time),true,true,true
+12,08,Tabla de multiplicar,16,true,Thu Jun 04 2026 19:29:51 GMT+0000 (Coordinated Universal Time),Thu Jun 04 2026 20:22:57 GMT+0000 (Coordinated Universal Time),true,true,true
+12,08,Altura máxima,1,true,Thu Jun 04 2026 19:29:51 GMT+0000 (Coordinated Universal Time),Thu Jun 04 2026 20:28:47 GMT+0000 (Coordinated Universal Time),true,true,true
+12,08,Contar menores que el último,0,false,Thu Jun 04 2026 19:29:51 GMT+0000 (Coordinated Universal Time),Thu Jun 04 2026 19:29:51 GMT+0000 (Coordinated Universal Time),true,true,true
+13,08,Suma de dos números,3,true,Thu Jun 04 2026 19:31:24 GMT+0000 (Coordinated Universal Time),Thu Jun 04 2026 19:33:01 GMT+0000 (Coordinated Universal Time),false,false,false
+13,08,Aprobado o reprobado,6,true,Thu Jun 04 2026 19:31:24 GMT+0000 (Coordinated Universal Time),Thu Jun 04 2026 19:41:42 GMT+0000 (Coordinated Universal Time),false,false,false
+13,08,Suma de N Números,5,true,Thu Jun 04 2026 19:31:24 GMT+0000 (Coordinated Universal Time),Thu Jun 04 2026 19:50:16 GMT+0000 (Coordinated Universal Time),false,false,false
+13,08,Porcentaje de incremento,3,true,Thu Jun 04 2026 19:31:24 GMT+0000 (Coordinated Universal Time),Thu Jun 04 2026 19:53:23 GMT+0000 (Coordinated Universal Time),false,false,false
+13,08,Sumar dos listas,2,true,Thu Jun 04 2026 19:31:24 GMT+0000 (Coordinated Universal Time),Thu Jun 04 2026 20:02:48 GMT+0000 (Coordinated Universal Time),false,false,false
+14,09,Área de un rectángulo,2,true,Fri Jun 05 2026 15:26:21 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 15:30:32 GMT+0000 (Coordinated Universal Time),false,false,true
+14,09,Par o impar,2,true,Fri Jun 05 2026 15:26:21 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 15:33:46 GMT+0000 (Coordinated Universal Time),false,false,true
+14,09,Suma de N Números,14,true,Fri Jun 05 2026 15:26:21 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 16:09:54 GMT+0000 (Coordinated Universal Time),false,false,true
+14,09,Porcentaje de incremento,9,true,Fri Jun 05 2026 15:26:21 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 16:08:12 GMT+0000 (Coordinated Universal Time),false,false,true
+14,09,Invertir una lista,2,true,Fri Jun 05 2026 15:26:21 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 16:05:58 GMT+0000 (Coordinated Universal Time),false,false,true
+15,09,Saludo personalizado,7,true,Fri Jun 05 2026 15:27:43 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 15:33:36 GMT+0000 (Coordinated Universal Time),false,true,false
+15,09,Signo del número,1,true,Fri Jun 05 2026 15:27:43 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 15:37:16 GMT+0000 (Coordinated Universal Time),false,true,false
+15,09,Factorial de un número,2,true,Fri Jun 05 2026 15:27:43 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 15:46:46 GMT+0000 (Coordinated Universal Time),false,true,false
+15,09,Velocidad final,1,true,Fri Jun 05 2026 15:27:43 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 15:50:48 GMT+0000 (Coordinated Universal Time),false,true,false
+15,09,Intercalar dos listas,5,true,Fri Jun 05 2026 15:27:43 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 16:15:59 GMT+0000 (Coordinated Universal Time),false,true,false
+16,09,Saludo personalizado,6,true,Fri Jun 05 2026 15:28:36 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 15:36:47 GMT+0000 (Coordinated Universal Time),false,true,true
+16,09,El Número Negativo,3,true,Fri Jun 05 2026 15:28:36 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 15:41:13 GMT+0000 (Coordinated Universal Time),false,true,true
+16,09,Tabla de multiplicar,2,true,Fri Jun 05 2026 15:28:36 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 15:44:04 GMT+0000 (Coordinated Universal Time),false,true,true
+16,09,Porcentaje de incremento,4,true,Fri Jun 05 2026 15:28:36 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 15:48:51 GMT+0000 (Coordinated Universal Time),false,true,true
+16,09,Invertir una lista,8,true,Fri Jun 05 2026 15:28:36 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 15:57:28 GMT+0000 (Coordinated Universal Time),false,true,true
+17,09,Suma de dos números,6,true,Fri Jun 05 2026 15:28:43 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 15:32:07 GMT+0000 (Coordinated Universal Time),true,false,false
+17,09,Aprobado o reprobado,2,true,Fri Jun 05 2026 15:28:43 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 15:34:16 GMT+0000 (Coordinated Universal Time),true,false,false
+17,09,Factorial de un número,6,true,Fri Jun 05 2026 15:28:43 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 15:39:23 GMT+0000 (Coordinated Universal Time),true,false,false
+17,09,Altura máxima,28,true,Fri Jun 05 2026 15:28:43 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 16:00:21 GMT+0000 (Coordinated Universal Time),true,false,false
+17,09,Intercalar dos listas,2,false,Fri Jun 05 2026 15:28:43 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 16:07:50 GMT+0000 (Coordinated Universal Time),true,false,false
+18,09,Datos de persona,4,true,Fri Jun 05 2026 15:28:44 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 15:31:03 GMT+0000 (Coordinated Universal Time),true,false,true
+18,09,Par o impar,2,true,Fri Jun 05 2026 15:28:44 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 15:32:30 GMT+0000 (Coordinated Universal Time),true,false,true
+18,09,Suma de N Números,2,true,Fri Jun 05 2026 15:28:44 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 15:35:47 GMT+0000 (Coordinated Universal Time),true,false,true
+18,09,Energia potencial,12,true,Fri Jun 05 2026 15:28:44 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 15:47:51 GMT+0000 (Coordinated Universal Time),true,false,true
+18,09,Contar menores que el último,8,true,Fri Jun 05 2026 15:28:44 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 15:58:33 GMT+0000 (Coordinated Universal Time),true,false,true
+19,09,Área de un rectángulo,6,true,Fri Jun 05 2026 15:29:29 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 15:35:08 GMT+0000 (Coordinated Universal Time),true,true,false
+19,09,Signo del número,1,true,Fri Jun 05 2026 15:29:29 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 15:37:09 GMT+0000 (Coordinated Universal Time),true,true,false
+19,09,Números del 1 al N,1,true,Fri Jun 05 2026 15:29:29 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 15:38:31 GMT+0000 (Coordinated Universal Time),true,true,false
+19,09,Velocidad final,3,true,Fri Jun 05 2026 15:29:29 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 15:46:40 GMT+0000 (Coordinated Universal Time),true,true,false
+19,09,Sumar dos listas,11,true,Fri Jun 05 2026 15:29:29 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 16:20:48 GMT+0000 (Coordinated Universal Time),true,true,false
+20,09,Datos de persona,3,true,Fri Jun 05 2026 15:31:07 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 15:36:06 GMT+0000 (Coordinated Universal Time),true,true,true
+20,09,Par o impar,1,true,Fri Jun 05 2026 15:31:07 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 15:38:10 GMT+0000 (Coordinated Universal Time),true,true,true
+20,09,Tabla de multiplicar,2,true,Fri Jun 05 2026 15:31:07 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 15:40:22 GMT+0000 (Coordinated Universal Time),true,true,true
+20,09,Velocidad final,1,true,Fri Jun 05 2026 15:31:07 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 15:43:32 GMT+0000 (Coordinated Universal Time),true,true,true
+20,09,Contar menores que el último,12,true,Fri Jun 05 2026 15:31:07 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 16:30:44 GMT+0000 (Coordinated Universal Time),true,true,true
+21,09,Área de un rectángulo,13,true,Fri Jun 05 2026 15:31:39 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 15:36:42 GMT+0000 (Coordinated Universal Time),false,false,false
+21,09,Signo del número,21,true,Fri Jun 05 2026 15:31:39 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 15:44:39 GMT+0000 (Coordinated Universal Time),false,false,false
+21,09,Suma de N Números,13,true,Fri Jun 05 2026 15:31:39 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 15:53:24 GMT+0000 (Coordinated Universal Time),false,false,false
+21,09,Altura máxima,10,true,Fri Jun 05 2026 15:31:39 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 15:57:29 GMT+0000 (Coordinated Universal Time),false,false,false
+21,09,Sumar dos listas,8,true,Fri Jun 05 2026 15:31:39 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 16:02:37 GMT+0000 (Coordinated Universal Time),false,false,false
+22,09,Saludo personalizado,7,true,Fri Jun 05 2026 15:31:49 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 15:37:26 GMT+0000 (Coordinated Universal Time),false,false,true
+22,09,El Número Negativo,2,true,Fri Jun 05 2026 15:31:49 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 15:41:58 GMT+0000 (Coordinated Universal Time),false,false,true
+22,09,Números del 1 al N,2,true,Fri Jun 05 2026 15:31:49 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 15:44:38 GMT+0000 (Coordinated Universal Time),false,false,true
+22,09,Energia potencial,2,true,Fri Jun 05 2026 15:31:49 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 15:47:28 GMT+0000 (Coordinated Universal Time),false,false,true
+22,09,Intercalar dos listas,12,true,Fri Jun 05 2026 15:31:49 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 16:05:47 GMT+0000 (Coordinated Universal Time),false,false,true
+23,09,Suma de dos números,2,true,Fri Jun 05 2026 15:32:01 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 15:34:30 GMT+0000 (Coordinated Universal Time),false,true,false
+23,09,Aprobado o reprobado,7,true,Fri Jun 05 2026 15:32:01 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 15:44:12 GMT+0000 (Coordinated Universal Time),false,true,false
+23,09,Factorial de un número,13,true,Fri Jun 05 2026 15:32:01 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 16:13:32 GMT+0000 (Coordinated Universal Time),false,true,false
+23,09,Porcentaje de incremento,10,true,Fri Jun 05 2026 15:32:01 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 16:30:09 GMT+0000 (Coordinated Universal Time),false,true,false
+23,09,Invertir una lista,8,false,Fri Jun 05 2026 15:32:01 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 16:40:12 GMT+0000 (Coordinated Universal Time),false,true,false
+24,09,Saludo personalizado,2,true,Fri Jun 05 2026 15:33:02 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 15:34:04 GMT+0000 (Coordinated Universal Time),false,true,true
+24,09,Aprobado o reprobado,1,true,Fri Jun 05 2026 15:33:02 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 15:35:35 GMT+0000 (Coordinated Universal Time),false,true,true
+24,09,Tabla de multiplicar,4,true,Fri Jun 05 2026 15:33:02 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 15:36:56 GMT+0000 (Coordinated Universal Time),false,true,true
+24,09,Energia potencial,10,true,Fri Jun 05 2026 15:33:02 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 15:45:39 GMT+0000 (Coordinated Universal Time),false,true,true
+24,09,Sumar dos listas,1,true,Fri Jun 05 2026 15:33:02 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 15:46:54 GMT+0000 (Coordinated Universal Time),false,true,true
+25,09,Área de un rectángulo,8,true,Fri Jun 05 2026 15:33:37 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 15:39:56 GMT+0000 (Coordinated Universal Time),true,false,false
+25,09,El Número Negativo,1,true,Fri Jun 05 2026 15:33:37 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 15:43:31 GMT+0000 (Coordinated Universal Time),true,false,false
+25,09,Números del 1 al N,9,true,Fri Jun 05 2026 15:33:37 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 16:05:07 GMT+0000 (Coordinated Universal Time),true,false,false
+25,09,Porcentaje de incremento,32,true,Fri Jun 05 2026 15:33:37 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 16:22:52 GMT+0000 (Coordinated Universal Time),true,false,false
+25,09,Contar menores que el último,1,true,Fri Jun 05 2026 15:33:37 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 16:10:46 GMT+0000 (Coordinated Universal Time),true,false,false
+26,09,Suma de dos números,2,true,Fri Jun 05 2026 15:38:31 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 15:40:48 GMT+0000 (Coordinated Universal Time),true,false,true
+26,09,Signo del número,3,true,Fri Jun 05 2026 15:38:31 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 15:43:16 GMT+0000 (Coordinated Universal Time),true,false,true
+26,09,Factorial de un número,10,false,Fri Jun 05 2026 15:38:31 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 16:31:36 GMT+0000 (Coordinated Universal Time),true,false,true
+26,09,Velocidad final,9,false,Fri Jun 05 2026 15:38:31 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 16:17:45 GMT+0000 (Coordinated Universal Time),true,false,true
+26,09,Intercalar dos listas,5,false,Fri Jun 05 2026 15:38:32 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 16:39:04 GMT+0000 (Coordinated Universal Time),true,false,true
+27,09,Datos de persona,11,true,Fri Jun 05 2026 15:39:21 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 15:50:17 GMT+0000 (Coordinated Universal Time),true,true,false
+27,09,Par o impar,2,true,Fri Jun 05 2026 15:39:21 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 15:53:39 GMT+0000 (Coordinated Universal Time),true,true,false
+27,09,Suma de N Números,29,false,Fri Jun 05 2026 15:39:21 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 16:24:44 GMT+0000 (Coordinated Universal Time),true,true,false
+27,09,Altura máxima,0,false,Fri Jun 05 2026 15:39:21 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 15:39:21 GMT+0000 (Coordinated Universal Time),true,true,false
+27,09,Invertir una lista,1,false,Fri Jun 05 2026 15:39:21 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 16:20:49 GMT+0000 (Coordinated Universal Time),true,true,false
+28,09,Saludo personalizado,10,false,Fri Jun 05 2026 15:39:51 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 16:14:34 GMT+0000 (Coordinated Universal Time),true,true,true
+28,09,Signo del número,6,true,Fri Jun 05 2026 15:39:51 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 15:51:10 GMT+0000 (Coordinated Universal Time),true,true,true
+28,09,Tabla de multiplicar,4,true,Fri Jun 05 2026 15:39:51 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 15:54:52 GMT+0000 (Coordinated Universal Time),true,true,true
+28,09,Velocidad final,4,false,Fri Jun 05 2026 15:39:51 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 16:15:34 GMT+0000 (Coordinated Universal Time),true,true,true
+28,09,Invertir una lista,5,true,Fri Jun 05 2026 15:39:51 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 16:10:02 GMT+0000 (Coordinated Universal Time),true,true,true
+29,09,Área de un rectángulo,2,true,Fri Jun 05 2026 15:48:42 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 15:50:52 GMT+0000 (Coordinated Universal Time),false,false,false
+29,09,El Número Negativo,20,true,Fri Jun 05 2026 15:48:42 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 16:22:57 GMT+0000 (Coordinated Universal Time),false,false,false
+29,09,Números del 1 al N,3,true,Fri Jun 05 2026 15:48:42 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 16:01:03 GMT+0000 (Coordinated Universal Time),false,false,false
+29,09,Altura máxima,5,true,Fri Jun 05 2026 15:48:42 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 16:05:32 GMT+0000 (Coordinated Universal Time),false,false,false
+29,09,Sumar dos listas,5,true,Fri Jun 05 2026 15:48:42 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 16:17:10 GMT+0000 (Coordinated Universal Time),false,false,false
+30,01,Saludo personalizado,2,true,Fri Jun 05 2026 19:27:25 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 19:28:21 GMT+0000 (Coordinated Universal Time),false,false,true
+30,01,Par o impar,1,true,Fri Jun 05 2026 19:27:25 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 19:31:17 GMT+0000 (Coordinated Universal Time),false,false,true
+30,01,Suma de N Números,1,true,Fri Jun 05 2026 19:27:25 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 19:33:03 GMT+0000 (Coordinated Universal Time),false,false,true
+30,01,Porcentaje de incremento,1,true,Fri Jun 05 2026 19:27:25 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 19:33:37 GMT+0000 (Coordinated Universal Time),false,false,true
+30,01,Contar menores que el último,1,true,Fri Jun 05 2026 19:27:25 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 19:34:49 GMT+0000 (Coordinated Universal Time),false,false,true
+31,01,Suma de dos números,2,true,Fri Jun 05 2026 19:27:52 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 19:29:10 GMT+0000 (Coordinated Universal Time),false,true,false
+31,01,Aprobado o reprobado,1,true,Fri Jun 05 2026 19:27:52 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 19:31:14 GMT+0000 (Coordinated Universal Time),false,true,false
+31,01,Tabla de multiplicar,2,true,Fri Jun 05 2026 19:27:52 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 19:32:27 GMT+0000 (Coordinated Universal Time),false,true,false
+31,01,Energia potencial,5,true,Fri Jun 05 2026 19:27:52 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 19:38:45 GMT+0000 (Coordinated Universal Time),false,true,false
+31,01,Intercalar dos listas,2,true,Fri Jun 05 2026 19:27:52 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 19:41:22 GMT+0000 (Coordinated Universal Time),false,true,false
+32,01,Datos de persona,2,true,Fri Jun 05 2026 19:29:24 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 19:31:46 GMT+0000 (Coordinated Universal Time),false,true,true
+32,01,Par o impar,6,true,Fri Jun 05 2026 19:29:24 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 19:37:23 GMT+0000 (Coordinated Universal Time),false,true,true
+32,01,Factorial de un número,14,true,Fri Jun 05 2026 19:29:24 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 20:17:56 GMT+0000 (Coordinated Universal Time),false,true,true
+32,01,Porcentaje de incremento,8,true,Fri Jun 05 2026 19:29:24 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 20:03:41 GMT+0000 (Coordinated Universal Time),false,true,true
+32,01,Sumar dos listas,4,true,Fri Jun 05 2026 19:29:24 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 20:15:22 GMT+0000 (Coordinated Universal Time),false,true,true
+33,01,Suma de dos números,3,true,Fri Jun 05 2026 19:29:59 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 19:31:52 GMT+0000 (Coordinated Universal Time),true,false,false
+33,01,El Número Negativo,2,true,Fri Jun 05 2026 19:29:59 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 19:35:49 GMT+0000 (Coordinated Universal Time),true,false,false
+33,01,Números del 1 al N,1,true,Fri Jun 05 2026 19:29:59 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 19:36:41 GMT+0000 (Coordinated Universal Time),true,false,false
+33,01,Altura máxima,4,true,Fri Jun 05 2026 19:29:59 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 19:39:52 GMT+0000 (Coordinated Universal Time),true,false,false
+33,01,Contar menores que el último,4,true,Fri Jun 05 2026 19:29:59 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 19:42:46 GMT+0000 (Coordinated Universal Time),true,false,false
+34,01,Saludo personalizado,4,true,Fri Jun 05 2026 19:30:45 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 19:33:41 GMT+0000 (Coordinated Universal Time),true,false,true
+34,01,Aprobado o reprobado,9,true,Fri Jun 05 2026 19:30:45 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 19:44:54 GMT+0000 (Coordinated Universal Time),true,false,true
+34,01,Tabla de multiplicar,4,true,Fri Jun 05 2026 19:30:45 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 19:49:52 GMT+0000 (Coordinated Universal Time),true,false,true
+34,01,Energia potencial,4,true,Fri Jun 05 2026 19:30:45 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 20:03:51 GMT+0000 (Coordinated Universal Time),true,false,true
+34,01,Invertir una lista,7,true,Fri Jun 05 2026 19:30:45 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 20:20:58 GMT+0000 (Coordinated Universal Time),true,false,true
+35,01,Área de un rectángulo,3,true,Fri Jun 05 2026 19:31:18 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 19:35:06 GMT+0000 (Coordinated Universal Time),true,true,false
+35,01,Par o impar,8,false,Fri Jun 05 2026 19:31:18 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 20:25:11 GMT+0000 (Coordinated Universal Time),true,true,false
+35,01,Factorial de un número,3,true,Fri Jun 05 2026 19:31:18 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 20:05:59 GMT+0000 (Coordinated Universal Time),true,true,false
+35,01,Velocidad final,10,true,Fri Jun 05 2026 19:31:18 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 20:24:54 GMT+0000 (Coordinated Universal Time),true,true,false
+35,01,Sumar dos listas,2,false,Fri Jun 05 2026 19:31:18 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 19:55:14 GMT+0000 (Coordinated Universal Time),true,true,false
+36,01,Datos de persona,2,true,Fri Jun 05 2026 19:31:20 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 19:34:23 GMT+0000 (Coordinated Universal Time),true,true,true
+36,01,Signo del número,2,true,Fri Jun 05 2026 19:31:20 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 19:38:02 GMT+0000 (Coordinated Universal Time),true,true,true
+36,01,Suma de N Números,5,true,Fri Jun 05 2026 19:31:20 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 19:46:52 GMT+0000 (Coordinated Universal Time),true,true,true
+36,01,Porcentaje de incremento,13,true,Fri Jun 05 2026 19:31:20 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 20:06:47 GMT+0000 (Coordinated Universal Time),true,true,true
+36,01,Intercalar dos listas,11,true,Fri Jun 05 2026 19:31:20 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 20:23:06 GMT+0000 (Coordinated Universal Time),true,true,true
+37,01,Saludo personalizado,2,true,Fri Jun 05 2026 19:32:26 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 19:33:54 GMT+0000 (Coordinated Universal Time),false,false,false
+37,01,Aprobado o reprobado,2,true,Fri Jun 05 2026 19:32:26 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 19:35:57 GMT+0000 (Coordinated Universal Time),false,false,false
+37,01,Suma de N Números,1,true,Fri Jun 05 2026 19:32:26 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 19:37:11 GMT+0000 (Coordinated Universal Time),false,false,false
+37,01,Altura máxima,1,true,Fri Jun 05 2026 19:32:26 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 19:38:27 GMT+0000 (Coordinated Universal Time),false,false,false
+37,01,Sumar dos listas,1,true,Fri Jun 05 2026 19:32:26 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 19:39:42 GMT+0000 (Coordinated Universal Time),false,false,false
+38,01,Datos de persona,5,true,Fri Jun 05 2026 19:33:20 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 19:36:46 GMT+0000 (Coordinated Universal Time),false,false,true
+38,01,El Número Negativo,4,true,Fri Jun 05 2026 19:33:20 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 19:39:20 GMT+0000 (Coordinated Universal Time),false,false,true
+38,01,Números del 1 al N,4,true,Fri Jun 05 2026 19:33:20 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 19:42:29 GMT+0000 (Coordinated Universal Time),false,false,true
+38,01,Porcentaje de incremento,11,false,Fri Jun 05 2026 19:33:20 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 20:29:15 GMT+0000 (Coordinated Universal Time),false,false,true
+38,01,Invertir una lista,27,false,Fri Jun 05 2026 19:33:20 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 20:28:09 GMT+0000 (Coordinated Universal Time),false,false,true
+39,01,Suma de dos números,2,true,Fri Jun 05 2026 19:33:48 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 19:36:13 GMT+0000 (Coordinated Universal Time),false,true,false
+39,01,Signo del número,3,true,Fri Jun 05 2026 19:33:48 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 19:41:42 GMT+0000 (Coordinated Universal Time),false,true,false
+39,01,Factorial de un número,6,true,Fri Jun 05 2026 19:33:48 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 19:45:27 GMT+0000 (Coordinated Universal Time),false,true,false
+39,01,Velocidad final,18,false,Fri Jun 05 2026 19:33:48 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 19:59:04 GMT+0000 (Coordinated Universal Time),false,true,false
+39,01,Contar menores que el último,10,false,Fri Jun 05 2026 19:33:48 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 20:10:15 GMT+0000 (Coordinated Universal Time),false,true,false
+40,01,Área de un rectángulo,10,true,Fri Jun 05 2026 19:34:02 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 19:45:27 GMT+0000 (Coordinated Universal Time),false,true,true
+40,01,Par o impar,1,true,Fri Jun 05 2026 19:34:02 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 19:47:13 GMT+0000 (Coordinated Universal Time),false,true,true
+40,01,Tabla de multiplicar,1,true,Fri Jun 05 2026 19:34:02 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 19:49:13 GMT+0000 (Coordinated Universal Time),false,true,true
+40,01,Energia potencial,11,true,Fri Jun 05 2026 19:34:02 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 20:01:04 GMT+0000 (Coordinated Universal Time),false,true,true
+40,01,Intercalar dos listas,1,true,Fri Jun 05 2026 19:34:02 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 20:00:28 GMT+0000 (Coordinated Universal Time),false,true,true
+41,01,Área de un rectángulo,3,true,Fri Jun 05 2026 19:34:29 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 19:38:40 GMT+0000 (Coordinated Universal Time),true,false,false
+41,01,Par o impar,1,true,Fri Jun 05 2026 19:34:29 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 19:41:40 GMT+0000 (Coordinated Universal Time),true,false,false
+41,01,Tabla de multiplicar,1,true,Fri Jun 05 2026 19:34:29 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 19:43:04 GMT+0000 (Coordinated Universal Time),true,false,false
+41,01,Velocidad final,6,true,Fri Jun 05 2026 19:34:29 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 19:54:04 GMT+0000 (Coordinated Universal Time),true,false,false
+41,01,Sumar dos listas,3,true,Fri Jun 05 2026 19:34:29 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 19:58:40 GMT+0000 (Coordinated Universal Time),true,false,false
+42,01,Datos de persona,2,true,Fri Jun 05 2026 19:35:48 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 19:37:43 GMT+0000 (Coordinated Universal Time),true,false,true
+42,01,Signo del número,1,true,Fri Jun 05 2026 19:35:48 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 19:39:54 GMT+0000 (Coordinated Universal Time),true,false,true
+42,01,Números del 1 al N,1,true,Fri Jun 05 2026 19:35:48 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 19:42:49 GMT+0000 (Coordinated Universal Time),true,false,true
+42,01,Altura máxima,2,true,Fri Jun 05 2026 19:35:48 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 19:50:56 GMT+0000 (Coordinated Universal Time),true,false,true
+42,01,Contar menores que el último,11,true,Fri Jun 05 2026 19:35:48 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 20:32:43 GMT+0000 (Coordinated Universal Time),true,false,true
+43,01,Saludo personalizado,4,true,Fri Jun 05 2026 19:37:33 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 19:41:57 GMT+0000 (Coordinated Universal Time),true,true,false
+43,01,Aprobado o reprobado,15,true,Fri Jun 05 2026 19:37:33 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 19:56:28 GMT+0000 (Coordinated Universal Time),true,true,false
+43,01,Factorial de un número,9,true,Fri Jun 05 2026 19:37:33 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 20:04:59 GMT+0000 (Coordinated Universal Time),true,true,false
+43,01,Energia potencial,7,true,Fri Jun 05 2026 19:37:33 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 20:19:18 GMT+0000 (Coordinated Universal Time),true,true,false
+43,01,Invertir una lista,9,false,Fri Jun 05 2026 19:37:33 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 20:31:00 GMT+0000 (Coordinated Universal Time),true,true,false
+44,01,Suma de dos números,21,true,Fri Jun 05 2026 19:38:18 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 20:29:16 GMT+0000 (Coordinated Universal Time),true,true,true
+44,01,El Número Negativo,11,true,Fri Jun 05 2026 19:38:18 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 20:18:00 GMT+0000 (Coordinated Universal Time),true,true,true
+44,01,Suma de N Números,4,false,Fri Jun 05 2026 19:38:18 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 20:22:58 GMT+0000 (Coordinated Universal Time),true,true,true
+44,01,Porcentaje de incremento,1,false,Fri Jun 05 2026 19:38:18 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 20:24:57 GMT+0000 (Coordinated Universal Time),true,true,true
+44,01,Intercalar dos listas,0,false,Fri Jun 05 2026 19:38:18 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 19:38:18 GMT+0000 (Coordinated Universal Time),true,true,true
+45,01,Datos de persona,2,true,Fri Jun 05 2026 19:39:10 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 19:40:56 GMT+0000 (Coordinated Universal Time),false,false,false
+45,01,Par o impar,3,true,Fri Jun 05 2026 19:39:10 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 19:42:38 GMT+0000 (Coordinated Universal Time),false,false,false
+45,01,Tabla de multiplicar,1,true,Fri Jun 05 2026 19:39:10 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 19:43:53 GMT+0000 (Coordinated Universal Time),false,false,false
+45,01,Porcentaje de incremento,13,true,Fri Jun 05 2026 19:39:10 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 20:02:50 GMT+0000 (Coordinated Universal Time),false,false,false
+45,01,Intercalar dos listas,4,true,Fri Jun 05 2026 19:39:10 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 20:11:54 GMT+0000 (Coordinated Universal Time),false,false,false
+46,01,Saludo personalizado,17,true,Fri Jun 05 2026 19:40:33 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 20:28:08 GMT+0000 (Coordinated Universal Time),false,false,true
+46,01,Signo del número,3,true,Fri Jun 05 2026 19:40:33 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 19:52:42 GMT+0000 (Coordinated Universal Time),false,false,true
+46,01,Números del 1 al N,1,true,Fri Jun 05 2026 19:40:33 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 19:54:34 GMT+0000 (Coordinated Universal Time),false,false,true
+46,01,Altura máxima,12,true,Fri Jun 05 2026 19:40:33 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 20:34:44 GMT+0000 (Coordinated Universal Time),false,false,true
+46,01,Invertir una lista,13,true,Fri Jun 05 2026 19:40:33 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 20:39:12 GMT+0000 (Coordinated Universal Time),false,false,true
+47,01,Área de un rectángulo,2,true,Fri Jun 05 2026 20:10:55 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 20:12:40 GMT+0000 (Coordinated Universal Time),false,true,false
+47,01,Aprobado o reprobado,1,true,Fri Jun 05 2026 20:10:55 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 20:15:07 GMT+0000 (Coordinated Universal Time),false,true,false
+47,01,Suma de N Números,9,true,Fri Jun 05 2026 20:10:55 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 20:31:33 GMT+0000 (Coordinated Universal Time),false,true,false
+47,01,Velocidad final,2,true,Fri Jun 05 2026 20:10:55 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 20:34:58 GMT+0000 (Coordinated Universal Time),false,true,false
+47,01,Sumar dos listas,4,true,Fri Jun 05 2026 20:10:55 GMT+0000 (Coordinated Universal Time),Fri Jun 05 2026 20:48:12 GMT+0000 (Coordinated Universal Time),false,true,false
+48,06,Suma de dos números,13,true,Mon Jun 08 2026 16:21:41 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:30:30 GMT+0000 (Coordinated Universal Time),true,false,false
+48,06,El Número Negativo,10,true,Mon Jun 08 2026 16:21:41 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:40:53 GMT+0000 (Coordinated Universal Time),true,false,false
+48,06,Factorial de un número,30,true,Mon Jun 08 2026 16:21:41 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 17:31:33 GMT+0000 (Coordinated Universal Time),true,false,false
+48,06,Energia potencial,10,true,Mon Jun 08 2026 16:21:41 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 17:34:50 GMT+0000 (Coordinated Universal Time),true,false,false
+48,06,Contar menores que el último,0,false,Mon Jun 08 2026 16:21:41 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:21:41 GMT+0000 (Coordinated Universal Time),true,false,false
+49,06,Saludo personalizado,8,true,Mon Jun 08 2026 16:22:44 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 20:32:42 GMT+0000 (Coordinated Universal Time),true,false,true
+49,06,Signo del número,4,true,Mon Jun 08 2026 16:22:44 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 20:33:25 GMT+0000 (Coordinated Universal Time),true,false,true
+49,06,Suma de N Números,1,true,Mon Jun 08 2026 16:22:44 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 20:33:58 GMT+0000 (Coordinated Universal Time),true,false,true
+49,06,Altura máxima,3,true,Mon Jun 08 2026 16:22:44 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 20:35:32 GMT+0000 (Coordinated Universal Time),true,false,true
+49,06,Invertir una lista,1,true,Mon Jun 08 2026 16:22:44 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 20:36:10 GMT+0000 (Coordinated Universal Time),true,false,true
+50,06,Datos de persona,7,true,Mon Jun 08 2026 16:22:56 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:28:48 GMT+0000 (Coordinated Universal Time),true,true,false
+50,06,Aprobado o reprobado,4,true,Mon Jun 08 2026 16:22:56 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:35:24 GMT+0000 (Coordinated Universal Time),true,true,false
+50,06,Tabla de multiplicar,7,true,Mon Jun 08 2026 16:22:56 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:53:28 GMT+0000 (Coordinated Universal Time),true,true,false
+50,06,Velocidad final,18,true,Mon Jun 08 2026 16:22:56 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 17:27:50 GMT+0000 (Coordinated Universal Time),true,true,false
+50,06,Contar menores que el último,11,false,Mon Jun 08 2026 16:22:56 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 17:40:16 GMT+0000 (Coordinated Universal Time),true,true,false
+51,04,Área de un rectángulo,10,true,Mon Jun 08 2026 16:24:23 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:34:30 GMT+0000 (Coordinated Universal Time),true,true,true
+51,04,El Número Negativo,3,true,Mon Jun 08 2026 16:24:23 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:38:09 GMT+0000 (Coordinated Universal Time),true,true,true
+51,04,Factorial de un número,16,true,Mon Jun 08 2026 16:24:23 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:58:44 GMT+0000 (Coordinated Universal Time),true,true,true
+51,04,Energia potencial,5,true,Mon Jun 08 2026 16:24:23 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 17:07:08 GMT+0000 (Coordinated Universal Time),true,true,true
+51,04,Sumar dos listas,9,true,Mon Jun 08 2026 16:24:23 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 17:32:54 GMT+0000 (Coordinated Universal Time),true,true,true
+52,02,Suma de dos números,2,true,Mon Jun 08 2026 16:25:45 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:28:02 GMT+0000 (Coordinated Universal Time),false,false,false
+52,02,Par o impar,1,true,Mon Jun 08 2026 16:25:45 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:29:16 GMT+0000 (Coordinated Universal Time),false,false,false
+52,02,Números del 1 al N,9,true,Mon Jun 08 2026 16:25:45 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:35:25 GMT+0000 (Coordinated Universal Time),false,false,false
+52,02,Porcentaje de incremento,2,true,Mon Jun 08 2026 16:25:45 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:37:37 GMT+0000 (Coordinated Universal Time),false,false,false
+52,02,Intercalar dos listas,32,true,Mon Jun 08 2026 16:25:45 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 17:00:49 GMT+0000 (Coordinated Universal Time),false,false,false
+53,02,Saludo personalizado,4,true,Mon Jun 08 2026 16:26:18 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:29:21 GMT+0000 (Coordinated Universal Time),false,false,true
+53,02,Par o impar,1,true,Mon Jun 08 2026 16:26:18 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:30:52 GMT+0000 (Coordinated Universal Time),false,false,true
+53,02,Factorial de un número,11,true,Mon Jun 08 2026 16:26:18 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:45:09 GMT+0000 (Coordinated Universal Time),false,false,true
+53,02,Altura máxima,1,true,Mon Jun 08 2026 16:26:18 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:48:24 GMT+0000 (Coordinated Universal Time),false,false,true
+53,02,Intercalar dos listas,6,true,Mon Jun 08 2026 16:26:18 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:54:41 GMT+0000 (Coordinated Universal Time),false,false,true
+54,06,Datos de persona,4,true,Mon Jun 08 2026 16:27:42 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:31:32 GMT+0000 (Coordinated Universal Time),false,true,false
+54,06,Aprobado o reprobado,6,true,Mon Jun 08 2026 16:27:42 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:38:47 GMT+0000 (Coordinated Universal Time),false,true,false
+54,06,Tabla de multiplicar,11,true,Mon Jun 08 2026 16:27:42 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:47:07 GMT+0000 (Coordinated Universal Time),false,true,false
+54,06,Velocidad final,29,true,Mon Jun 08 2026 16:27:42 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 17:34:08 GMT+0000 (Coordinated Universal Time),false,true,false
+54,06,Sumar dos listas,11,true,Mon Jun 08 2026 16:27:42 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 17:18:22 GMT+0000 (Coordinated Universal Time),false,true,false
+55,06,Área de un rectángulo,4,true,Mon Jun 08 2026 16:28:14 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:37:24 GMT+0000 (Coordinated Universal Time),false,true,true
+55,06,Signo del número,17,true,Mon Jun 08 2026 16:28:14 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 17:11:11 GMT+0000 (Coordinated Universal Time),false,true,true
+55,06,Números del 1 al N,3,true,Mon Jun 08 2026 16:28:14 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 17:13:06 GMT+0000 (Coordinated Universal Time),false,true,true
+55,06,Energia potencial,17,true,Mon Jun 08 2026 16:28:14 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 17:33:38 GMT+0000 (Coordinated Universal Time),false,true,true
+55,06,Invertir una lista,6,false,Mon Jun 08 2026 16:28:14 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 17:39:05 GMT+0000 (Coordinated Universal Time),false,true,true
+56,06,Suma de dos números,20,true,Mon Jun 08 2026 16:28:14 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:55:03 GMT+0000 (Coordinated Universal Time),true,false,false
+56,06,El Número Negativo,48,true,Mon Jun 08 2026 16:28:14 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 17:24:50 GMT+0000 (Coordinated Universal Time),true,false,false
+56,06,Suma de N Números,60,false,Mon Jun 08 2026 16:28:14 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 17:39:34 GMT+0000 (Coordinated Universal Time),true,false,false
+56,06,Porcentaje de incremento,10,false,Mon Jun 08 2026 16:28:14 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 17:40:01 GMT+0000 (Coordinated Universal Time),true,false,false
+56,06,Contar menores que el último,0,false,Mon Jun 08 2026 16:28:14 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:28:14 GMT+0000 (Coordinated Universal Time),true,false,false
+57,06,Área de un rectángulo,3,true,Mon Jun 08 2026 16:28:36 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:35:13 GMT+0000 (Coordinated Universal Time),true,false,true
+57,06,Signo del número,2,true,Mon Jun 08 2026 16:28:36 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:42:19 GMT+0000 (Coordinated Universal Time),true,false,true
+57,06,Números del 1 al N,1,true,Mon Jun 08 2026 16:28:36 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:47:44 GMT+0000 (Coordinated Universal Time),true,false,true
+57,06,Altura máxima,4,true,Mon Jun 08 2026 16:28:36 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:51:59 GMT+0000 (Coordinated Universal Time),true,false,true
+57,06,Invertir una lista,2,true,Mon Jun 08 2026 16:28:36 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:57:03 GMT+0000 (Coordinated Universal Time),true,false,true
+58,02,Saludo personalizado,20,false,Mon Jun 08 2026 16:29:28 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:59:11 GMT+0000 (Coordinated Universal Time),true,true,false
+58,02,Aprobado o reprobado,6,false,Mon Jun 08 2026 16:29:28 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:39:59 GMT+0000 (Coordinated Universal Time),true,true,false
+58,02,Tabla de multiplicar,13,false,Mon Jun 08 2026 16:29:28 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:57:02 GMT+0000 (Coordinated Universal Time),true,true,false
+58,02,Energia potencial,0,false,Mon Jun 08 2026 16:29:28 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:29:28 GMT+0000 (Coordinated Universal Time),true,true,false
+58,02,Sumar dos listas,0,false,Mon Jun 08 2026 16:29:28 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:29:28 GMT+0000 (Coordinated Universal Time),true,true,false
+59,06,Suma de dos números,14,true,Mon Jun 08 2026 16:29:59 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:48:32 GMT+0000 (Coordinated Universal Time),true,true,true
+59,06,Par o impar,16,true,Mon Jun 08 2026 16:29:59 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 17:28:44 GMT+0000 (Coordinated Universal Time),true,true,true
+59,06,Suma de N Números,6,false,Mon Jun 08 2026 16:29:59 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 17:34:09 GMT+0000 (Coordinated Universal Time),true,true,true
+59,06,Velocidad final,2,false,Mon Jun 08 2026 16:29:59 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 17:02:01 GMT+0000 (Coordinated Universal Time),true,true,true
+59,06,Contar menores que el último,18,false,Mon Jun 08 2026 16:29:59 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 17:12:51 GMT+0000 (Coordinated Universal Time),true,true,true
+60,02,Datos de persona,11,true,Mon Jun 08 2026 16:30:01 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:38:53 GMT+0000 (Coordinated Universal Time),false,false,false
+60,02,El Número Negativo,11,true,Mon Jun 08 2026 16:30:01 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:49:08 GMT+0000 (Coordinated Universal Time),false,false,false
+60,02,Factorial de un número,26,true,Mon Jun 08 2026 16:30:01 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 17:30:53 GMT+0000 (Coordinated Universal Time),false,false,false
+60,02,Porcentaje de incremento,15,true,Mon Jun 08 2026 16:30:01 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 17:11:46 GMT+0000 (Coordinated Universal Time),false,false,false
+60,02,Intercalar dos listas,4,true,Mon Jun 08 2026 16:30:01 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 17:21:13 GMT+0000 (Coordinated Universal Time),false,false,false
+61,06,Saludo personalizado,3,true,Mon Jun 08 2026 16:30:05 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:32:20 GMT+0000 (Coordinated Universal Time),false,false,true
+61,06,Signo del número,1,true,Mon Jun 08 2026 16:30:05 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:34:49 GMT+0000 (Coordinated Universal Time),false,false,true
+61,06,Suma de N Números,6,false,Mon Jun 08 2026 16:30:05 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:59:23 GMT+0000 (Coordinated Universal Time),false,false,true
+61,06,Porcentaje de incremento,4,true,Mon Jun 08 2026 16:30:05 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 17:04:31 GMT+0000 (Coordinated Universal Time),false,false,true
+61,06,Invertir una lista,16,true,Mon Jun 08 2026 16:30:05 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 17:37:25 GMT+0000 (Coordinated Universal Time),false,false,true
+62,02,Suma de dos números,12,true,Mon Jun 08 2026 16:30:13 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 17:13:34 GMT+0000 (Coordinated Universal Time),false,true,false
+62,02,Par o impar,7,true,Mon Jun 08 2026 16:30:13 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 17:13:58 GMT+0000 (Coordinated Universal Time),false,true,false
+62,02,Tabla de multiplicar,9,true,Mon Jun 08 2026 16:30:13 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 17:31:38 GMT+0000 (Coordinated Universal Time),false,true,false
+62,02,Energia potencial,12,true,Mon Jun 08 2026 16:30:13 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 17:32:56 GMT+0000 (Coordinated Universal Time),false,true,false
+62,02,Sumar dos listas,0,false,Mon Jun 08 2026 16:30:13 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:30:13 GMT+0000 (Coordinated Universal Time),false,true,false
+63,02,Datos de persona,2,true,Mon Jun 08 2026 16:30:25 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:32:33 GMT+0000 (Coordinated Universal Time),false,true,true
+63,02,Aprobado o reprobado,7,true,Mon Jun 08 2026 16:30:25 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:39:32 GMT+0000 (Coordinated Universal Time),false,true,true
+63,02,Factorial de un número,1,true,Mon Jun 08 2026 16:30:26 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:40:56 GMT+0000 (Coordinated Universal Time),false,true,true
+63,02,Velocidad final,1,true,Mon Jun 08 2026 16:30:26 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:42:14 GMT+0000 (Coordinated Universal Time),false,true,true
+63,02,Contar menores que el último,3,true,Mon Jun 08 2026 16:30:26 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:46:58 GMT+0000 (Coordinated Universal Time),false,true,true
+64,06,Área de un rectángulo,27,true,Mon Jun 08 2026 16:30:46 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 17:34:49 GMT+0000 (Coordinated Universal Time),true,false,false
+64,06,El Número Negativo,7,true,Mon Jun 08 2026 16:30:46 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 17:35:14 GMT+0000 (Coordinated Universal Time),true,false,false
+64,06,Números del 1 al N,15,true,Mon Jun 08 2026 16:30:46 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 17:35:24 GMT+0000 (Coordinated Universal Time),true,false,false
+64,06,Altura máxima,8,true,Mon Jun 08 2026 16:30:46 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 17:26:08 GMT+0000 (Coordinated Universal Time),true,false,false
+64,06,Intercalar dos listas,8,false,Mon Jun 08 2026 16:30:46 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 17:37:57 GMT+0000 (Coordinated Universal Time),true,false,false
+65,04,Datos de persona,7,true,Mon Jun 08 2026 16:30:51 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:37:31 GMT+0000 (Coordinated Universal Time),true,false,true
+65,04,Par o impar,8,true,Mon Jun 08 2026 16:30:51 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:43:55 GMT+0000 (Coordinated Universal Time),true,false,true
+65,04,Factorial de un número,8,true,Mon Jun 08 2026 16:30:51 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 17:32:40 GMT+0000 (Coordinated Universal Time),true,false,true
+65,04,Porcentaje de incremento,3,true,Mon Jun 08 2026 16:30:51 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:50:54 GMT+0000 (Coordinated Universal Time),true,false,true
+65,04,Invertir una lista,17,true,Mon Jun 08 2026 16:30:51 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 17:18:02 GMT+0000 (Coordinated Universal Time),true,false,true
+66,04,Suma de dos números,3,true,Mon Jun 08 2026 16:31:08 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:32:48 GMT+0000 (Coordinated Universal Time),true,true,false
+66,04,Signo del número,3,true,Mon Jun 08 2026 16:31:08 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:37:33 GMT+0000 (Coordinated Universal Time),true,true,false
+66,04,Números del 1 al N,27,true,Mon Jun 08 2026 16:31:08 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:52:06 GMT+0000 (Coordinated Universal Time),true,true,false
+66,04,Altura máxima,10,true,Mon Jun 08 2026 16:31:08 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:59:19 GMT+0000 (Coordinated Universal Time),true,true,false
+66,04,Contar menores que el último,4,true,Mon Jun 08 2026 16:31:08 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 17:23:07 GMT+0000 (Coordinated Universal Time),true,true,false
+67,06,Área de un rectángulo,3,true,Mon Jun 08 2026 16:32:05 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:37:49 GMT+0000 (Coordinated Universal Time),true,true,true
+67,06,Aprobado o reprobado,4,true,Mon Jun 08 2026 16:32:05 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 17:00:24 GMT+0000 (Coordinated Universal Time),true,true,true
+67,06,Suma de N Números,1,true,Mon Jun 08 2026 16:32:05 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 17:03:35 GMT+0000 (Coordinated Universal Time),true,true,true
+67,06,Velocidad final,2,true,Mon Jun 08 2026 16:32:05 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:50:28 GMT+0000 (Coordinated Universal Time),true,true,true
+67,06,Sumar dos listas,1,true,Mon Jun 08 2026 16:32:05 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 17:05:19 GMT+0000 (Coordinated Universal Time),true,true,true
+68,02,Saludo personalizado,39,true,Mon Jun 08 2026 16:32:09 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 17:26:53 GMT+0000 (Coordinated Universal Time),false,false,false
+68,02,El Número Negativo,40,true,Mon Jun 08 2026 16:32:09 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 17:29:16 GMT+0000 (Coordinated Universal Time),false,false,false
+68,02,Tabla de multiplicar,4,true,Mon Jun 08 2026 16:32:09 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:49:51 GMT+0000 (Coordinated Universal Time),false,false,false
+68,02,Energia potencial,1,true,Mon Jun 08 2026 16:32:09 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:58:01 GMT+0000 (Coordinated Universal Time),false,false,false
+68,02,Intercalar dos listas,7,true,Mon Jun 08 2026 16:32:09 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 17:33:27 GMT+0000 (Coordinated Universal Time),false,false,false
+69,02,Área de un rectángulo,1,true,Mon Jun 08 2026 16:32:58 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:44:12 GMT+0000 (Coordinated Universal Time),false,false,true
+69,02,Signo del número,1,true,Mon Jun 08 2026 16:32:58 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:46:44 GMT+0000 (Coordinated Universal Time),false,false,true
+69,02,Números del 1 al N,5,true,Mon Jun 08 2026 16:32:58 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:42:35 GMT+0000 (Coordinated Universal Time),false,false,true
+69,02,Porcentaje de incremento,4,true,Mon Jun 08 2026 16:32:58 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:56:24 GMT+0000 (Coordinated Universal Time),false,false,true
+69,02,Contar menores que el último,10,true,Mon Jun 08 2026 16:32:58 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 17:08:36 GMT+0000 (Coordinated Universal Time),false,false,true
+70,04,Suma de dos números,4,true,Mon Jun 08 2026 16:33:06 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:36:51 GMT+0000 (Coordinated Universal Time),false,true,false
+70,04,Aprobado o reprobado,2,true,Mon Jun 08 2026 16:33:06 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:44:48 GMT+0000 (Coordinated Universal Time),false,true,false
+70,04,Tabla de multiplicar,1,true,Mon Jun 08 2026 16:33:06 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:53:16 GMT+0000 (Coordinated Universal Time),false,true,false
+70,04,Altura máxima,28,true,Mon Jun 08 2026 16:33:06 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 17:31:22 GMT+0000 (Coordinated Universal Time),false,true,false
+70,04,Invertir una lista,2,false,Mon Jun 08 2026 16:33:06 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 17:34:49 GMT+0000 (Coordinated Universal Time),false,true,false
+71,02,Saludo personalizado,13,true,Mon Jun 08 2026 16:35:47 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:55:05 GMT+0000 (Coordinated Universal Time),false,true,true
+71,02,Par o impar,3,true,Mon Jun 08 2026 16:35:47 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:54:49 GMT+0000 (Coordinated Universal Time),false,true,true
+71,02,Suma de N Números,9,false,Mon Jun 08 2026 16:35:47 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 17:04:12 GMT+0000 (Coordinated Universal Time),false,true,true
+71,02,Energia potencial,2,false,Mon Jun 08 2026 16:35:47 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 17:07:59 GMT+0000 (Coordinated Universal Time),false,true,true
+71,02,Sumar dos listas,1,false,Mon Jun 08 2026 16:35:47 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:45:12 GMT+0000 (Coordinated Universal Time),false,true,true
+72,06,Datos de persona,1,true,Mon Jun 08 2026 16:36:40 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:39:55 GMT+0000 (Coordinated Universal Time),true,false,false
+72,06,El Número Negativo,34,false,Mon Jun 08 2026 16:36:40 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 17:38:04 GMT+0000 (Coordinated Universal Time),true,false,false
+72,06,Factorial de un número,3,false,Mon Jun 08 2026 16:36:40 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:58:17 GMT+0000 (Coordinated Universal Time),true,false,false
+72,06,Velocidad final,17,true,Mon Jun 08 2026 16:36:40 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 17:26:15 GMT+0000 (Coordinated Universal Time),true,false,false
+72,06,Intercalar dos listas,0,false,Mon Jun 08 2026 16:36:40 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:36:40 GMT+0000 (Coordinated Universal Time),true,false,false
+73,04,Saludo personalizado,16,true,Mon Jun 08 2026 16:37:36 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:52:53 GMT+0000 (Coordinated Universal Time),true,false,true
+73,04,El Número Negativo,7,true,Mon Jun 08 2026 16:37:36 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 17:03:31 GMT+0000 (Coordinated Universal Time),true,false,true
+73,04,Números del 1 al N,20,true,Mon Jun 08 2026 16:37:36 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 17:30:45 GMT+0000 (Coordinated Universal Time),true,false,true
+73,04,Altura máxima,2,false,Mon Jun 08 2026 16:37:36 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 17:35:01 GMT+0000 (Coordinated Universal Time),true,false,true
+73,04,Invertir una lista,0,false,Mon Jun 08 2026 16:37:36 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:37:36 GMT+0000 (Coordinated Universal Time),true,false,true
+74,04,Área de un rectángulo,2,true,Mon Jun 08 2026 16:37:40 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:39:33 GMT+0000 (Coordinated Universal Time),true,true,false
+74,04,Par o impar,2,true,Mon Jun 08 2026 16:37:40 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:43:37 GMT+0000 (Coordinated Universal Time),true,true,false
+74,04,Suma de N Números,5,true,Mon Jun 08 2026 16:37:40 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 17:20:18 GMT+0000 (Coordinated Universal Time),true,true,false
+74,04,Energia potencial,9,true,Mon Jun 08 2026 16:37:40 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:58:13 GMT+0000 (Coordinated Universal Time),true,true,false
+74,04,Intercalar dos listas,1,true,Mon Jun 08 2026 16:37:40 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 17:10:44 GMT+0000 (Coordinated Universal Time),true,true,false
+75,02,Suma de dos números,4,true,Mon Jun 08 2026 16:37:46 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:43:06 GMT+0000 (Coordinated Universal Time),true,true,true
+75,02,Aprobado o reprobado,2,true,Mon Jun 08 2026 16:37:46 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:47:39 GMT+0000 (Coordinated Universal Time),true,true,true
+75,02,Tabla de multiplicar,1,true,Mon Jun 08 2026 16:37:46 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:49:46 GMT+0000 (Coordinated Universal Time),true,true,true
+75,02,Velocidad final,1,true,Mon Jun 08 2026 16:37:46 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:53:32 GMT+0000 (Coordinated Universal Time),true,true,true
+75,02,Contar menores que el último,1,true,Mon Jun 08 2026 16:37:46 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 17:01:27 GMT+0000 (Coordinated Universal Time),true,true,true
+76,06,Datos de persona,27,true,Mon Jun 08 2026 16:37:57 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 17:18:43 GMT+0000 (Coordinated Universal Time),false,false,false
+76,06,Signo del número,24,true,Mon Jun 08 2026 16:37:57 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 17:24:43 GMT+0000 (Coordinated Universal Time),false,false,false
+76,06,Factorial de un número,1,false,Mon Jun 08 2026 16:37:57 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 17:26:45 GMT+0000 (Coordinated Universal Time),false,false,false
+76,06,Porcentaje de incremento,0,false,Mon Jun 08 2026 16:37:57 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:37:57 GMT+0000 (Coordinated Universal Time),false,false,false
+76,06,Sumar dos listas,0,false,Mon Jun 08 2026 16:37:57 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:37:57 GMT+0000 (Coordinated Universal Time),false,false,false
+77,06,Área de un rectángulo,3,true,Mon Jun 08 2026 16:39:57 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:48:22 GMT+0000 (Coordinated Universal Time),false,false,true
+77,06,Par o impar,1,true,Mon Jun 08 2026 16:39:57 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:50:01 GMT+0000 (Coordinated Universal Time),false,false,true
+77,06,Suma de N Números,8,false,Mon Jun 08 2026 16:39:57 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 17:15:13 GMT+0000 (Coordinated Universal Time),false,false,true
+77,06,Altura máxima,1,true,Mon Jun 08 2026 16:39:57 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 17:24:39 GMT+0000 (Coordinated Universal Time),false,false,true
+77,06,Contar menores que el último,7,false,Mon Jun 08 2026 16:39:57 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 17:41:46 GMT+0000 (Coordinated Universal Time),false,false,true
+78,06,Suma de dos números,2,true,Mon Jun 08 2026 16:40:57 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:43:04 GMT+0000 (Coordinated Universal Time),false,true,false
+78,06,Signo del número,1,true,Mon Jun 08 2026 16:40:57 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:45:55 GMT+0000 (Coordinated Universal Time),false,true,false
+78,06,Tabla de multiplicar,4,true,Mon Jun 08 2026 16:40:57 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:51:05 GMT+0000 (Coordinated Universal Time),false,true,false
+78,06,Velocidad final,1,true,Mon Jun 08 2026 16:40:57 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:53:40 GMT+0000 (Coordinated Universal Time),false,true,false
+78,06,Invertir una lista,16,true,Mon Jun 08 2026 16:40:57 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 17:12:05 GMT+0000 (Coordinated Universal Time),false,true,false
+79,04,Datos de persona,7,true,Mon Jun 08 2026 16:42:04 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:55:19 GMT+0000 (Coordinated Universal Time),false,true,true
+79,04,El Número Negativo,8,true,Mon Jun 08 2026 16:42:04 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 17:16:32 GMT+0000 (Coordinated Universal Time),false,true,true
+79,04,Números del 1 al N,7,false,Mon Jun 08 2026 16:42:04 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 17:33:56 GMT+0000 (Coordinated Universal Time),false,true,true
+79,04,Energia potencial,0,false,Mon Jun 08 2026 16:42:04 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:42:04 GMT+0000 (Coordinated Universal Time),false,true,true
+79,04,Intercalar dos listas,0,false,Mon Jun 08 2026 16:42:04 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:42:04 GMT+0000 (Coordinated Universal Time),false,true,true
+80,04,Saludo personalizado,13,true,Mon Jun 08 2026 16:45:31 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:50:56 GMT+0000 (Coordinated Universal Time),true,false,false
+80,04,Aprobado o reprobado,11,true,Mon Jun 08 2026 16:45:31 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:57:53 GMT+0000 (Coordinated Universal Time),true,false,false
+80,04,Factorial de un número,22,true,Mon Jun 08 2026 16:45:31 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 17:11:51 GMT+0000 (Coordinated Universal Time),true,false,false
+80,04,Porcentaje de incremento,1,true,Mon Jun 08 2026 16:45:31 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 17:13:50 GMT+0000 (Coordinated Universal Time),true,false,false
+80,04,Sumar dos listas,5,true,Mon Jun 08 2026 16:45:31 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 17:19:30 GMT+0000 (Coordinated Universal Time),true,false,false
+81,06,Datos de persona,2,true,Mon Jun 08 2026 16:52:38 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:57:33 GMT+0000 (Coordinated Universal Time),true,false,true
+81,06,Par o impar,3,true,Mon Jun 08 2026 16:52:38 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 17:03:27 GMT+0000 (Coordinated Universal Time),true,false,true
+81,06,Suma de N Números,14,false,Mon Jun 08 2026 16:52:38 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 17:36:47 GMT+0000 (Coordinated Universal Time),true,false,true
+81,06,Energia potencial,0,false,Mon Jun 08 2026 16:52:38 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:52:38 GMT+0000 (Coordinated Universal Time),true,false,true
+81,06,Invertir una lista,0,false,Mon Jun 08 2026 16:52:38 GMT+0000 (Coordinated Universal Time),Mon Jun 08 2026 16:52:38 GMT+0000 (Coordinated Universal Time),true,false,true
+82,03,Saludo personalizado,3,true,Tue Jun 09 2026 13:26:55 GMT+0000 (Coordinated Universal Time),Tue Jun 09 2026 13:29:41 GMT+0000 (Coordinated Universal Time),true,true,false
+82,03,El Número Negativo,2,true,Tue Jun 09 2026 13:26:55 GMT+0000 (Coordinated Universal Time),Tue Jun 09 2026 13:37:23 GMT+0000 (Coordinated Universal Time),true,true,false
+82,03,Números del 1 al N,2,true,Tue Jun 09 2026 13:26:55 GMT+0000 (Coordinated Universal Time),Tue Jun 09 2026 13:39:47 GMT+0000 (Coordinated Universal Time),true,true,false
+82,03,Altura máxima,2,true,Tue Jun 09 2026 13:26:55 GMT+0000 (Coordinated Universal Time),Tue Jun 09 2026 13:42:35 GMT+0000 (Coordinated Universal Time),true,true,false
+82,03,Contar menores que el último,9,true,Tue Jun 09 2026 13:26:55 GMT+0000 (Coordinated Universal Time),Tue Jun 09 2026 14:02:47 GMT+0000 (Coordinated Universal Time),true,true,false
+83,03,Área de un rectángulo,9,true,Tue Jun 09 2026 13:26:56 GMT+0000 (Coordinated Universal Time),Tue Jun 09 2026 13:44:18 GMT+0000 (Coordinated Universal Time),true,true,true
+83,03,Aprobado o reprobado,4,true,Tue Jun 09 2026 13:26:56 GMT+0000 (Coordinated Universal Time),Tue Jun 09 2026 13:52:04 GMT+0000 (Coordinated Universal Time),true,true,true
+83,03,Factorial de un número,3,true,Tue Jun 09 2026 13:26:56 GMT+0000 (Coordinated Universal Time),Tue Jun 09 2026 14:15:33 GMT+0000 (Coordinated Universal Time),true,true,true
+83,03,Porcentaje de incremento,0,false,Tue Jun 09 2026 13:26:56 GMT+0000 (Coordinated Universal Time),Tue Jun 09 2026 13:26:56 GMT+0000 (Coordinated Universal Time),true,true,true
+83,03,Intercalar dos listas,0,false,Tue Jun 09 2026 13:26:56 GMT+0000 (Coordinated Universal Time),Tue Jun 09 2026 13:26:56 GMT+0000 (Coordinated Universal Time),true,true,true
+84,03,Suma de dos números,1,true,Tue Jun 09 2026 13:28:01 GMT+0000 (Coordinated Universal Time),Tue Jun 09 2026 13:30:55 GMT+0000 (Coordinated Universal Time),false,false,false
+84,03,Signo del número,1,true,Tue Jun 09 2026 13:28:01 GMT+0000 (Coordinated Universal Time),Tue Jun 09 2026 13:32:30 GMT+0000 (Coordinated Universal Time),false,false,false
+84,03,Números del 1 al N,2,true,Tue Jun 09 2026 13:28:01 GMT+0000 (Coordinated Universal Time),Tue Jun 09 2026 13:33:32 GMT+0000 (Coordinated Universal Time),false,false,false
+84,03,Altura máxima,2,true,Tue Jun 09 2026 13:28:01 GMT+0000 (Coordinated Universal Time),Tue Jun 09 2026 13:30:00 GMT+0000 (Coordinated Universal Time),false,false,false
+84,03,Contar menores que el último,1,true,Tue Jun 09 2026 13:28:01 GMT+0000 (Coordinated Universal Time),Tue Jun 09 2026 13:35:38 GMT+0000 (Coordinated Universal Time),false,false,false
+85,03,Datos de persona,4,false,Tue Jun 09 2026 13:29:13 GMT+0000 (Coordinated Universal Time),Tue Jun 09 2026 13:36:20 GMT+0000 (Coordinated Universal Time),false,false,true
+85,03,Signo del número,7,false,Tue Jun 09 2026 13:29:13 GMT+0000 (Coordinated Universal Time),Tue Jun 09 2026 13:46:24 GMT+0000 (Coordinated Universal Time),false,false,true
+85,03,Suma de N Números,0,false,Tue Jun 09 2026 13:29:13 GMT+0000 (Coordinated Universal Time),Tue Jun 09 2026 13:29:13 GMT+0000 (Coordinated Universal Time),false,false,true
+85,03,Energia potencial,1,false,Tue Jun 09 2026 13:29:13 GMT+0000 (Coordinated Universal Time),Tue Jun 09 2026 13:50:44 GMT+0000 (Coordinated Universal Time),false,false,true
+85,03,Invertir una lista,0,false,Tue Jun 09 2026 13:29:13 GMT+0000 (Coordinated Universal Time),Tue Jun 09 2026 13:29:13 GMT+0000 (Coordinated Universal Time),false,false,true
+86,03,Área de un rectángulo,3,true,Tue Jun 09 2026 13:29:34 GMT+0000 (Coordinated Universal Time),Tue Jun 09 2026 13:33:36 GMT+0000 (Coordinated Universal Time),false,true,false
+86,03,Aprobado o reprobado,4,true,Tue Jun 09 2026 13:29:34 GMT+0000 (Coordinated Universal Time),Tue Jun 09 2026 13:39:33 GMT+0000 (Coordinated Universal Time),false,true,false
+86,03,Tabla de multiplicar,3,true,Tue Jun 09 2026 13:29:34 GMT+0000 (Coordinated Universal Time),Tue Jun 09 2026 13:42:56 GMT+0000 (Coordinated Universal Time),false,true,false
+86,03,Porcentaje de incremento,1,true,Tue Jun 09 2026 13:29:34 GMT+0000 (Coordinated Universal Time),Tue Jun 09 2026 13:46:18 GMT+0000 (Coordinated Universal Time),false,true,false
+86,03,Sumar dos listas,1,true,Tue Jun 09 2026 13:29:34 GMT+0000 (Coordinated Universal Time),Tue Jun 09 2026 13:49:43 GMT+0000 (Coordinated Universal Time),false,true,false
+87,03,Suma de dos números,4,true,Tue Jun 09 2026 13:30:47 GMT+0000 (Coordinated Universal Time),Tue Jun 09 2026 13:34:30 GMT+0000 (Coordinated Universal Time),false,true,true
+87,03,Par o impar,5,true,Tue Jun 09 2026 13:30:47 GMT+0000 (Coordinated Universal Time),Tue Jun 09 2026 13:40:57 GMT+0000 (Coordinated Universal Time),false,true,true
+87,03,Factorial de un número,13,false,Tue Jun 09 2026 13:30:47 GMT+0000 (Coordinated Universal Time),Tue Jun 09 2026 14:29:04 GMT+0000 (Coordinated Universal Time),false,true,true
+87,03,Velocidad final,8,false,Tue Jun 09 2026 13:30:47 GMT+0000 (Coordinated Universal Time),Tue Jun 09 2026 14:09:17 GMT+0000 (Coordinated Universal Time),false,true,true
+87,03,Intercalar dos listas,0,false,Tue Jun 09 2026 13:30:47 GMT+0000 (Coordinated Universal Time),Tue Jun 09 2026 13:30:47 GMT+0000 (Coordinated Universal Time),false,true,true
+88,03,Saludo personalizado,3,true,Tue Jun 09 2026 13:31:10 GMT+0000 (Coordinated Universal Time),Tue Jun 09 2026 13:35:51 GMT+0000 (Coordinated Universal Time),true,false,false
+88,03,El Número Negativo,11,true,Tue Jun 09 2026 13:31:10 GMT+0000 (Coordinated Universal Time),Tue Jun 09 2026 13:53:38 GMT+0000 (Coordinated Universal Time),true,false,false
+88,03,Suma de N Números,2,true,Tue Jun 09 2026 13:31:10 GMT+0000 (Coordinated Universal Time),Tue Jun 09 2026 13:57:41 GMT+0000 (Coordinated Universal Time),true,false,false
+88,03,Altura máxima,6,true,Tue Jun 09 2026 13:31:10 GMT+0000 (Coordinated Universal Time),Tue Jun 09 2026 14:05:14 GMT+0000 (Coordinated Universal Time),true,false,false
+88,03,Sumar dos listas,6,true,Tue Jun 09 2026 13:31:10 GMT+0000 (Coordinated Universal Time),Tue Jun 09 2026 14:17:16 GMT+0000 (Coordinated Universal Time),true,false,false
+89,03,Saludo personalizado,15,true,Tue Jun 09 2026 13:31:45 GMT+0000 (Coordinated Universal Time),Tue Jun 09 2026 14:26:18 GMT+0000 (Coordinated Universal Time),true,false,true
+89,03,Signo del número,11,true,Tue Jun 09 2026 13:31:45 GMT+0000 (Coordinated Universal Time),Tue Jun 09 2026 13:47:35 GMT+0000 (Coordinated Universal Time),true,false,true
+89,03,Factorial de un número,0,false,Tue Jun 09 2026 13:31:45 GMT+0000 (Coordinated Universal Time),Tue Jun 09 2026 13:31:45 GMT+0000 (Coordinated Universal Time),true,false,true
+89,03,Porcentaje de incremento,12,true,Tue Jun 09 2026 13:31:45 GMT+0000 (Coordinated Universal Time),Tue Jun 09 2026 14:03:44 GMT+0000 (Coordinated Universal Time),true,false,true
+89,03,Invertir una lista,23,true,Tue Jun 09 2026 13:31:45 GMT+0000 (Coordinated Universal Time),Tue Jun 09 2026 14:47:11 GMT+0000 (Coordinated Universal Time),true,false,true
+90,03,Área de un rectángulo,2,true,Tue Jun 09 2026 13:33:02 GMT+0000 (Coordinated Universal Time),Tue Jun 09 2026 13:35:01 GMT+0000 (Coordinated Universal Time),true,true,false
+90,03,El Número Negativo,4,true,Tue Jun 09 2026 13:33:02 GMT+0000 (Coordinated Universal Time),Tue Jun 09 2026 13:40:48 GMT+0000 (Coordinated Universal Time),true,true,false
+90,03,Tabla de multiplicar,1,true,Tue Jun 09 2026 13:33:02 GMT+0000 (Coordinated Universal Time),Tue Jun 09 2026 13:42:43 GMT+0000 (Coordinated Universal Time),true,true,false
+90,03,Energia potencial,6,true,Tue Jun 09 2026 13:33:02 GMT+0000 (Coordinated Universal Time),Tue Jun 09 2026 13:50:49 GMT+0000 (Coordinated Universal Time),true,true,false
+90,03,Contar menores que el último,5,true,Tue Jun 09 2026 13:33:02 GMT+0000 (Coordinated Universal Time),Tue Jun 09 2026 14:04:37 GMT+0000 (Coordinated Universal Time),true,true,false
+91,03,Datos de persona,5,true,Tue Jun 09 2026 13:33:55 GMT+0000 (Coordinated Universal Time),Tue Jun 09 2026 13:39:52 GMT+0000 (Coordinated Universal Time),true,true,true
+91,03,Aprobado o reprobado,6,true,Tue Jun 09 2026 13:33:55 GMT+0000 (Coordinated Universal Time),Tue Jun 09 2026 13:49:56 GMT+0000 (Coordinated Universal Time),true,true,true
+91,03,Números del 1 al N,3,true,Tue Jun 09 2026 13:33:55 GMT+0000 (Coordinated Universal Time),Tue Jun 09 2026 13:54:34 GMT+0000 (Coordinated Universal Time),true,true,true
+91,03,Velocidad final,1,true,Tue Jun 09 2026 13:33:55 GMT+0000 (Coordinated Universal Time),Tue Jun 09 2026 14:02:57 GMT+0000 (Coordinated Universal Time),true,true,true
+91,03,Intercalar dos listas,2,true,Tue Jun 09 2026 13:33:55 GMT+0000 (Coordinated Universal Time),Tue Jun 09 2026 14:13:38 GMT+0000 (Coordinated Universal Time),true,true,true
+92,03,Suma de dos números,21,true,Tue Jun 09 2026 13:38:01 GMT+0000 (Coordinated Universal Time),Tue Jun 09 2026 13:58:54 GMT+0000 (Coordinated Universal Time),false,false,false
+92,03,Par o impar,2,true,Tue Jun 09 2026 13:38:01 GMT+0000 (Coordinated Universal Time),Tue Jun 09 2026 14:46:18 GMT+0000 (Coordinated Universal Time),false,false,false
+92,03,Suma de N Números,2,true,Tue Jun 09 2026 13:38:01 GMT+0000 (Coordinated Universal Time),Tue Jun 09 2026 14:58:41 GMT+0000 (Coordinated Universal Time),false,false,false
+92,03,Velocidad final,16,true,Tue Jun 09 2026 13:38:01 GMT+0000 (Coordinated Universal Time),Tue Jun 09 2026 14:34:29 GMT+0000 (Coordinated Universal Time),false,false,false
+92,03,Intercalar dos listas,0,false,Tue Jun 09 2026 13:38:01 GMT+0000 (Coordinated Universal Time),Tue Jun 09 2026 13:38:01 GMT+0000 (Coordinated Universal Time),false,false,false
+93,03,Saludo personalizado,4,true,Tue Jun 09 2026 13:46:30 GMT+0000 (Coordinated Universal Time),Tue Jun 09 2026 13:48:33 GMT+0000 (Coordinated Universal Time),false,false,true
+93,03,Aprobado o reprobado,4,true,Tue Jun 09 2026 13:46:30 GMT+0000 (Coordinated Universal Time),Tue Jun 09 2026 13:52:09 GMT+0000 (Coordinated Universal Time),false,false,true
+93,03,Números del 1 al N,16,true,Tue Jun 09 2026 13:46:30 GMT+0000 (Coordinated Universal Time),Tue Jun 09 2026 14:16:48 GMT+0000 (Coordinated Universal Time),false,false,true
+93,03,Porcentaje de incremento,1,true,Tue Jun 09 2026 13:46:30 GMT+0000 (Coordinated Universal Time),Tue Jun 09 2026 14:22:43 GMT+0000 (Coordinated Universal Time),false,false,true
+93,03,Sumar dos listas,5,true,Tue Jun 09 2026 13:46:30 GMT+0000 (Coordinated Universal Time),Tue Jun 09 2026 14:29:05 GMT+0000 (Coordinated Universal Time),false,false,true
+94,03,Suma de dos números,2,true,Tue Jun 09 2026 13:47:54 GMT+0000 (Coordinated Universal Time),Tue Jun 09 2026 13:49:39 GMT+0000 (Coordinated Universal Time),false,true,false
+94,03,El Número Negativo,2,true,Tue Jun 09 2026 13:47:54 GMT+0000 (Coordinated Universal Time),Tue Jun 09 2026 13:52:43 GMT+0000 (Coordinated Universal Time),false,true,false
+94,03,Tabla de multiplicar,2,true,Tue Jun 09 2026 13:47:54 GMT+0000 (Coordinated Universal Time),Tue Jun 09 2026 13:55:34 GMT+0000 (Coordinated Universal Time),false,true,false
+94,03,Altura máxima,1,true,Tue Jun 09 2026 13:47:54 GMT+0000 (Coordinated Universal Time),Tue Jun 09 2026 13:59:12 GMT+0000 (Coordinated Universal Time),false,true,false
+94,03,Invertir una lista,3,true,Tue Jun 09 2026 13:47:54 GMT+0000 (Coordinated Universal Time),Tue Jun 09 2026 14:06:51 GMT+0000 (Coordinated Universal Time),false,true,false
+95,03,Datos de persona,10,true,Tue Jun 09 2026 13:55:41 GMT+0000 (Coordinated Universal Time),Tue Jun 09 2026 14:34:33 GMT+0000 (Coordinated Universal Time),false,true,true
+95,03,Signo del número,6,true,Tue Jun 09 2026 13:55:41 GMT+0000 (Coordinated Universal Time),Tue Jun 09 2026 14:27:07 GMT+0000 (Coordinated Universal Time),false,true,true
+95,03,Factorial de un número,18,true,Tue Jun 09 2026 13:55:41 GMT+0000 (Coordinated Universal Time),Tue Jun 09 2026 14:49:01 GMT+0000 (Coordinated Universal Time),false,true,true
+95,03,Energia potencial,7,true,Tue Jun 09 2026 13:55:41 GMT+0000 (Coordinated Universal Time),Tue Jun 09 2026 15:04:02 GMT+0000 (Coordinated Universal Time),false,true,true
+95,03,Contar menores que el último,0,false,Tue Jun 09 2026 13:55:41 GMT+0000 (Coordinated Universal Time),Tue Jun 09 2026 13:55:41 GMT+0000 (Coordinated Universal Time),false,true,true
+96,03,Área de un rectángulo,8,true,Tue Jun 09 2026 14:03:02 GMT+0000 (Coordinated Universal Time),Tue Jun 09 2026 14:14:40 GMT+0000 (Coordinated Universal Time),true,false,false
+96,03,Par o impar,17,true,Tue Jun 09 2026 14:03:02 GMT+0000 (Coordinated Universal Time),Tue Jun 09 2026 14:30:58 GMT+0000 (Coordinated Universal Time),true,false,false
+96,03,Tabla de multiplicar,6,true,Tue Jun 09 2026 14:03:02 GMT+0000 (Coordinated Universal Time),Tue Jun 09 2026 14:54:07 GMT+0000 (Coordinated Universal Time),true,false,false
+96,03,Porcentaje de incremento,1,false,Tue Jun 09 2026 14:03:02 GMT+0000 (Coordinated Universal Time),Tue Jun 09 2026 14:54:29 GMT+0000 (Coordinated Universal Time),true,false,false
+96,03,Contar menores que el último,0,false,Tue Jun 09 2026 14:03:02 GMT+0000 (Coordinated Universal Time),Tue Jun 09 2026 14:03:02 GMT+0000 (Coordinated Universal Time),true,false,false
+97,03,Saludo personalizado,8,true,Tue Jun 09 2026 14:06:01 GMT+0000 (Coordinated Universal Time),Tue Jun 09 2026 14:40:22 GMT+0000 (Coordinated Universal Time),true,false,true
+97,03,Aprobado o reprobado,15,true,Tue Jun 09 2026 14:06:01 GMT+0000 (Coordinated Universal Time),Tue Jun 09 2026 14:35:13 GMT+0000 (Coordinated Universal Time),true,false,true
+97,03,Factorial de un número,0,false,Tue Jun 09 2026 14:06:01 GMT+0000 (Coordinated Universal Time),Tue Jun 09 2026 14:06:01 GMT+0000 (Coordinated Universal Time),true,false,true
+97,03,Energia potencial,1,false,Tue Jun 09 2026 14:06:01 GMT+0000 (Coordinated Universal Time),Tue Jun 09 2026 15:06:09 GMT+0000 (Coordinated Universal Time),true,false,true
+97,03,Sumar dos listas,8,false,Tue Jun 09 2026 14:06:01 GMT+0000 (Coordinated Universal Time),Tue Jun 09 2026 14:58:21 GMT+0000 (Coordinated Universal Time),true,false,true
+98,07,Datos de persona,6,true,Thu Jun 11 2026 13:18:46 GMT+0000 (Coordinated Universal Time),Thu Jun 11 2026 13:21:55 GMT+0000 (Coordinated Universal Time),true,true,false
+98,07,Signo del número,9,false,Thu Jun 11 2026 13:18:46 GMT+0000 (Coordinated Universal Time),Thu Jun 11 2026 13:28:13 GMT+0000 (Coordinated Universal Time),true,true,false
+98,07,Tabla de multiplicar,30,true,Thu Jun 11 2026 13:18:46 GMT+0000 (Coordinated Universal Time),Thu Jun 11 2026 14:09:44 GMT+0000 (Coordinated Universal Time),true,true,false
+98,07,Velocidad final,14,true,Thu Jun 11 2026 13:18:46 GMT+0000 (Coordinated Universal Time),Thu Jun 11 2026 13:47:31 GMT+0000 (Coordinated Universal Time),true,true,false
+98,07,Invertir una lista,32,false,Thu Jun 11 2026 13:18:46 GMT+0000 (Coordinated Universal Time),Thu Jun 11 2026 14:26:54 GMT+0000 (Coordinated Universal Time),true,true,false
+99,07,Área de un rectángulo,2,true,Thu Jun 11 2026 13:20:02 GMT+0000 (Coordinated Universal Time),Thu Jun 11 2026 13:22:53 GMT+0000 (Coordinated Universal Time),true,true,true
+99,07,El Número Negativo,2,true,Thu Jun 11 2026 13:20:02 GMT+0000 (Coordinated Universal Time),Thu Jun 11 2026 13:32:39 GMT+0000 (Coordinated Universal Time),true,true,true
+99,07,Suma de N Números,4,true,Thu Jun 11 2026 13:20:02 GMT+0000 (Coordinated Universal Time),Thu Jun 11 2026 13:40:12 GMT+0000 (Coordinated Universal Time),true,true,true
+99,07,Altura máxima,1,true,Thu Jun 11 2026 13:20:02 GMT+0000 (Coordinated Universal Time),Thu Jun 11 2026 13:42:28 GMT+0000 (Coordinated Universal Time),true,true,true
+99,07,Sumar dos listas,3,true,Thu Jun 11 2026 13:20:02 GMT+0000 (Coordinated Universal Time),Thu Jun 11 2026 13:50:57 GMT+0000 (Coordinated Universal Time),true,true,true
+100,07,Suma de dos números,5,true,Thu Jun 11 2026 13:23:50 GMT+0000 (Coordinated Universal Time),Thu Jun 11 2026 13:29:55 GMT+0000 (Coordinated Universal Time),false,false,false
+100,07,Par o impar,6,true,Thu Jun 11 2026 13:23:50 GMT+0000 (Coordinated Universal Time),Thu Jun 11 2026 14:11:03 GMT+0000 (Coordinated Universal Time),false,false,false
+100,07,Números del 1 al N,2,true,Thu Jun 11 2026 13:23:50 GMT+0000 (Coordinated Universal Time),Thu Jun 11 2026 13:37:55 GMT+0000 (Coordinated Universal Time),false,false,false
+100,07,Velocidad final,4,true,Thu Jun 11 2026 13:23:50 GMT+0000 (Coordinated Universal Time),Thu Jun 11 2026 13:45:01 GMT+0000 (Coordinated Universal Time),false,false,false
+100,07,Intercalar dos listas,13,true,Thu Jun 11 2026 13:23:50 GMT+0000 (Coordinated Universal Time),Thu Jun 11 2026 14:06:41 GMT+0000 (Coordinated Universal Time),false,false,false
+101,07,Saludo personalizado,10,true,Thu Jun 11 2026 13:24:36 GMT+0000 (Coordinated Universal Time),Thu Jun 11 2026 14:04:25 GMT+0000 (Coordinated Universal Time),false,false,true
+101,07,Par o impar,2,true,Thu Jun 11 2026 13:24:36 GMT+0000 (Coordinated Universal Time),Thu Jun 11 2026 14:11:58 GMT+0000 (Coordinated Universal Time),false,false,true
+101,07,Números del 1 al N,4,true,Thu Jun 11 2026 13:24:36 GMT+0000 (Coordinated Universal Time),Thu Jun 11 2026 14:21:51 GMT+0000 (Coordinated Universal Time),false,false,true
+101,07,Energia potencial,7,true,Thu Jun 11 2026 13:24:36 GMT+0000 (Coordinated Universal Time),Thu Jun 11 2026 14:24:46 GMT+0000 (Coordinated Universal Time),false,false,true
+101,07,Invertir una lista,1,false,Thu Jun 11 2026 13:24:36 GMT+0000 (Coordinated Universal Time),Thu Jun 11 2026 14:26:32 GMT+0000 (Coordinated Universal Time),false,false,true
+102,07,Área de un rectángulo,2,true,Thu Jun 11 2026 13:24:49 GMT+0000 (Coordinated Universal Time),Thu Jun 11 2026 13:30:41 GMT+0000 (Coordinated Universal Time),false,true,false
+102,07,Aprobado o reprobado,8,true,Thu Jun 11 2026 13:24:49 GMT+0000 (Coordinated Universal Time),Thu Jun 11 2026 13:49:42 GMT+0000 (Coordinated Universal Time),false,true,false
+102,07,Suma de N Números,12,false,Thu Jun 11 2026 13:24:49 GMT+0000 (Coordinated Universal Time),Thu Jun 11 2026 14:17:50 GMT+0000 (Coordinated Universal Time),false,true,false
+102,07,Porcentaje de incremento,1,false,Thu Jun 11 2026 13:24:49 GMT+0000 (Coordinated Universal Time),Thu Jun 11 2026 14:27:24 GMT+0000 (Coordinated Universal Time),false,true,false
+102,07,Intercalar dos listas,0,false,Thu Jun 11 2026 13:24:49 GMT+0000 (Coordinated Universal Time),Thu Jun 11 2026 13:24:49 GMT+0000 (Coordinated Universal Time),false,true,false
+103,07,Suma de dos números,2,true,Thu Jun 11 2026 13:28:17 GMT+0000 (Coordinated Universal Time),Thu Jun 11 2026 13:31:52 GMT+0000 (Coordinated Universal Time),false,true,true
+103,07,Signo del número,1,true,Thu Jun 11 2026 13:28:17 GMT+0000 (Coordinated Universal Time),Thu Jun 11 2026 13:35:57 GMT+0000 (Coordinated Universal Time),false,true,true
+103,07,Tabla de multiplicar,1,true,Thu Jun 11 2026 13:28:17 GMT+0000 (Coordinated Universal Time),Thu Jun 11 2026 13:41:50 GMT+0000 (Coordinated Universal Time),false,true,true
+103,07,Altura máxima,8,true,Thu Jun 11 2026 13:28:17 GMT+0000 (Coordinated Universal Time),Thu Jun 11 2026 14:21:21 GMT+0000 (Coordinated Universal Time),false,true,true
+103,07,Contar menores que el último,5,false,Thu Jun 11 2026 13:28:17 GMT+0000 (Coordinated Universal Time),Thu Jun 11 2026 14:12:48 GMT+0000 (Coordinated Universal Time),false,true,true
+104,07,Datos de persona,6,false,Thu Jun 11 2026 13:31:20 GMT+0000 (Coordinated Universal Time),Thu Jun 11 2026 13:43:38 GMT+0000 (Coordinated Universal Time),true,false,false
+104,07,El Número Negativo,9,true,Thu Jun 11 2026 13:31:20 GMT+0000 (Coordinated Universal Time),Thu Jun 11 2026 14:08:22 GMT+0000 (Coordinated Universal Time),true,false,false
+104,07,Factorial de un número,2,true,Thu Jun 11 2026 13:31:20 GMT+0000 (Coordinated Universal Time),Thu Jun 11 2026 14:26:01 GMT+0000 (Coordinated Universal Time),true,false,false
+104,07,Velocidad final,0,false,Thu Jun 11 2026 13:31:20 GMT+0000 (Coordinated Universal Time),Thu Jun 11 2026 13:31:20 GMT+0000 (Coordinated Universal Time),true,false,false
+104,07,Sumar dos listas,0,false,Thu Jun 11 2026 13:31:20 GMT+0000 (Coordinated Universal Time),Thu Jun 11 2026 13:31:20 GMT+0000 (Coordinated Universal Time),true,false,false
+105,07,Datos de persona,3,true,Thu Jun 11 2026 13:35:51 GMT+0000 (Coordinated Universal Time),Thu Jun 11 2026 13:48:54 GMT+0000 (Coordinated Universal Time),true,false,true
+105,07,Par o impar,9,true,Thu Jun 11 2026 13:35:51 GMT+0000 (Coordinated Universal Time),Thu Jun 11 2026 14:08:39 GMT+0000 (Coordinated Universal Time),true,false,true
+105,07,Números del 1 al N,5,false,Thu Jun 11 2026 13:35:51 GMT+0000 (Coordinated Universal Time),Thu Jun 11 2026 14:27:49 GMT+0000 (Coordinated Universal Time),true,false,true
+105,07,Altura máxima,0,false,Thu Jun 11 2026 13:35:51 GMT+0000 (Coordinated Universal Time),Thu Jun 11 2026 13:35:51 GMT+0000 (Coordinated Universal Time),true,false,true
+105,07,Intercalar dos listas,0,false,Thu Jun 11 2026 13:35:51 GMT+0000 (Coordinated Universal Time),Thu Jun 11 2026 13:35:51 GMT+0000 (Coordinated Universal Time),true,false,true
+106,07,Área de un rectángulo,4,true,Thu Jun 11 2026 13:37:25 GMT+0000 (Coordinated Universal Time),Thu Jun 11 2026 13:43:31 GMT+0000 (Coordinated Universal Time),true,true,false
+106,07,El Número Negativo,10,true,Thu Jun 11 2026 13:37:25 GMT+0000 (Coordinated Universal Time),Thu Jun 11 2026 14:14:19 GMT+0000 (Coordinated Universal Time),true,true,false
+106,07,Suma de N Números,7,false,Thu Jun 11 2026 13:37:25 GMT+0000 (Coordinated Universal Time),Thu Jun 11 2026 14:26:47 GMT+0000 (Coordinated Universal Time),true,true,false
+106,07,Velocidad final,0,false,Thu Jun 11 2026 13:37:25 GMT+0000 (Coordinated Universal Time),Thu Jun 11 2026 13:37:25 GMT+0000 (Coordinated Universal Time),true,true,false
+106,07,Invertir una lista,0,false,Thu Jun 11 2026 13:37:25 GMT+0000 (Coordinated Universal Time),Thu Jun 11 2026 13:37:25 GMT+0000 (Coordinated Universal Time),true,true,false
+107,07,Saludo personalizado,7,false,Thu Jun 11 2026 13:39:48 GMT+0000 (Coordinated Universal Time),Thu Jun 11 2026 14:06:58 GMT+0000 (Coordinated Universal Time),true,true,true
+107,07,Signo del número,11,true,Thu Jun 11 2026 13:39:48 GMT+0000 (Coordinated Universal Time),Thu Jun 11 2026 14:09:01 GMT+0000 (Coordinated Universal Time),true,true,true
+107,07,Tabla de multiplicar,9,true,Thu Jun 11 2026 13:39:48 GMT+0000 (Coordinated Universal Time),Thu Jun 11 2026 14:25:59 GMT+0000 (Coordinated Universal Time),true,true,true
+107,07,Energia potencial,0,false,Thu Jun 11 2026 13:39:48 GMT+0000 (Coordinated Universal Time),Thu Jun 11 2026 13:39:48 GMT+0000 (Coordinated Universal Time),true,true,true
+107,07,Contar menores que el último,0,false,Thu Jun 11 2026 13:39:48 GMT+0000 (Coordinated Universal Time),Thu Jun 11 2026 13:39:48 GMT+0000 (Coordinated Universal Time),true,true,true
+108,05,Suma de dos números,2,true,Mon Jun 15 2026 19:22:41 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 19:24:15 GMT+0000 (Coordinated Universal Time),false,false,false
+108,05,Aprobado o reprobado,2,true,Mon Jun 15 2026 19:22:41 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 19:28:47 GMT+0000 (Coordinated Universal Time),false,false,false
+108,05,Factorial de un número,39,false,Mon Jun 15 2026 19:22:41 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 20:32:18 GMT+0000 (Coordinated Universal Time),false,false,false
+108,05,Porcentaje de incremento,16,false,Mon Jun 15 2026 19:22:41 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 20:12:12 GMT+0000 (Coordinated Universal Time),false,false,false
+108,05,Sumar dos listas,2,false,Mon Jun 15 2026 19:22:41 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 20:32:22 GMT+0000 (Coordinated Universal Time),false,false,false
+109,05,Saludo personalizado,18,true,Mon Jun 15 2026 19:23:02 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 20:16:59 GMT+0000 (Coordinated Universal Time),false,false,true
+109,05,Par o impar,17,true,Mon Jun 15 2026 19:23:02 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 20:06:46 GMT+0000 (Coordinated Universal Time),false,false,true
+109,05,Suma de N Números,19,false,Mon Jun 15 2026 19:23:02 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 20:42:36 GMT+0000 (Coordinated Universal Time),false,false,true
+109,05,Velocidad final,0,false,Mon Jun 15 2026 19:23:02 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 19:23:02 GMT+0000 (Coordinated Universal Time),false,false,true
+109,05,Sumar dos listas,5,false,Mon Jun 15 2026 19:23:02 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 20:36:21 GMT+0000 (Coordinated Universal Time),false,false,true
+110,05,Área de un rectángulo,11,true,Mon Jun 15 2026 19:23:04 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 19:43:39 GMT+0000 (Coordinated Universal Time),false,true,false
+110,05,Aprobado o reprobado,8,true,Mon Jun 15 2026 19:23:04 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 19:46:55 GMT+0000 (Coordinated Universal Time),false,true,false
+110,05,Números del 1 al N,5,true,Mon Jun 15 2026 19:23:04 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 19:56:12 GMT+0000 (Coordinated Universal Time),false,true,false
+110,05,Altura máxima,14,true,Mon Jun 15 2026 19:23:04 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 20:15:42 GMT+0000 (Coordinated Universal Time),false,true,false
+110,05,Invertir una lista,1,true,Mon Jun 15 2026 19:23:04 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 20:27:11 GMT+0000 (Coordinated Universal Time),false,true,false
+111,05,Suma de dos números,2,true,Mon Jun 15 2026 19:24:46 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 19:26:09 GMT+0000 (Coordinated Universal Time),false,true,true
+111,05,El Número Negativo,17,true,Mon Jun 15 2026 19:24:46 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 20:03:47 GMT+0000 (Coordinated Universal Time),false,true,true
+111,05,Tabla de multiplicar,2,true,Mon Jun 15 2026 19:24:46 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 19:41:47 GMT+0000 (Coordinated Universal Time),false,true,true
+111,05,Energia potencial,17,true,Mon Jun 15 2026 19:24:46 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 20:13:44 GMT+0000 (Coordinated Universal Time),false,true,true
+111,05,Intercalar dos listas,14,true,Mon Jun 15 2026 19:24:46 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 20:42:08 GMT+0000 (Coordinated Universal Time),false,true,true
+112,05,Datos de persona,34,true,Mon Jun 15 2026 19:25:03 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 20:43:15 GMT+0000 (Coordinated Universal Time),true,false,false
+112,05,Signo del número,14,false,Mon Jun 15 2026 19:25:03 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 20:38:11 GMT+0000 (Coordinated Universal Time),true,false,false
+112,05,Factorial de un número,23,false,Mon Jun 15 2026 19:25:03 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 20:43:41 GMT+0000 (Coordinated Universal Time),true,false,false
+112,05,Porcentaje de incremento,20,true,Mon Jun 15 2026 19:25:03 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 20:18:23 GMT+0000 (Coordinated Universal Time),true,false,false
+112,05,Contar menores que el último,11,true,Mon Jun 15 2026 19:25:03 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 20:05:28 GMT+0000 (Coordinated Universal Time),true,false,false
+113,05,Área de un rectángulo,2,true,Mon Jun 15 2026 19:26:45 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 19:29:03 GMT+0000 (Coordinated Universal Time),true,false,true
+113,05,El Número Negativo,2,true,Mon Jun 15 2026 19:26:45 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 19:33:33 GMT+0000 (Coordinated Universal Time),true,false,true
+113,05,Tabla de multiplicar,1,true,Mon Jun 15 2026 19:26:45 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 19:35:20 GMT+0000 (Coordinated Universal Time),true,false,true
+113,05,Energia potencial,13,true,Mon Jun 15 2026 19:26:45 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 20:08:35 GMT+0000 (Coordinated Universal Time),true,false,true
+113,05,Invertir una lista,14,false,Mon Jun 15 2026 19:26:45 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 20:31:05 GMT+0000 (Coordinated Universal Time),true,false,true
+114,05,Datos de persona,14,true,Mon Jun 15 2026 19:28:56 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 20:41:46 GMT+0000 (Coordinated Universal Time),true,true,false
+114,05,Aprobado o reprobado,20,true,Mon Jun 15 2026 19:28:56 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 20:28:39 GMT+0000 (Coordinated Universal Time),true,true,false
+114,05,Números del 1 al N,22,true,Mon Jun 15 2026 19:28:56 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 20:23:46 GMT+0000 (Coordinated Universal Time),true,true,false
+114,05,Velocidad final,1,false,Mon Jun 15 2026 19:28:56 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 20:15:45 GMT+0000 (Coordinated Universal Time),true,true,false
+114,05,Contar menores que el último,12,false,Mon Jun 15 2026 19:28:56 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 20:44:18 GMT+0000 (Coordinated Universal Time),true,true,false
+115,05,Suma de dos números,2,true,Mon Jun 15 2026 19:30:08 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 19:32:15 GMT+0000 (Coordinated Universal Time),true,true,true
+115,05,Signo del número,1,true,Mon Jun 15 2026 19:30:08 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 19:33:57 GMT+0000 (Coordinated Universal Time),true,true,true
+115,05,Factorial de un número,1,true,Mon Jun 15 2026 19:30:08 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 19:38:07 GMT+0000 (Coordinated Universal Time),true,true,true
+115,05,Porcentaje de incremento,1,true,Mon Jun 15 2026 19:30:08 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 19:40:32 GMT+0000 (Coordinated Universal Time),true,true,true
+115,05,Sumar dos listas,2,true,Mon Jun 15 2026 19:30:08 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 19:49:20 GMT+0000 (Coordinated Universal Time),true,true,true
+116,05,Saludo personalizado,45,true,Mon Jun 15 2026 19:30:21 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 20:11:26 GMT+0000 (Coordinated Universal Time),false,false,false
+116,05,Par o impar,13,true,Mon Jun 15 2026 19:30:21 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 20:19:05 GMT+0000 (Coordinated Universal Time),false,false,false
+116,05,Suma de N Números,12,false,Mon Jun 15 2026 19:30:21 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 20:39:43 GMT+0000 (Coordinated Universal Time),false,false,false
+116,05,Altura máxima,1,false,Mon Jun 15 2026 19:30:21 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 20:28:04 GMT+0000 (Coordinated Universal Time),false,false,false
+116,05,Intercalar dos listas,0,false,Mon Jun 15 2026 19:30:21 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 19:30:21 GMT+0000 (Coordinated Universal Time),false,false,false
+117,05,Suma de dos números,2,true,Mon Jun 15 2026 19:31:09 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 19:34:09 GMT+0000 (Coordinated Universal Time),false,false,true
+117,05,El Número Negativo,4,true,Mon Jun 15 2026 19:31:09 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 19:39:25 GMT+0000 (Coordinated Universal Time),false,false,true
+117,05,Factorial de un número,13,true,Mon Jun 15 2026 19:31:09 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 20:54:53 GMT+0000 (Coordinated Universal Time),false,false,true
+117,05,Porcentaje de incremento,6,true,Mon Jun 15 2026 19:31:09 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 20:39:40 GMT+0000 (Coordinated Universal Time),false,false,true
+117,05,Sumar dos listas,5,true,Mon Jun 15 2026 19:31:09 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 20:12:15 GMT+0000 (Coordinated Universal Time),false,false,true
+118,05,Saludo personalizado,7,true,Mon Jun 15 2026 19:33:08 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 19:51:25 GMT+0000 (Coordinated Universal Time),false,true,false
+118,05,Aprobado o reprobado,16,true,Mon Jun 15 2026 19:33:08 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 19:46:40 GMT+0000 (Coordinated Universal Time),false,true,false
+118,05,Suma de N Números,9,true,Mon Jun 15 2026 19:33:08 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 20:19:33 GMT+0000 (Coordinated Universal Time),false,true,false
+118,05,Velocidad final,16,true,Mon Jun 15 2026 19:33:08 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 20:34:00 GMT+0000 (Coordinated Universal Time),false,true,false
+118,05,Invertir una lista,2,true,Mon Jun 15 2026 19:33:08 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 20:42:33 GMT+0000 (Coordinated Universal Time),false,true,false
+119,05,Área de un rectángulo,5,true,Mon Jun 15 2026 19:33:12 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 19:36:55 GMT+0000 (Coordinated Universal Time),false,true,true
+119,05,Signo del número,18,true,Mon Jun 15 2026 19:33:12 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 19:52:06 GMT+0000 (Coordinated Universal Time),false,true,true
+119,05,Números del 1 al N,10,true,Mon Jun 15 2026 19:33:12 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 20:00:42 GMT+0000 (Coordinated Universal Time),false,true,true
+119,05,Altura máxima,7,true,Mon Jun 15 2026 19:33:12 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 20:08:48 GMT+0000 (Coordinated Universal Time),false,true,true
+119,05,Intercalar dos listas,4,true,Mon Jun 15 2026 19:33:12 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 20:21:13 GMT+0000 (Coordinated Universal Time),false,true,true
+120,05,Datos de persona,1,true,Mon Jun 15 2026 19:33:30 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 19:40:30 GMT+0000 (Coordinated Universal Time),true,false,false
+120,05,Par o impar,13,true,Mon Jun 15 2026 19:33:30 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 19:39:19 GMT+0000 (Coordinated Universal Time),true,false,false
+120,05,Tabla de multiplicar,23,true,Mon Jun 15 2026 19:33:30 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 19:49:18 GMT+0000 (Coordinated Universal Time),true,false,false
+120,05,Energia potencial,29,true,Mon Jun 15 2026 19:33:30 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 20:16:02 GMT+0000 (Coordinated Universal Time),true,false,false
+120,05,Contar menores que el último,66,false,Mon Jun 15 2026 19:33:30 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 20:43:38 GMT+0000 (Coordinated Universal Time),true,false,false
+121,05,Datos de persona,1,true,Mon Jun 15 2026 19:36:29 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 19:40:08 GMT+0000 (Coordinated Universal Time),true,false,true
+121,05,Par o impar,2,true,Mon Jun 15 2026 19:36:29 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 19:43:12 GMT+0000 (Coordinated Universal Time),true,false,true
+121,05,Suma de N Números,3,true,Mon Jun 15 2026 19:36:29 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 19:51:41 GMT+0000 (Coordinated Universal Time),true,false,true
+121,05,Velocidad final,1,true,Mon Jun 15 2026 19:36:29 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 19:55:02 GMT+0000 (Coordinated Universal Time),true,false,true
+121,05,Invertir una lista,6,true,Mon Jun 15 2026 19:36:29 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 20:10:35 GMT+0000 (Coordinated Universal Time),true,false,true
+122,05,Saludo personalizado,32,true,Mon Jun 15 2026 19:39:02 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 20:37:20 GMT+0000 (Coordinated Universal Time),true,true,false
+122,05,Aprobado o reprobado,21,true,Mon Jun 15 2026 19:39:02 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 20:03:00 GMT+0000 (Coordinated Universal Time),true,true,false
+122,05,Tabla de multiplicar,8,true,Mon Jun 15 2026 19:39:02 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 20:07:32 GMT+0000 (Coordinated Universal Time),true,true,false
+122,05,Energia potencial,9,true,Mon Jun 15 2026 19:39:02 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 20:19:32 GMT+0000 (Coordinated Universal Time),true,true,false
+122,05,Contar menores que el último,7,true,Mon Jun 15 2026 19:39:02 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 20:30:22 GMT+0000 (Coordinated Universal Time),true,true,false
+123,05,Área de un rectángulo,3,true,Mon Jun 15 2026 19:41:37 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 19:44:50 GMT+0000 (Coordinated Universal Time),true,true,true
+123,05,Signo del número,4,true,Mon Jun 15 2026 19:41:37 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 19:50:03 GMT+0000 (Coordinated Universal Time),true,true,true
+123,05,Factorial de un número,4,true,Mon Jun 15 2026 19:41:37 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 20:33:07 GMT+0000 (Coordinated Universal Time),true,true,true
+123,05,Porcentaje de incremento,11,true,Mon Jun 15 2026 19:41:37 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 20:08:33 GMT+0000 (Coordinated Universal Time),true,true,true
+123,05,Sumar dos listas,3,true,Mon Jun 15 2026 19:41:37 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 20:24:43 GMT+0000 (Coordinated Universal Time),true,true,true
+124,05,Suma de dos números,11,true,Mon Jun 15 2026 19:41:39 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 19:54:55 GMT+0000 (Coordinated Universal Time),false,false,false
+124,05,El Número Negativo,5,true,Mon Jun 15 2026 19:41:39 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 19:59:49 GMT+0000 (Coordinated Universal Time),false,false,false
+124,05,Números del 1 al N,11,true,Mon Jun 15 2026 19:41:39 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 20:11:46 GMT+0000 (Coordinated Universal Time),false,false,false
+124,05,Altura máxima,2,true,Mon Jun 15 2026 19:41:39 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 20:16:23 GMT+0000 (Coordinated Universal Time),false,false,false
+124,05,Intercalar dos listas,1,true,Mon Jun 15 2026 19:41:39 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 20:19:05 GMT+0000 (Coordinated Universal Time),false,false,false
+125,05,Datos de persona,8,true,Mon Jun 15 2026 19:43:35 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 19:50:44 GMT+0000 (Coordinated Universal Time),false,false,true
+125,05,Signo del número,4,true,Mon Jun 15 2026 19:43:35 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 19:54:05 GMT+0000 (Coordinated Universal Time),false,false,true
+125,05,Números del 1 al N,1,true,Mon Jun 15 2026 19:43:35 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 19:55:43 GMT+0000 (Coordinated Universal Time),false,false,true
+125,05,Altura máxima,7,true,Mon Jun 15 2026 19:43:35 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 20:02:33 GMT+0000 (Coordinated Universal Time),false,false,true
+125,05,Invertir una lista,12,true,Mon Jun 15 2026 19:43:35 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 20:15:38 GMT+0000 (Coordinated Universal Time),false,false,true
+126,05,Área de un rectángulo,3,true,Mon Jun 15 2026 19:46:47 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 19:49:35 GMT+0000 (Coordinated Universal Time),false,true,false
+126,05,El Número Negativo,1,true,Mon Jun 15 2026 19:46:47 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 19:53:06 GMT+0000 (Coordinated Universal Time),false,true,false
+126,05,Suma de N Números,8,true,Mon Jun 15 2026 19:46:47 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 20:01:14 GMT+0000 (Coordinated Universal Time),false,true,false
+126,05,Porcentaje de incremento,19,true,Mon Jun 15 2026 19:46:47 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 20:13:40 GMT+0000 (Coordinated Universal Time),false,true,false
+126,05,Contar menores que el último,0,false,Mon Jun 15 2026 19:46:47 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 19:46:47 GMT+0000 (Coordinated Universal Time),false,true,false
+127,05,Saludo personalizado,3,true,Mon Jun 15 2026 19:49:06 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 19:52:02 GMT+0000 (Coordinated Universal Time),false,true,true
+127,05,Par o impar,15,false,Mon Jun 15 2026 19:49:06 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 20:50:35 GMT+0000 (Coordinated Universal Time),false,true,true
+127,05,Tabla de multiplicar,19,true,Mon Jun 15 2026 19:49:06 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 20:36:33 GMT+0000 (Coordinated Universal Time),false,true,true
+127,05,Velocidad final,7,false,Mon Jun 15 2026 19:49:06 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 20:43:51 GMT+0000 (Coordinated Universal Time),false,true,true
+127,05,Sumar dos listas,10,false,Mon Jun 15 2026 19:49:06 GMT+0000 (Coordinated Universal Time),Mon Jun 15 2026 20:48:42 GMT+0000 (Coordinated Universal Time),false,true,true
