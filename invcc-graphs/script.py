@@ -323,7 +323,40 @@ def fig_intentos_sus_combinado(sessions, sus):
                      f"n = {d['carnet'].nunique()} estudiantes (intentos) · "
                      f"{sus['carnet'].nunique()} con SUS")
 
+def fig_eficiencia_vs_sus(sessions, sus):
+    d = sessions[sessions["attempts"] > 0]
+    per_student = (
+        d.groupby("carnet")
+        .agg(solved_n=("solved", "sum"), attempts_n=("attempts", "sum"))
+        .reset_index()
+    )
+    per_student["eficiencia"] = per_student["solved_n"] / per_student["attempts_n"]
+    merged = sus.merge(per_student[["carnet", "eficiencia"]], on="carnet", how="inner")
 
+    fig = go.Figure()
+    for c in cells_present(merged):
+        sub = merged[merged["cell"] == c]
+        fig.add_trace(go.Scatter(
+            x=sub["eficiencia"], y=sub["SUS"], mode="markers",
+            name=c, marker=dict(color=CELL_COLORS[c], size=10, opacity=0.8,
+                                line=dict(width=1, color="white")),
+            hovertemplate="Eficiencia: %{x:.2f}<br>SUS: %{y:.0f}<extra>" + c + "</extra>",
+        ))
+    if len(merged) > 2:
+        x = merged["eficiencia"].values
+        y = merged["SUS"].values
+        b, a = np.polyfit(x, y, 1)
+        xs = np.linspace(x.min(), x.max(), 50)
+        fig.add_trace(go.Scatter(x=xs, y=a + b * xs, mode="lines",
+                                 name="Tendencia", line=dict(color=INK, dash="dash", width=2)))
+        r = np.corrcoef(x, y)[0, 1]
+        fig.add_annotation(x=0.98, y=0.04, xref="paper", yref="paper",
+                           text=f"r = {r:.2f}", showarrow=False,
+                           font=dict(size=13, color=MUTED))
+    fig.update_layout(title="Relación entre eficiencia (resueltos/intento) y experiencia (SUS) por estudiante",
+                      xaxis_title="Eficiencia por estudiante (resueltos / intentos)",
+                      yaxis_title="Puntuación SUS")
+    return with_n(style_fig(fig), len(merged), "estudiantes con intentos y SUS")
 def fig_efectos_principales(sessions):
     d = sessions[sessions["attempts"] > 0]
     factors = [("O", "Ocultamiento"), ("C", "Contador cromático"), ("E", "Espera incremental")]
@@ -810,6 +843,14 @@ def build(sessions_path, sus_path, out_path):
          "entender si reducir la prueba y error y mejorar la satisfacción van de la mano o en "
          "tensión.",
          fig_intentos_vs_sus(sessions, sus)),
+        ("relacion_eficiencia", "Relación entre medidas",
+         "Eficiencia (resueltos/intento) vs. SUS por estudiante",
+         "Reemplaza los intentos crudos por la eficiencia individual del estudiante "
+         "—problemas resueltos sobre el total de intentos— y la cruza con su puntuación "
+         "SUS. Una pendiente positiva indicaría que los estudiantes más eficientes (logran "
+         "resolver con menos reintentos) también reportan mejor experiencia, complementando "
+         "a nivel individual la lectura por celda de 'rq1_eficiencia'.",
+         fig_eficiencia_vs_sus(sessions, sus)),
     ]
 
     # Navegacion agrupada por seccion.
