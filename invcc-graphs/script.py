@@ -117,6 +117,27 @@ def with_n(fig, n, label="estudiantes", top=78):
     return with_note(fig, f"n = {n} {label}", top=top)
 
 
+def with_factor_key(fig):
+    """Añade, fuera del área de trazado, una pequeña leyenda que recuerda qué
+    significan las siglas O, C y E con las que se rotulan las celdas (p. ej. O+E).
+    Se usa en los gráficos cuyas categorías son las combinaciones de tratamiento,
+    para que el lector no tenga que volver a la cabecera para interpretarlas."""
+    key = "&nbsp;&nbsp;·&nbsp;&nbsp;".join(
+        f'<span style="color:{CELL_COLORS[k]}"><b>{k}</b></span> = {name}'
+        for k, name in (("O", "Ocultamiento de casos"),
+                        ("C", "Contador cromático"),
+                        ("E", "Espera incremental")))
+    fig.add_annotation(
+        x=0.5, y=-0.30, xref="paper", yref="paper",
+        xanchor="center", yanchor="top", align="center",
+        text=key, showarrow=False, font=dict(size=12, color=MUTED),
+        bordercolor=GRID, borderwidth=1, borderpad=6, bgcolor="white",
+    )
+    m = fig.layout.margin
+    fig.update_layout(margin=dict(l=m.l, r=m.r, t=m.t, b=(m.b or 60) + 78))
+    return fig
+
+
 # ---------------------------------------------------------------------------
 # Carga y preparacion de datos
 # ---------------------------------------------------------------------------
@@ -241,12 +262,13 @@ def fig_participantes(sessions):
     fig = go.Figure(go.Bar(
         x=order, y=counts.values,
         marker_color=[PASTEL[c] for c in order],
-        text=counts.values.astype(int), textposition="outside",
+        text=counts.values.astype(int), textposition="inside",
+        insidetextanchor="start", textfont=dict(color=INK, size=13),
     ))
     fig.update_layout(title="Participantes por celda experimental",
                       xaxis_title="Celda (combinación de intervenciones)",
                       yaxis_title="N.° de estudiantes")
-    return with_n(style_fig(fig), sessions["carnet"].nunique())
+    return with_factor_key(with_n(style_fig(fig), sessions["carnet"].nunique()))
 
 
 def fig_intentos_celda(sessions):
@@ -266,12 +288,15 @@ def fig_intentos_celda(sessions):
         insidetextanchor="start", textfont=dict(color=INK, size=13),
     ))
     if ctrl is not None:
-        fig.add_hline(y=ctrl, line_dash="dash", line_color="#9aa5b1",
-                      annotation_text="Nivel control", annotation_position="top left")
+        fig.add_hline(y=ctrl, line_dash="dash", line_color="#9aa5b1")
+        fig.add_annotation(x=0.02, y=0.98, xref="paper", yref="paper",
+                           text="– – –  Nivel del grupo control", showarrow=False,
+                           xanchor="left", yanchor="top",
+                           font=dict(size=12, color="#9aa5b1"))
     fig.update_layout(title="Intentos promedio por celda",
                       xaxis_title="Celda experimental",
                       yaxis_title="Intentos promedio por ejercicio")
-    return with_n(style_fig(fig), d["carnet"].nunique())
+    return with_factor_key(with_n(style_fig(fig), d["carnet"].nunique()))
 
 
 def fig_intentos_sus_combinado(sessions, sus):
@@ -319,9 +344,11 @@ def fig_intentos_sus_combinado(sessions, sus):
                                showarrow=False, xanchor="center", yanchor="middle",
                                yshift=1, font=dict(color=INK, size=11))
     if ctrl is not None:
-        fig.add_hline(y=ctrl, line_dash="dash", line_color="#9aa5b1",
-                      annotation_text="Nivel control (intentos)",
-                      annotation_position="top left", yref="y")
+        fig.add_hline(y=ctrl, line_dash="dash", line_color="#9aa5b1", yref="y")
+        fig.add_annotation(x=0.02, y=0.98, xref="paper", yref="paper",
+                           text="– – –  Nivel del grupo control (intentos)", showarrow=False,
+                           xanchor="left", yanchor="top",
+                           font=dict(size=12, color="#9aa5b1"))
     fig.update_layout(
         title="Intentos promedio y SUS por celda experimental (interacción)",
         xaxis_title="Celda experimental",
@@ -332,9 +359,9 @@ def fig_intentos_sus_combinado(sessions, sus):
                     tickfont=dict(color="#b34a46")),
         legend=dict(orientation="h", y=1.12, x=1, xanchor="right"),
     )
-    return with_note(style_fig(fig),
+    return with_factor_key(with_note(style_fig(fig),
                      f"n = {d['carnet'].nunique()} estudiantes (intentos) · "
-                     f"{sus['carnet'].nunique()} con SUS")
+                     f"{sus['carnet'].nunique()} con SUS"))
 
 def fig_efectos_principales(sessions):
     d = sessions[sessions["attempts"] > 0]
@@ -375,7 +402,7 @@ def fig_distribucion_intentos(sessions):
     fig.update_layout(title="Distribución de intentos por celda experimental",
                       xaxis_title="Celda experimental",
                       yaxis_title="Intentos por ejercicio", showlegend=False)
-    return with_n(style_fig(fig), d["carnet"].nunique())
+    return with_factor_key(with_n(style_fig(fig), d["carnet"].nunique()))
 
 
 def fig_intentos_tema(sessions, exercise_catalog=None):
@@ -386,6 +413,18 @@ def fig_intentos_tema(sessions, exercise_catalog=None):
         catalog_order = exercise_catalog["problem_name"].tolist()
         med = med.reindex(catalog_order)
     order = med.index.tolist()
+
+    # El eje Y se recorta al bigote superior más alto (q3 + 1.5·IQR de todos los
+    # ejercicios) para que las cajas aprovechen todo el alto disponible. Sin esto,
+    # un único valor atípico (que con boxpoints=False ni se dibuja) estira el eje y
+    # aplasta las cajas hasta volverlas invisibles.
+    def _upper_whisker(values):
+        q1, q3 = np.percentile(values, [25, 75])
+        fence = q3 + 1.5 * (q3 - q1)
+        inside = values[values <= fence]
+        return inside.max() if len(inside) else values.max()
+    y_top = max(_upper_whisker(s.values) for _, s in d.groupby(name_col)["attempts"])
+
     fig = go.Figure()
     fig.add_trace(go.Box(
         x=d[name_col], y=d["attempts"],
@@ -396,7 +435,7 @@ def fig_intentos_tema(sessions, exercise_catalog=None):
     fig.update_xaxes(categoryorder="array", categoryarray=order)
     fig.update_layout(title="Intentos por ejercicio (control de dificultad)",
                       xaxis_title="Ejercicio", yaxis_title="Intentos",
-                      showlegend=False)
+                      yaxis_range=[0, y_top * 1.08], showlegend=False)
     fig.update_xaxes(tickangle=-40)
     return with_n(style_fig(fig, height=520), d["carnet"].nunique())
 
@@ -442,7 +481,7 @@ def fig_tasa_resolucion(sessions):
                       xaxis_title="Celda experimental",
                       yaxis_title="% de ejercicios resueltos",
                       yaxis_range=[0, 105])
-    return with_n(style_fig(fig), d["carnet"].nunique())
+    return with_factor_key(with_n(style_fig(fig), d["carnet"].nunique()))
 
 
 def fig_sus_celda(sus):
@@ -458,12 +497,15 @@ def fig_sus_celda(sus):
         text=[f"{m:.0f}" for m in means], textposition="inside",
         insidetextanchor="start", textfont=dict(color=INK, size=13),
     ))
-    fig.add_hline(y=68, line_dash="dash", line_color="#e0726e",
-                  annotation_text="Promedio de referencia (68)", annotation_position="top left")
+    fig.add_hline(y=68, line_dash="dash", line_color="#e0726e")
+    fig.add_annotation(x=0.02, y=0.98, xref="paper", yref="paper",
+                       text="– – –  Promedio de referencia SUS (68)", showarrow=False,
+                       xanchor="left", yanchor="top",
+                       font=dict(size=12, color="#e0726e"))
     fig.update_layout(title="Puntuación SUS promedio por celda (IC 95%)",
                       xaxis_title="Celda experimental",
                       yaxis_title="Puntuación SUS (0-100)", yaxis_range=[0, 100])
-    return with_n(style_fig(fig), sus["carnet"].nunique())
+    return with_factor_key(with_n(style_fig(fig), sus["carnet"].nunique()))
 
 
 def fig_sus_efectos(sus):
@@ -481,8 +523,11 @@ def fig_sus_efectos(sus):
                 textfont=dict(color=INK, size=13),
                 showlegend=False,
             ))
-    fig.add_hline(y=68, line_dash="dash", line_color="#e0726e",
-                  annotation_text="Referencia 68", annotation_position="top left")
+    fig.add_hline(y=68, line_dash="dash", line_color="#e0726e")
+    fig.add_annotation(x=0.02, y=0.98, xref="paper", yref="paper",
+                       text="– – –  Promedio de referencia SUS (68)", showarrow=False,
+                       xanchor="left", yanchor="top",
+                       font=dict(size=12, color="#e0726e"))
     fig.update_layout(title="Efecto principal de cada intervención sobre el SUS",
                       xaxis_title="Factor (desactivado vs. activado)",
                       yaxis_title="Puntuación SUS", yaxis_range=[0, 100], bargap=0.35)
@@ -503,7 +548,7 @@ def fig_sus_distribucion(sus):
     fig.update_layout(title="Distribución del SUS por celda experimental",
                       xaxis_title="Celda experimental",
                       yaxis_title="Puntuación SUS", showlegend=False)
-    return with_n(style_fig(fig), sus["carnet"].nunique())
+    return with_factor_key(with_n(style_fig(fig), sus["carnet"].nunique()))
 
 
 def fig_sus_clasificacion(sus):
@@ -547,7 +592,7 @@ def fig_sus_items(sus):
     fig.update_layout(title="Respuesta promedio por ítem del SUS y celda",
                       xaxis_title="Ítem del cuestionario SUS",
                       yaxis_title="Celda experimental")
-    return with_n(style_fig(fig, height=480), sus["carnet"].nunique())
+    return with_factor_key(with_n(style_fig(fig, height=480), sus["carnet"].nunique()))
 
 
 def fig_intentos_vs_sus(sessions, sus):
@@ -571,9 +616,8 @@ def fig_intentos_vs_sus(sessions, sus):
         xs = np.linspace(x.min(), x.max(), 50)
         fig.add_trace(go.Scatter(x=xs, y=a + b * xs, mode="lines",
                                  name="Tendencia", line=dict(color=INK, dash="dash", width=2)))
-        r = np.corrcoef(x, y)[0, 1]
         fig.add_annotation(x=0.98, y=0.04, xref="paper", yref="paper",
-                           text=f"r = {r:.2f}", showarrow=False,
+                           text=f"pendiente = {b:.2f}", showarrow=False,
                            font=dict(size=13, color=MUTED))
     fig.update_layout(title="Relación entre intentos promedio y experiencia (SUS) por estudiante",
                       xaxis_title="Intentos promedio por ejercicio (por estudiante)",
@@ -611,9 +655,8 @@ def fig_intentos_por_resuelto_vs_sus(sessions, sus):
         xs = np.linspace(x.min(), x.max(), 50)
         fig.add_trace(go.Scatter(x=xs, y=a + b * xs, mode="lines",
                                  name="Tendencia", line=dict(color=INK, dash="dash", width=2)))
-        r = np.corrcoef(x, y)[0, 1]
         fig.add_annotation(x=0.98, y=0.04, xref="paper", yref="paper",
-                           text=f"r = {r:.2f}", showarrow=False,
+                           text=f"pendiente = {b:.2f}", showarrow=False,
                            font=dict(size=13, color=MUTED))
     fig.update_layout(title="Relación entre intentos para resolver un problema y experiencia (SUS) por estudiante",
                       xaxis_title="Intentos promedio para resolver un problema (por estudiante)",
@@ -699,7 +742,7 @@ def fig_intentos_por_problema_resuelto(sessions):
     fig.update_layout(title="Intentos promedio para resolver un problema, según tratamiento",
                       xaxis_title="Celda experimental",
                       yaxis_title="Intentos por problema resuelto")
-    return with_n(style_fig(fig), d["carnet"].nunique())
+    return with_factor_key(with_n(style_fig(fig), d["carnet"].nunique()))
 # ---------------------------------------------------------------------------
 # Ensamblaje del HTML
 # ---------------------------------------------------------------------------
@@ -721,7 +764,7 @@ def fig_to_card(section_id, title, description, fig):
       <div class="card-head">
         <h2>{html.escape(title)}</h2>
         <button class="dl-btn" onclick="descargar('{div_id}', '{section_id}')">
-          &#x2193;&nbsp;Descargar SVG (vectorial)
+          Descargar SVG
         </button>
       </div>
       <p class="desc">{description}</p>
