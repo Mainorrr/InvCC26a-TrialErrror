@@ -59,12 +59,25 @@ PLOTLY_CDN = "https://cdn.plot.ly/plotly-2.35.2.min.js"
 
 def lighten(bg, t=0.55):
     """Mezcla el color con blanco una fracción t (0=igual, 1=blanco). Se usa para
-    aclarar las barras de modo que la etiqueta del valor, siempre en negro, se lea
-    bien sin perder el tono que identifica cada celda/factor."""
+    derivar la paleta pastel: cada tono base se aclara la misma fracción, de modo
+    que todos los gráficos compartan el mismo nivel de saturación y la etiqueta del
+    valor, siempre en negro, se lea bien sin perder el tono que identifica cada
+    celda/factor."""
     h = bg.lstrip("#")
     r, g, b = (int(h[i:i + 2], 16) for i in (0, 2, 4))
     r, g, b = (round(v + (255 - v) * t) for v in (r, g, b))
     return f"#{r:02x}{g:02x}{b:02x}"
+
+
+# Paleta pastel uniforme: se obtiene aclarando los tonos base la misma fracción,
+# así todas las superficies de los gráficos (barras, cajas, violines, puntos)
+# comparten el mismo nivel de saturación. Los tonos vívidos originales se reservan
+# para acentos finos (bordes de puntos/cajas y las insignias de la leyenda).
+PASTEL_T = 0.5
+PASTEL = {c: lighten(v, PASTEL_T) for c, v in CELL_COLORS.items()}
+FACTOR_ON_PASTEL = lighten(FACTOR_ON, PASTEL_T)
+FACTOR_OFF_PASTEL = lighten(FACTOR_OFF, PASTEL_T)
+
 EXERCISES_ROOT = Path(__file__).resolve().parent.parent / "exercises"
 
 
@@ -79,7 +92,7 @@ def style_fig(fig, height=460):
         paper_bgcolor="white",
         plot_bgcolor="white",
         legend=dict(bgcolor="rgba(255,255,255,0.6)", bordercolor=GRID, borderwidth=1),
-        colorway=list(CELL_COLORS.values()),
+        colorway=list(PASTEL.values()),
     )
     fig.update_xaxes(gridcolor=GRID, zerolinecolor=GRID, linecolor=GRID,
                      title_font=dict(size=14, color=MUTED), tickfont=dict(color=MUTED))
@@ -227,7 +240,7 @@ def fig_participantes(sessions):
     counts = sessions.groupby("cell")["carnet"].nunique().reindex(order).fillna(0)
     fig = go.Figure(go.Bar(
         x=order, y=counts.values,
-        marker_color=[CELL_COLORS[c] for c in order],
+        marker_color=[PASTEL[c] for c in order],
         text=counts.values.astype(int), textposition="outside",
     ))
     fig.update_layout(title="Participantes por celda experimental",
@@ -248,7 +261,7 @@ def fig_intentos_celda(sessions):
     fig = go.Figure(go.Bar(
         x=labels, y=means,
         error_y=dict(type="data", array=err, color=MUTED, thickness=1.4, width=6),
-        marker_color=[lighten(CELL_COLORS[c]) for c in labels],
+        marker_color=[PASTEL[c] for c in labels],
         text=[f"{m:.1f}" for m in means], textposition="inside",
         insidetextanchor="start", textfont=dict(color=INK, size=13),
     ))
@@ -283,7 +296,7 @@ def fig_intentos_sus_combinado(sessions, sus):
     fig.add_trace(go.Bar(
         x=labels, y=att_means,
         error_y=dict(type="data", array=att_err, color=MUTED, thickness=1.4, width=6),
-        marker_color=[lighten(CELL_COLORS[c]) for c in labels],
+        marker_color=[PASTEL[c] for c in labels],
         text=[f"{m:.1f}" for m in att_means], textposition="inside",
         insidetextanchor="start", textfont=dict(color=INK, size=13),
         name="Intentos promedio", yaxis="y",
@@ -323,40 +336,6 @@ def fig_intentos_sus_combinado(sessions, sus):
                      f"n = {d['carnet'].nunique()} estudiantes (intentos) · "
                      f"{sus['carnet'].nunique()} con SUS")
 
-def fig_eficiencia_vs_sus(sessions, sus):
-    d = sessions[sessions["attempts"] > 0]
-    per_student = (
-        d.groupby("carnet")
-        .agg(solved_n=("solved", "sum"), attempts_n=("attempts", "sum"))
-        .reset_index()
-    )
-    per_student["eficiencia"] = per_student["solved_n"] / per_student["attempts_n"]
-    merged = sus.merge(per_student[["carnet", "eficiencia"]], on="carnet", how="inner")
-
-    fig = go.Figure()
-    for c in cells_present(merged):
-        sub = merged[merged["cell"] == c]
-        fig.add_trace(go.Scatter(
-            x=sub["eficiencia"], y=sub["SUS"], mode="markers",
-            name=c, marker=dict(color=CELL_COLORS[c], size=10, opacity=0.8,
-                                line=dict(width=1, color="white")),
-            hovertemplate="Eficiencia: %{x:.2f}<br>SUS: %{y:.0f}<extra>" + c + "</extra>",
-        ))
-    if len(merged) > 2:
-        x = merged["eficiencia"].values
-        y = merged["SUS"].values
-        b, a = np.polyfit(x, y, 1)
-        xs = np.linspace(x.min(), x.max(), 50)
-        fig.add_trace(go.Scatter(x=xs, y=a + b * xs, mode="lines",
-                                 name="Tendencia", line=dict(color=INK, dash="dash", width=2)))
-        r = np.corrcoef(x, y)[0, 1]
-        fig.add_annotation(x=0.98, y=0.04, xref="paper", yref="paper",
-                           text=f"r = {r:.2f}", showarrow=False,
-                           font=dict(size=13, color=MUTED))
-    fig.update_layout(title="Relación entre eficiencia (resueltos/intento) y experiencia (SUS) por estudiante",
-                      xaxis_title="Eficiencia por estudiante (resueltos / intentos)",
-                      yaxis_title="Puntuación SUS")
-    return with_n(style_fig(fig), len(merged), "estudiantes con intentos y SUS")
 def fig_efectos_principales(sessions):
     d = sessions[sessions["attempts"] > 0]
     factors = [("O", "Ocultamiento"), ("C", "Contador cromático"), ("E", "Espera incremental")]
@@ -370,7 +349,7 @@ def fig_efectos_principales(sessions):
             fig.add_trace(go.Bar(
                 x=[cat], y=[m],
                 error_y=dict(type="data", array=[e], color=MUTED, thickness=1.4, width=6),
-                marker_color=lighten(FACTOR_ON if state else FACTOR_OFF),
+                marker_color=FACTOR_ON_PASTEL if state else FACTOR_OFF_PASTEL,
                 text=[f"{m:.1f}"], textposition="inside", insidetextanchor="start",
                 textfont=dict(color=INK, size=13),
                 showlegend=False,
@@ -389,8 +368,8 @@ def fig_distribucion_intentos(sessions):
     for c in order:
         fig.add_trace(go.Box(
             y=d[d["cell"] == c]["attempts"], name=c,
-            marker_color=CELL_COLORS[c], boxmean=True,
-            boxpoints="outliers", line=dict(width=1.4),
+            fillcolor=PASTEL[c], marker_color=CELL_COLORS[c], boxmean=True,
+            boxpoints="outliers", line=dict(color=CELL_COLORS[c], width=1.4),
             hoverinfo="y",  # nunca muestra identificadores, solo el valor
         ))
     fig.update_layout(title="Distribución de intentos por celda experimental",
@@ -410,7 +389,8 @@ def fig_intentos_tema(sessions, exercise_catalog=None):
     fig = go.Figure()
     fig.add_trace(go.Box(
         x=d[name_col], y=d["attempts"],
-        marker_color="#2c7fb8", line=dict(width=1.2), boxpoints=False,
+        fillcolor=PASTEL["O"], marker_color=CELL_COLORS["O"],
+        line=dict(color=CELL_COLORS["O"], width=1.2), boxpoints=False,
         hoverinfo="y",
     ))
     fig.update_xaxes(categoryorder="array", categoryarray=order)
@@ -430,7 +410,7 @@ def fig_interacciones(sessions):
     fig = make_subplots(rows=1, cols=3, subplot_titles=[f"{a} x {b}" for _, _, a, b in pairs],
                         shared_yaxes=True)
     for idx, (f1, f2, n1, n2) in enumerate(pairs, start=1):
-        for state2, color in [(False, FACTOR_OFF), (True, FACTOR_ON)]:
+        for state2, color in [(False, "#aeb6c0"), (True, FACTOR_ON_PASTEL)]:
             ys, xs = [], []
             for state1 in [False, True]:
                 sub = d[(d[f1] == state1) & (d[f2] == state2)]["attempts"]
@@ -455,7 +435,7 @@ def fig_tasa_resolucion(sessions):
     order = rate.index.tolist()
     fig = go.Figure(go.Bar(
         x=order, y=rate.values,
-        marker_color=[CELL_COLORS[c] for c in order],
+        marker_color=[PASTEL[c] for c in order],
         text=[f"{v:.0f}%" for v in rate.values], textposition="outside",
     ))
     fig.update_layout(title="Tasa de ejercicios resueltos por celda",
@@ -474,7 +454,7 @@ def fig_sus_celda(sus):
     fig = go.Figure(go.Bar(
         x=labels, y=means,
         error_y=dict(type="data", array=err, color=MUTED, thickness=1.4, width=6),
-        marker_color=[lighten(CELL_COLORS[c]) for c in labels],
+        marker_color=[PASTEL[c] for c in labels],
         text=[f"{m:.0f}" for m in means], textposition="inside",
         insidetextanchor="start", textfont=dict(color=INK, size=13),
     ))
@@ -496,7 +476,7 @@ def fig_sus_efectos(sus):
             fig.add_trace(go.Bar(
                 x=[cat], y=[m],
                 error_y=dict(type="data", array=[e], color=MUTED, thickness=1.4, width=6),
-                marker_color=lighten(FACTOR_ON if state else FACTOR_OFF),
+                marker_color=FACTOR_ON_PASTEL if state else FACTOR_OFF_PASTEL,
                 text=[f"{m:.0f}"], textposition="inside", insidetextanchor="start",
                 textfont=dict(color=INK, size=13),
                 showlegend=False,
@@ -515,7 +495,7 @@ def fig_sus_distribucion(sus):
     for c in order:
         fig.add_trace(go.Violin(
             y=sus[sus["cell"] == c]["SUS"], name=c,
-            line_color=CELL_COLORS[c], fillcolor=CELL_COLORS[c], opacity=0.55,
+            line_color=CELL_COLORS[c], fillcolor=PASTEL[c], opacity=0.7,
             box_visible=True, meanline_visible=True, points="all",
             marker=dict(size=5), hoveron="violins",
             hoverinfo="y",  # los puntos no exponen identificadores
@@ -528,12 +508,12 @@ def fig_sus_distribucion(sus):
 
 def fig_sus_clasificacion(sus):
     # Bandas adjetivales de Bangor et al. sobre el promedio global.
-    bands = [(0, 25, "Peor imaginable", "#c0392b"),
-             (25, 39, "Pobre", "#e67e22"),
-             (39, 52, "OK", "#f1c40f"),
-             (52, 73, "Bueno", "#7dcea0"),
-             (73, 86, "Excelente", "#27ae60"),
-             (86, 100, "Mejor imaginable", "#1e8449")]
+    bands = [(0, 25, "Peor imaginable", "#e8a39c"),
+             (25, 39, "Pobre", "#f0c193"),
+             (39, 52, "OK", "#f5e3a3"),
+             (52, 73, "Bueno", "#bfe3c9"),
+             (73, 86, "Excelente", "#9ed9b4"),
+             (86, 100, "Mejor imaginable", "#86c9a6")]
     mean = sus["SUS"].mean()
     fig = go.Figure()
     for lo, hi, lab, color in bands:
@@ -558,7 +538,8 @@ def fig_sus_items(sus):
     z = [[sus[sus["cell"] == c][q].mean() for q in items] for c in order]
     fig = go.Figure(go.Heatmap(
         z=z, x=[f"Q{i}" for i in range(1, 11)], y=order,
-        colorscale="Blues", zmin=1, zmax=5,
+        colorscale=[[0.0, "#f4f8fc"], [0.5, "#cfe3f3"], [1.0, "#9cc4e4"]],
+        zmin=1, zmax=5,
         text=[[f"{v:.1f}" for v in row] for row in z],
         texttemplate="%{text}", textfont=dict(size=12),
         colorbar=dict(title="Media<br>(1-5)"),
@@ -578,8 +559,8 @@ def fig_intentos_vs_sus(sessions, sus):
         sub = merged[merged["cell"] == c]
         fig.add_trace(go.Scatter(
             x=sub["mean_attempts"], y=sub["SUS"], mode="markers",
-            name=c, marker=dict(color=CELL_COLORS[c], size=10, opacity=0.8,
-                                line=dict(width=1, color="white")),
+            name=c, marker=dict(color=PASTEL[c], size=10, opacity=0.95,
+                                line=dict(width=1.4, color=CELL_COLORS[c])),
             hovertemplate="Intentos prom.: %{x:.1f}<br>SUS: %{y:.0f}<extra>" + c + "</extra>",
         ))
     # Linea de tendencia global.
@@ -598,6 +579,46 @@ def fig_intentos_vs_sus(sessions, sus):
                       xaxis_title="Intentos promedio por ejercicio (por estudiante)",
                       yaxis_title="Puntuación SUS")
     return with_n(style_fig(fig), len(merged), "estudiantes con intentos y SUS")
+
+
+def fig_intentos_por_resuelto_vs_sus(sessions, sus):
+    """Igual que la dispersión intentos vs. SUS, pero en el eje X usa los intentos
+    promedio que cada estudiante invirtió por cada problema que llegó a resolver
+    (intentos totales / problemas resueltos). Se excluyen estudiantes sin ningún
+    problema resuelto, para los que la métrica no está definida."""
+    d = sessions[sessions["attempts"] > 0]
+    per_student = d.groupby("carnet").agg(
+        attempts_n=("attempts", "sum"), solved_n=("solved", "sum"))
+    per_student = per_student[per_student["solved_n"] > 0]
+    per_student["intentos_por_resuelto"] = (
+        per_student["attempts_n"] / per_student["solved_n"])
+    merged = sus.merge(
+        per_student["intentos_por_resuelto"].reset_index(), on="carnet", how="inner")
+    fig = go.Figure()
+    for c in cells_present(merged):
+        sub = merged[merged["cell"] == c]
+        fig.add_trace(go.Scatter(
+            x=sub["intentos_por_resuelto"], y=sub["SUS"], mode="markers",
+            name=c, marker=dict(color=PASTEL[c], size=10, opacity=0.95,
+                                line=dict(width=1.4, color=CELL_COLORS[c])),
+            hovertemplate="Intentos/problema: %{x:.1f}<br>SUS: %{y:.0f}<extra>" + c + "</extra>",
+        ))
+    # Linea de tendencia global.
+    if len(merged) > 2:
+        x = merged["intentos_por_resuelto"].values
+        y = merged["SUS"].values
+        b, a = np.polyfit(x, y, 1)
+        xs = np.linspace(x.min(), x.max(), 50)
+        fig.add_trace(go.Scatter(x=xs, y=a + b * xs, mode="lines",
+                                 name="Tendencia", line=dict(color=INK, dash="dash", width=2)))
+        r = np.corrcoef(x, y)[0, 1]
+        fig.add_annotation(x=0.98, y=0.04, xref="paper", yref="paper",
+                           text=f"r = {r:.2f}", showarrow=False,
+                           font=dict(size=13, color=MUTED))
+    fig.update_layout(title="Relación entre intentos para resolver un problema y experiencia (SUS) por estudiante",
+                      xaxis_title="Intentos promedio para resolver un problema (por estudiante)",
+                      yaxis_title="Puntuación SUS")
+    return with_n(style_fig(fig), len(merged), "estudiantes con resueltos y SUS")
 
 
 def fig_resueltos_vs_intentos_tratamiento(sessions):
@@ -621,10 +642,10 @@ def fig_resueltos_vs_intentos_tratamiento(sessions):
             textposition="top center",
             name=cell,
             marker=dict(
-                color=CELL_COLORS[cell],
+                color=PASTEL[cell],
                 size=max(12, min(30, 8 + row["n"] / 8)),
-                opacity=0.9,
-                line=dict(width=1, color="white"),
+                opacity=0.95,
+                line=dict(width=1.4, color=CELL_COLORS[cell]),
             ),
             hovertemplate=(
                 f"{cell}<br>Intentos promedio: %{{x:.1f}}"
@@ -660,22 +681,24 @@ def fig_resueltos_vs_intentos_tratamiento(sessions):
     )
     return with_n(style_fig(fig, height=520), d_all["carnet"].nunique())
 
-def fig_eficiencia_resueltos_por_intento(sessions):
+def fig_intentos_por_problema_resuelto(sessions):
     d = sessions[sessions["attempts"] > 0]
     order = cells_present(d)
     grp = d.groupby("cell").agg(solved_n=("solved", "sum"), attempts_n=("attempts", "sum"))
-    grp["eficiencia"] = grp["solved_n"] / grp["attempts_n"]
+    # Intentos invertidos por cada problema resuelto (inverso de la eficiencia):
+    # números más legibles (p. ej. 3.75 intentos/problema en lugar de 0.267).
+    grp["intentos_por_resuelto"] = grp["attempts_n"] / grp["solved_n"].replace(0, np.nan)
     grp = grp.reindex(order)
     fig = go.Figure(go.Bar(
-        x=order, y=grp["eficiencia"],
-        marker_color=[CELL_COLORS[c] for c in order],
-        text=[f"{v:.3f}" for v in grp["eficiencia"]], textposition="outside",
+        x=order, y=grp["intentos_por_resuelto"],
+        marker_color=[PASTEL[c] for c in order],
+        text=[f"{v:.2f}" for v in grp["intentos_por_resuelto"]], textposition="outside",
         hovertemplate="%{x}<br>Resueltos: %{customdata[0]}<br>Intentos: %{customdata[1]}<extra></extra>",
         customdata=grp[["solved_n", "attempts_n"]].values,
     ))
-    fig.update_layout(title="Problemas resueltos por cada intento, según tratamiento",
+    fig.update_layout(title="Intentos promedio para resolver un problema, según tratamiento",
                       xaxis_title="Celda experimental",
-                      yaxis_title="Resueltos / intentos")
+                      yaxis_title="Intentos por problema resuelto")
     return with_n(style_fig(fig), d["carnet"].nunique())
 # ---------------------------------------------------------------------------
 # Ensamblaje del HTML
@@ -783,13 +806,13 @@ def build(sessions_path, sus_path, out_path):
          "estrategias.",
          fig_resueltos_vs_intentos_tratamiento(sessions)),
         ("rq1_eficiencia", "RQ1 · Prueba y error",
-         "Problemas resueltos por cada intento",
-         "Calcula, para cada celda, la razón entre problemas resueltos y el total de intentos "
-         "invertidos (resueltos / intentos), una medida directa de eficiencia: por ejemplo, "
-         "resolver 1 problema en 5 intentos da 0.2, y resolver 4 en 15 da 0.267. Es la métrica "
-         "más cercana al objetivo del análisis de Tukey: identificar la combinación de "
-         "estrategias con mejor relación entre logro y reintentos.",
-         fig_eficiencia_resueltos_por_intento(sessions)),
+         "Intentos promedio para resolver un problema",
+         "Calcula, para cada celda, cuántos intentos se invierten en promedio por cada problema "
+         "resuelto (intentos / resueltos): por ejemplo, resolver 1 problema en 5 intentos da 5.00, "
+         "y resolver 4 en 15 da 3.75. Cuanto menor es el valor, más eficiente es el tratamiento. "
+         "Es la métrica más cercana al objetivo del análisis de Tukey: identificar la combinación "
+         "de estrategias con mejor relación entre logro y reintentos.",
+         fig_intentos_por_problema_resuelto(sessions)),
         ("rq2_celdas", "RQ2 · Experiencia (SUS)",
          "Puntuación SUS promedio por celda",
          "Responde a la RQ2: si las estrategias afectan la experiencia percibida. La línea de "
@@ -843,14 +866,15 @@ def build(sessions_path, sus_path, out_path):
          "entender si reducir la prueba y error y mejorar la satisfacción van de la mano o en "
          "tensión.",
          fig_intentos_vs_sus(sessions, sus)),
-        ("relacion_eficiencia", "Relación entre medidas",
-         "Eficiencia (resueltos/intento) vs. SUS por estudiante",
-         "Reemplaza los intentos crudos por la eficiencia individual del estudiante "
-         "—problemas resueltos sobre el total de intentos— y la cruza con su puntuación "
-         "SUS. Una pendiente positiva indicaría que los estudiantes más eficientes (logran "
-         "resolver con menos reintentos) también reportan mejor experiencia, complementando "
-         "a nivel individual la lectura por celda de 'rq1_eficiencia'.",
-         fig_eficiencia_vs_sus(sessions, sus)),
+        ("relacion_resuelto", "Relación entre medidas",
+         "Intentos para resolver un problema vs. SUS por estudiante",
+         "Misma lectura que la dispersión anterior, pero el eje horizontal usa los intentos "
+         "promedio que cada estudiante necesitó por cada problema que llegó a resolver "
+         "(intentos / resueltos). Al enfocar el esfuerzo en términos de logros efectivos, una "
+         "pendiente negativa indicaría que quienes gastan más intentos por problema resuelto "
+         "reportan peor experiencia. Se excluyen los estudiantes que no resolvieron ningún "
+         "problema, porque la métrica no está definida para ellos.",
+         fig_intentos_por_resuelto_vs_sus(sessions, sus)),
     ]
 
     # Navegacion agrupada por seccion.
