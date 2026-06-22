@@ -626,7 +626,7 @@ def fig_intentos_vs_sus(sessions, sus):
     fig.update_layout(title="Relación entre intentos promedio y experiencia (SUS) por estudiante",
                       xaxis_title="Intentos promedio por ejercicio (por estudiante)",
                       yaxis_title="Puntuación SUS")
-    return with_n(style_fig(fig), len(merged), "estudiantes con intentos y SUS")
+    return with_factor_key(with_n(style_fig(fig), len(merged), "estudiantes con intentos y SUS"))
 
 
 def fig_intentos_por_resuelto_vs_sus(sessions, sus):
